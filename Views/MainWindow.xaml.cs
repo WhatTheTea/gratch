@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace gratch_desktop
+namespace gratch_desktop.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

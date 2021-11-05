@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.31515.178
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch-desktop", "gratch-desktop.csproj", "{D1E3BFA4-22AC-4FF9-8A59-02E188D8E122}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch-desktop", "gratch-desktop.csproj", "{0DC4796E-C439-4471-8D5A-EBF0D75B7E38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D1E3BFA4-22AC-4FF9-8A59-02E188D8E122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1E3BFA4-22AC-4FF9-8A59-02E188D8E122}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1E3BFA4-22AC-4FF9-8A59-02E188D8E122}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1E3BFA4-22AC-4FF9-8A59-02E188D8E122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC4796E-C439-4471-8D5A-EBF0D75B7E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC4796E-C439-4471-8D5A-EBF0D75B7E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC4796E-C439-4471-8D5A-EBF0D75B7E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC4796E-C439-4471-8D5A-EBF0D75B7E38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {618A6AE2-370A-444D-BB59-E9DF98F50EE1}
+		SolutionGuid = {5BCD3A5F-26AD-427D-B353-11CBD0A11B90}
 	EndGlobalSection
 EndGlobal

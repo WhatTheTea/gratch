@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "lYM2G2qxqvI1rrGacSmL4v/OBO0im1AW8/+BrXw428Mtn2q/upwwleXHKsvrSMhe4srioIm6Uj3YwMVci/NoYg==",
+  "success": true,
+  "projectFilePath": "D:\\WORK\\Programming\\Gratch\\gratch-desktop\\gratch-desktop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mrale\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\dynamicdata\\7.4.3\\dynamicdata.7.4.3.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\fody\\6.6.0\\fody.6.6.0.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\mahapps.metro\\2.4.9\\mahapps.metro.2.4.9.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\materialdesigncolors\\2.0.3\\materialdesigncolors.2.0.3.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\materialdesignthemes\\4.2.1\\materialdesignthemes.4.2.1.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\reactiveui\\16.3.10\\reactiveui.16.3.10.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\reactiveui.fody\\16.3.10\\reactiveui.fody.16.3.10.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\reactiveui.wpf\\16.3.10\\reactiveui.wpf.16.3.10.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\splat\\13.1.42\\splat.13.1.42.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\system.reactive\\5.0.0\\system.reactive.5.0.0.nupkg.sha512",
+    "C:\\Users\\mrale\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}

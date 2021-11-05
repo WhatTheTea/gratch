@@ -8,7 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MVVM\Models\" />
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DynamicData" Version="7.4.3" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+    <PackageReference Include="ReactiveUI" Version="16.3.10" />
+    <PackageReference Include="ReactiveUI.Fody" Version="16.3.10" />
+    <PackageReference Include="ReactiveUI.WPF" Version="16.3.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="gratch-core">
+      <HintPath>..\gratch-core\gratch-core\obj\Release\net5.0\gratch-core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

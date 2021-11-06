@@ -1,17 +1,23 @@
 ﻿<mah:MetroWindow x:Class="gratch_desktop.Views.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:gratch_desktop"
-        
-        xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
-        xmlns:vw="clr-namespace:gratch_desktop.Views"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:gratch_desktop"
+                 
+                 xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
+                 xmlns:vw="clr-namespace:gratch_desktop.Views"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 
+                 mc:Ignorable="d"
+                 Title="gratch desktop" Height="450" Width="800"
+                 WindowStyle="None"
+                 Background="{StaticResource MahApps.Brushes.Window.Background}"
+                 >
+    <mah:MetroWindow.DataContext>
+        <vm:MainWindowViewModel/>
+    </mah:MetroWindow.DataContext>
+	<Grid>
 
-    </Grid>
+	</Grid>
 </mah:MetroWindow>

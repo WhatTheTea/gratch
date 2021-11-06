@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="res\grach ver2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DynamicData" Version="7.4.3" />
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MaterialDesignColors" Version="2.0.3" />
@@ -21,6 +25,10 @@
     <Reference Include="gratch-core">
       <HintPath>..\gratch-core\gratch-core\obj\Release\net5.0\gratch-core.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="res\grach ver2.ico" />
   </ItemGroup>
 
 </Project>

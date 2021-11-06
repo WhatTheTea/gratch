@@ -8,16 +8,65 @@
                  xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
                  xmlns:vw="clr-namespace:gratch_desktop.Views"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
                  
                  mc:Ignorable="d"
-                 Title="gratch desktop" Height="450" Width="800"
+                 Title="gratch desktop" 
+                 Height="450" Width="800"
                  WindowStyle="None"
+                 BorderThickness="0"
+                 GlowBrush="Black"
                  Background="{StaticResource MahApps.Brushes.Window.Background}"
                  >
     <mah:MetroWindow.DataContext>
         <vm:MainWindowViewModel/>
     </mah:MetroWindow.DataContext>
-	<Grid>
 
-	</Grid>
+	<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.36*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.18*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--Шапка-->
+        <mat:Card Grid.ColumnSpan="2" 
+                Background="{StaticResource MahApps.Brushes.Accent2}"/>
+        <Label Style="{StaticResource MahApps.Styles.Label}" 
+               Content="gratch" FontSize="36"
+               HorizontalAlignment="Right"
+               Grid.Column="0"
+               Grid.Row="0"
+               Margin="10,0"
+               />
+        <Image Source="{StaticResource Logo}"
+               HorizontalAlignment="Left"
+               Margin="10,0"
+               Grid.Column="0"
+               Grid.Row="0"
+               />
+        <!--Сайдбар-->
+        <mah:MetroAnimatedTabControl Grid.Column="0"
+                                     Grid.Row="1"
+                                     Grid.ColumnSpan="2"
+                                     TabStripPlacement="Left">
+            <TabItem Style="{StaticResource grTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource Logo}" Width="48" Height="48"/>
+                        <Label Style="{StaticResource MahApps.Styles.Label}"
+                               FontSize="24"
+                               Content="Home"/>
+                        
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <mah:MetroTabItem Header="People">
+            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="Graph">
+            </mah:MetroTabItem>
+        </mah:MetroAnimatedTabControl>
+    </Grid>
 </mah:MetroWindow>

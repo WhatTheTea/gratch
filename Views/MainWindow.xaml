@@ -9,9 +9,10 @@
                  xmlns:vw="clr-namespace:gratch_desktop.Views"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
+                 xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
                  
                  mc:Ignorable="d"
-                 Title="gratch desktop" 
+                 Title="gratch desktop V5" 
                  Height="450" Width="800"
                  WindowStyle="None"
                  BorderThickness="0"
@@ -52,21 +53,9 @@
                                      Grid.Row="1"
                                      Grid.ColumnSpan="2"
                                      TabStripPlacement="Left">
-            <TabItem Style="{StaticResource grTabItem}">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{StaticResource Logo}" Width="48" Height="48"/>
-                        <Label Style="{StaticResource MahApps.Styles.Label}"
-                               FontSize="24"
-                               Content="Home"/>
-                        
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-            <mah:MetroTabItem Header="People">
-            </mah:MetroTabItem>
-            <mah:MetroTabItem Header="Graph">
-            </mah:MetroTabItem>
+            <mah:MetroTabItem Header="Home" Style="{StaticResource grTabItem}"/>
+            <mah:MetroTabItem Header="People" Style="{StaticResource grTabItem}"/>
+            <mah:MetroTabItem Header="Graph" Style="{StaticResource grTabItem}"/>
         </mah:MetroAnimatedTabControl>
     </Grid>
 </mah:MetroWindow>

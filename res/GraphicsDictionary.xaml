@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    >
+    <!-- Логотип -->
+    <BitmapImage x:Key="Logo" UriSource="/gratch-desktop;component/res/icons/grach ver2.ico"/>
+    <!-- Домик -->
+    <BitmapImage x:Key="Home" UriSource="/gratch-desktop;component/res/icons/home.png"/>
+    <BitmapImage x:Key="Home-Out" UriSource="/gratch-desktop;component/res/icons/home-outline.png"/>
+
+</ResourceDictionary>

@@ -5,6 +5,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:local="clr-namespace:gratch_desktop"
                  
+                 xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
                  xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
                  xmlns:vw="clr-namespace:gratch_desktop.Views"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
@@ -18,12 +19,13 @@
                  BorderThickness="0"
                  GlowBrush="Black"
                  Background="{StaticResource MahApps.Brushes.Window.Background}"
+                 Icon="{StaticResource Logo}"
                  >
     <mah:MetroWindow.DataContext>
         <vm:MainWindowViewModel/>
     </mah:MetroWindow.DataContext>
 
-	<Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.36*"/>
             <ColumnDefinition/>
@@ -38,11 +40,11 @@
         <Label Style="{StaticResource MahApps.Styles.Label}" 
                Content="gratch" FontSize="36"
                HorizontalAlignment="Right"
+               Margin="10,0"
                Grid.Column="0"
                Grid.Row="0"
-               Margin="10,0"
                />
-        <Image Source="{StaticResource Logo}"
+        <Image Source="{DynamicResource Logo}"
                HorizontalAlignment="Left"
                Margin="10,0"
                Grid.Column="0"
@@ -53,8 +55,11 @@
                                      Grid.Row="1"
                                      Grid.ColumnSpan="2"
                                      TabStripPlacement="Left">
-            <mah:MetroTabItem Header="Home" Style="{StaticResource grTabItem}"/>
-            <mah:MetroTabItem Header="People" Style="{StaticResource grTabItem}"/>
+            <mah:MetroTabItem Header="Home" 
+                              Style="{StaticResource grTabItem}"
+                              helpers:TabItemHelper.Icon="{icons:MaterialLightImage Kind=Home, Brush=White}"/>
+            <mah:MetroTabItem Header="People" 
+                              Style="{StaticResource grTabItem}"/>
             <mah:MetroTabItem Header="Graph" Style="{StaticResource grTabItem}"/>
         </mah:MetroAnimatedTabControl>
     </Grid>

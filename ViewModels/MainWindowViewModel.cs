@@ -10,7 +10,5 @@ namespace gratch_desktop.ViewModels
 {
     internal class MainWindowViewModel : BaseViewModel
     {
-        [Reactive]
-        public int ContentActualHeight { get; set; }
     }
 }

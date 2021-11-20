@@ -71,11 +71,13 @@
             <TabItem Header="Home"
                      Style="{StaticResource grTabItem}"
                      helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Home}">
-                        <vw:HomeView/>
+                <vw:HomeView/>
             </TabItem>
             <TabItem Header="People" 
                      Style="{StaticResource grTabItem}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}"/>
+                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}">
+                
+            </TabItem>
             <TabItem Header="Graph" 
                      Style="{StaticResource grTabItem}"
                      helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}"/>

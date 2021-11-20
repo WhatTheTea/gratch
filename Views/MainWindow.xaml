@@ -15,11 +15,13 @@
                  mc:Ignorable="d"
                  Title="gratch desktop V5" 
                  Height="450" Width="800"
+                 MinHeight="450" MinWidth="800"
                  WindowStyle="None"
                  BorderThickness="0"
                  GlowBrush="Black"
                  Background="{StaticResource MahApps.Brushes.Window.Background}"
                  Icon="{StaticResource Logo}"
+                 ShowIconOnTitleBar="False"
                  >
     <mah:MetroWindow.DataContext>
         <vm:MainWindowViewModel/>
@@ -31,36 +33,53 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.18*"/>
-            <RowDefinition/>
+            <RowDefinition Height="72"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--Шапка-->
+
+        <!-- Лого и заголовок -->
         <mat:Card Grid.ColumnSpan="2" 
-                Background="{StaticResource MahApps.Brushes.Accent2}"/>
-        <Label Style="{StaticResource MahApps.Styles.Label}" 
-               Content="gratch" FontSize="36"
-               HorizontalAlignment="Right"
-               Margin="10,0"
-               Grid.Column="0"
-               Grid.Row="0"
-               />
-        <Image Source="{DynamicResource Logo}"
-               HorizontalAlignment="Left"
-               Margin="10,0"
-               Grid.Column="0"
-               Grid.Row="0"
-               />
-        <!--Сайдбар-->
-        <mah:MetroAnimatedTabControl Grid.Column="0"
-                                     Grid.Row="1"
-                                     Grid.ColumnSpan="2"
-                                     TabStripPlacement="Left">
-            <mah:MetroTabItem Header="Home" 
-                              Style="{StaticResource grTabItem}"
-                              helpers:TabItemHelper.Icon="{icons:MaterialLightImage Kind=Home, Brush=White}"/>
-            <mah:MetroTabItem Header="People" 
-                              Style="{StaticResource grTabItem}"/>
-            <mah:MetroTabItem Header="Graph" Style="{StaticResource grTabItem}"/>
-        </mah:MetroAnimatedTabControl>
+                  Background="{StaticResource MahApps.Brushes.Accent2}">
+            <DockPanel>
+                <StackPanel Orientation="Horizontal"
+                            DockPanel.Dock="Left"
+                            VerticalAlignment="Center"
+                            >
+                    <Image Source="{DynamicResource Logo}"
+                       HorizontalAlignment="Left"
+                       Margin="5,0"/>
+                    <Label Style="{StaticResource MahApps.Styles.Label}" 
+                       Content="gratch" FontSize="39"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="10,0,10,5"/>
+                </StackPanel>
+                <!-- Инфо -->
+                <Button Style="{StaticResource MahApps.Styles.Button.Circle}"
+                        Margin="20" 
+                        DockPanel.Dock="Right"
+                        HorizontalAlignment="Right">
+                    <Image Source="{icons:MaterialImage Kind=Information,Brush=WhiteSmoke}"/>
+                </Button>
+            </DockPanel>
+        </mat:Card>
+        <!-- Сайдбар -->
+        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    TabStripPlacement="Left" 
+                    VerticalContentAlignment="Stretch" 
+                    HorizontalContentAlignment="Stretch">
+            <TabItem Header="Home"
+                     Style="{StaticResource grTabItem}"
+                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Home}">
+                        <vw:HomeView/>
+            </TabItem>
+            <TabItem Header="People" 
+                     Style="{StaticResource grTabItem}"
+                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}"/>
+            <TabItem Header="Graph" 
+                     Style="{StaticResource grTabItem}"
+                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}"/>
+
+        </TabControl>
     </Grid>
 </mah:MetroWindow>

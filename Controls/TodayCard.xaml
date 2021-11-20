@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="gratch_desktop.Controls.TodayCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:gratch_desktop.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="200"
+             MinHeight="150" MinWidth="200"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Border CornerRadius="15" 
+            Background="{DynamicResource PrimaryHueMidBrush}"
+            Margin="5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" 
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignLabel}"
+                   FontSize="32"
+                   Margin="5,0,0,0"
+                   Content="{Binding GroupName}"
+                   d:Content="GroupName"
+                   />
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignTextBlock}"
+                   FontSize="24"
+                   Margin="10,0,0,0"
+                   TextWrapping="Wrap"
+                   Text="{Binding AssignedPerson}" 
+                   Foreground="{DynamicResource MaterialDesignBody}"
+                   d:Text="AssignedPerson"/>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,16 +1,17 @@
-﻿using ReactiveUI.Fody.Helpers;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+
 namespace gratch_desktop.ViewModels
 {
-    internal class MainWindowViewModel : BaseViewModel
+    internal class HomeViewModel : BaseViewModel
     {
         [Reactive]
-        public int ContentActualHeight { get; set; }
+        public string test { get; set; }
     }
 }

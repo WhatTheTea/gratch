@@ -10,8 +10,6 @@
   <ItemGroup>
     <None Remove="res\grach ver2.ico" />
     <None Remove="res\icons\grach ver2.ico" />
-    <None Remove="res\icons\home-outline.png" />
-    <None Remove="res\icons\home.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,8 +34,6 @@
 
   <ItemGroup>
     <Resource Include="res\icons\grach ver2.ico" />
-    <Resource Include="res\icons\home-outline.png" />
-    <Resource Include="res\icons\home.png" />
   </ItemGroup>
 
 </Project>

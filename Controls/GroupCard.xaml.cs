@@ -16,12 +16,12 @@ using System.Windows.Shapes;
 namespace gratch_desktop.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для TodayCard.xaml
+    /// Логика взаимодействия для GroupCard.xaml
     /// </summary>
-    public partial class TodayCard : UserControl
+    public partial class GroupCard : UserControl
     {
         public static DependencyProperty GroupNameProperty { get; set; }
-        public static DependencyProperty AssignedPersonProperty { get; set; }
+        public static DependencyProperty HolidaysProperty { get; set; }
         public string GroupName
         {
             get => GetValue(GroupNameProperty) as string;
@@ -29,16 +29,16 @@ namespace gratch_desktop.Controls
         }
         public string AssignedPerson
         {
-            get => GetValue(AssignedPersonProperty) as string;
-            set => SetValue(AssignedPersonProperty, value);
+            get => GetValue(HolidaysProperty) as string;
+            set => SetValue(HolidaysProperty, value);
         }
 
-        static TodayCard()
+        static GroupCard()
         {
             GroupNameProperty = DependencyProperty.Register("GroupName", typeof(string), typeof(TodayCard));
-            AssignedPersonProperty = DependencyProperty.Register("AssignedPerson", typeof(string), typeof(TodayCard));
+            HolidaysProperty = DependencyProperty.Register("Holidays", typeof(string), typeof(TodayCard));
         }
-        public TodayCard()
+        public GroupCard()
         {
             InitializeComponent();
         }

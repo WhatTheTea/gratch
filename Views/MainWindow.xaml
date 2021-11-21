@@ -39,7 +39,8 @@
 
         <!-- Лого и заголовок -->
         <mat:Card Grid.ColumnSpan="2" 
-                  Background="{StaticResource MahApps.Brushes.Accent2}">
+                  Background="{StaticResource MahApps.Brushes.Accent2}"
+                  x:Name="TopCard">
             <DockPanel>
                 <StackPanel Orientation="Horizontal"
                             DockPanel.Dock="Left"
@@ -76,11 +77,13 @@
             <TabItem Header="People" 
                      Style="{StaticResource grTabItem}"
                      helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}">
-                
+                <vw:PeopleView/>
             </TabItem>
             <TabItem Header="Graph" 
                      Style="{StaticResource grTabItem}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}"/>
+                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}">
+                <vw:GraphView/>
+            </TabItem>
 
         </TabControl>
     </Grid>

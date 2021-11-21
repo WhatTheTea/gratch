@@ -46,6 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Controls\GroupCard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Views\GraphView.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

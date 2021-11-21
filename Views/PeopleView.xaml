@@ -18,52 +18,7 @@
                   VerticalScrollBarVisibility="Visible"
                   Background="{StaticResource MahApps.Brushes.Control.Background}">
         <ScrollViewer.DataContext>
-            <vm:HomeViewModel/>
+            <vm:PeopleViewModel/>
         </ScrollViewer.DataContext>
-        <WrapPanel Orientation="Horizontal"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center">
-            <!--#region designdata-->
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <!--#endregion designdata-->
-        </WrapPanel>
     </ScrollViewer>
 </UserControl>

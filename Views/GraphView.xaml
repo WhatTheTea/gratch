@@ -14,13 +14,13 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" 
+    <ScrollViewer Background="{StaticResource MahApps.Brushes.Control.Background}"
+                  HorizontalScrollBarVisibility="Disabled" 
                   VerticalScrollBarVisibility="Visible"
-                  Background="{StaticResource MahApps.Brushes.Control.Background}">
+                  HorizontalAlignment="Center">
         <ScrollViewer.DataContext>
             <vm:GraphViewModel/>
         </ScrollViewer.DataContext>
-        <WrapPanel>
-        </WrapPanel>
+        
     </ScrollViewer>
 </UserControl>

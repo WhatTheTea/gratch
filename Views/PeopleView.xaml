@@ -20,5 +20,48 @@
         <ScrollViewer.DataContext>
             <vm:PeopleViewModel/>
         </ScrollViewer.DataContext>
+
+        <WrapPanel Orientation="Horizontal"
+                   VerticalAlignment="Top">
+            <!--#region designdata-->
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <d:Border>
+                <controls:GroupCard/>
+            </d:Border>
+            <!--#endregion designdata-->
+        </WrapPanel>
+        
     </ScrollViewer>
 </UserControl>

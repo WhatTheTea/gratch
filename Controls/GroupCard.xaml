@@ -8,7 +8,8 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="200"
-             MinHeight="150" MinWidth="200"
+             MinHeight="150" MinWidth="250"
+             MaxHeight="150" MaxWidth="250"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Border CornerRadius="15" 
             Background="{DynamicResource PrimaryHueMidBrush}"
@@ -28,7 +29,7 @@
                    Style="{StaticResource MaterialDesignLabel}"
                    FontSize="24"
                    Margin="5,0,0,0"
-                   Content="{Binding GroupName}"
+                   Content="{Binding GrpName}"
                    d:Content="GroupName"
                    />
             <!-- Holidays -->
@@ -42,19 +43,20 @@
                    Foreground="{DynamicResource MaterialDesignBody}"
                    d:Text="Holidays: Mon, Tue, Wed, Thu, Fri, Sat, Sun"/>
             <!-- Settings -->
-            <mah:DropDownButton 
-                    Grid.Column="1" Grid.Row="0"
-                    Margin="15,10,6,28" 
-                    DockPanel.Dock="Right"
-                    HorizontalAlignment="Right" 
-                    BorderBrush="{x:Null}" 
-                    Background="{x:Null}"
-                    ArrowVisibility="Collapsed">
-                <mah:DropDownButton.Icon>
-                    <Image Source="{icons:MaterialImage Kind=DotsVertical,Brush=WhiteSmoke}"/>
-                </mah:DropDownButton.Icon>
-            </mah:DropDownButton>
-            
+            <Menu Style="{StaticResource gratch.Styles.Menu.Dots}"
+                  Grid.Column="1" Grid.Row="0"
+                  DockPanel.Dock="Right"
+                  Margin="70,10,6,28">
+                <MenuItem Icon="{icons:Material Kind=DotsVertical}"
+                          Background="Transparent"
+                          Width="30"
+                          Height="30"
+                          HorizontalAlignment="Center">
+                    <TextBlock>Holidays</TextBlock>
+                    <TextBlock>Rename</TextBlock>
+                    <TextBlock>Delete</TextBlock>
+                </MenuItem>
+            </Menu>
         </Grid>
     </Border>
 </UserControl>

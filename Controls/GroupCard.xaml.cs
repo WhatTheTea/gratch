@@ -22,12 +22,12 @@ namespace gratch_desktop.Controls
     {
         public static DependencyProperty GrpNameProperty { get; set; }
         public static DependencyProperty HolidaysProperty { get; set; }
-        public string GroupName
+        public string GrpName
         {
             get => GetValue(GrpNameProperty) as string;
             set => SetValue(GrpNameProperty, value);
         }
-        public string AssignedPerson
+        public string Holidays
         {
             get => GetValue(HolidaysProperty) as string;
             set => SetValue(HolidaysProperty, value);

@@ -18,9 +18,9 @@ namespace gratch_desktop.Views
     /// <summary>
     /// Логика взаимодействия для GraphView.xaml
     /// </summary>
-    public partial class PeopleView : UserControl
+    public partial class GroupView : UserControl
     {
-        public PeopleView()
+        public GroupView()
         {
             InitializeComponent();
         }

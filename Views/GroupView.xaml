@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="gratch_desktop.Views.PeopleView"
+﻿<UserControl x:Class="gratch_desktop.Views.GroupView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,19 +14,19 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" 
-                  VerticalScrollBarVisibility="Visible"
-                  Background="{StaticResource MahApps.Brushes.Control.Background}">
+    <ScrollViewer Background="{StaticResource MahApps.Brushes.Control.Background}"
+                  HorizontalScrollBarVisibility="Disabled" 
+                  VerticalScrollBarVisibility="Visible">
         <ScrollViewer.DataContext>
-            <vm:PeopleViewModel/>
+            <vm:GroupViewModel/>
         </ScrollViewer.DataContext>
 
         <WrapPanel Orientation="Horizontal"
                    VerticalAlignment="Top">
             <!--#region designdata-->
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
+            <Border>
+                <controls:GroupCard />
+            </Border>
             <d:Border>
                 <controls:GroupCard/>
             </d:Border>
@@ -61,6 +61,7 @@
                 <controls:GroupCard/>
             </d:Border>
             <!--#endregion designdata-->
+            
         </WrapPanel>
         
     </ScrollViewer>

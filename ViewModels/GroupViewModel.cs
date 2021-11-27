@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class PeopleViewModel : BaseViewModel
+    internal class GroupViewModel : BaseViewModel
     {
     }
 }

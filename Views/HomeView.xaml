@@ -21,8 +21,7 @@
             <vm:HomeViewModel/>
         </ScrollViewer.DataContext>
         <WrapPanel Orientation="Horizontal"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center">
+                   VerticalAlignment="Top">
             <!--#region designdata-->
             <d:Border>
                 <controls:TodayCard/>

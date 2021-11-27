@@ -70,17 +70,17 @@
                     VerticalContentAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch">
             <TabItem Header="Home"
-                     Style="{StaticResource grTabItem}"
+                     Style="{StaticResource TabItem.Animated}"
                      helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Home}">
                 <vw:HomeView/>
             </TabItem>
             <TabItem Header="People" 
-                     Style="{StaticResource grTabItem}"
+                     Style="{StaticResource TabItem.Animated}"
                      helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}">
-                <vw:PeopleView/>
+                <vw:GroupView/>
             </TabItem>
             <TabItem Header="Graph" 
-                     Style="{StaticResource grTabItem}"
+                     Style="{StaticResource TabItem.Animated}"
                      helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}">
                 <vw:GraphView/>
             </TabItem>

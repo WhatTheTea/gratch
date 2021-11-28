@@ -20,20 +20,26 @@
             <vm:PeopleViewModel/>
         </Control.DataContext>
         <DockPanel Background="{StaticResource MahApps.Brushes.Control.Background}">
-            <StackPanel DockPanel.Dock="Top">
+            <Border DockPanel.Dock="Top" 
+                    CornerRadius="5"
+                    Margin="8"
+                    Background="{StaticResource MahApps.Brushes.Accent4}">
                 <ListView VerticalAlignment="Stretch"
-                          Margin="10"
+                          Margin="2"
                           Style="{StaticResource MahApps.Styles.ListBox}">
-                    <d:TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                 Foreground="White">
-                        Hello
-                    </d:TextBlock>
-                    <d:TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                 Foreground="White">
-                        World
-                    </d:TextBlock>
+                    <!--#region DesignData-->
+                    <d:Border>
+                        <controls:PersonListItem PersonName="Hello"/>
+                    </d:Border>
+                    <d:Border>
+                        <controls:PersonListItem PersonName="World"/>
+                    </d:Border>
+                    <d:Border>
+                        <controls:PersonListItem PersonName="Kek"/>
+                    </d:Border>
+                    <!--#endregion-->
                 </ListView>
-            </StackPanel>
+            </Border>
             <Button DockPanel.Dock="Bottom"
                     VerticalAlignment="Bottom"
                     Margin="10">

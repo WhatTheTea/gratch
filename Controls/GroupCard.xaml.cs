@@ -20,8 +20,8 @@ namespace gratch_desktop.Controls
     /// </summary>
     public partial class GroupCard : UserControl
     {
-        public static DependencyProperty GrpNameProperty { get; set; }
-        public static DependencyProperty HolidaysProperty { get; set; }
+        public static DependencyProperty GrpNameProperty;
+        public static DependencyProperty HolidaysProperty;
         public string GrpName
         {
             get => GetValue(GrpNameProperty) as string;

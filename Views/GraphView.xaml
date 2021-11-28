@@ -14,10 +14,7 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer Background="{StaticResource MahApps.Brushes.Control.Background}"
-                  HorizontalScrollBarVisibility="Disabled" 
-                  VerticalScrollBarVisibility="Visible"
-                  HorizontalAlignment="Center">
+    <ScrollViewer Style="{StaticResource gratch.Styles.Menu.ScrollViewer}">
         <ScrollViewer.DataContext>
             <vm:GraphViewModel/>
         </ScrollViewer.DataContext>

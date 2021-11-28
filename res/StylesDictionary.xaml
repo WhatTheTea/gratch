@@ -73,5 +73,13 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
-
+    
+    <!-- ScrollViewer -->
+    <Style x:Key="gratch.Styles.Menu.ScrollViewer"
+           TargetType="ScrollViewer"
+           BasedOn="{StaticResource MaterialDesignScrollViewer}">
+        <Setter Property="Background" Value="{StaticResource MahApps.Brushes.Control.Background}"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+    </Style>
 </ResourceDictionary>

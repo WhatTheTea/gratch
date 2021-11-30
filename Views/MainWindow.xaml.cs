@@ -26,5 +26,10 @@ namespace gratch_desktop.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new HolidaysCheckDialogWindow().ShowDialog();
+        }
     }
 }

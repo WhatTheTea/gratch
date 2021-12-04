@@ -23,6 +23,15 @@ namespace gratch_desktop.Views
         public GraphView()
         {
             InitializeComponent();
+            this.DataContext = new ViewModels.GraphViewModel();
+        }
+
+        // ?
+        private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var date = GraphCalendar.SelectedDate ?? default;
+            ((ViewModels.GraphViewModel)DataContext).CalendarDayCommand.Execute(date).Subscribe();
+            GraphCalendar.SelectedDate = default;
         }
     }
 }

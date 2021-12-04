@@ -5,6 +5,8 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>gratch_desktop</RootNamespace>
     <UseWPF>true</UseWPF>
+    <DebugType>portable</DebugType>
+	<PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,11 +26,13 @@
     <PackageReference Include="ReactiveUI" Version="16.3.10" />
     <PackageReference Include="ReactiveUI.Fody" Version="16.3.10" />
     <PackageReference Include="ReactiveUI.WPF" Version="16.3.10" />
+    <PackageReference Include="Resource.Embedder" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="gratch-core">
       <HintPath>..\gratch-core\gratch-core\obj\Release\net5.0\gratch-core.dll</HintPath>
+      <CopyLocal>True</CopyLocal>
     </Reference>
   </ItemGroup>
 

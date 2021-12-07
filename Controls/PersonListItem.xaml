@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:gratch_desktop.Controls"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              mc:Ignorable="d"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="30" d:DesignWidth="150">
-    <DockPanel Background="{StaticResource MahApps.Brushes.Control.Background}">
+    <DockPanel Background="{StaticResource MahApps.Brushes.Control.Background}"
+               x:Name="LayoutRoot">
         <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
                    Foreground="{StaticResource MaterialDesignDarkForeground}"
                    VerticalAlignment="Center"

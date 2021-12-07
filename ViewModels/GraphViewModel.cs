@@ -25,6 +25,7 @@ namespace gratch_desktop.ViewModels
     {
         [Reactive]
         public ObservableCollection<AssigneesItem> Assignees { get; set; }
+            = new ObservableCollection<AssigneesItem> { new AssigneesItem { Group = "Sample", Name = "keke" } };
 
         [Reactive]
         public bool FlyoutIsOpen { get; set; }

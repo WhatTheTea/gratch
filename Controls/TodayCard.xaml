@@ -7,11 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="200"
              MinHeight="150" MinWidth="250"
-             MaxHeight="150" MaxWidth="250"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             MaxHeight="150" MaxWidth="250">
     <Border CornerRadius="15" 
             Background="{DynamicResource PrimaryHueMidBrush}"
-            Margin="5">
+            Margin="5"
+            
+            x:Name="LayoutRoot">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

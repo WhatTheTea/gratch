@@ -34,6 +34,8 @@ namespace gratch_desktop.Controls
         public PersonListItem()
         {
             InitializeComponent();
+
+            LayoutRoot.DataContext = this;
         }
     }
 }

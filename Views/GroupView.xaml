@@ -18,49 +18,23 @@
         <ScrollViewer.DataContext>
             <vm:GroupViewModel/>
         </ScrollViewer.DataContext>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ItemsSource="{Binding Groups}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" 
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type controls:GroupCard}">
+                    <controls:GroupCard />
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-        <WrapPanel Orientation="Horizontal"
-                   VerticalAlignment="Top">
-            <!--#region designdata-->
-            <Border>
-                <controls:GroupCard />
-            </Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <d:Border>
-                <controls:GroupCard/>
-            </d:Border>
-            <!--#endregion designdata-->
-            
-        </WrapPanel>
-        
+        </ListView>
+
     </ScrollViewer>
 </UserControl>

@@ -39,6 +39,7 @@ namespace gratch_desktop.Controls
         public TodayCard()
         {
             InitializeComponent();
+            LayoutRoot.DataContext = this;
         }
     }
 }

@@ -44,8 +44,11 @@
                       d:ItemsSource="{d:SampleData ItemCount=5}"
                       Name="List">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <mat:Card UniformCornerRadius="10"
+                    <DataTemplate DataType="{x:Type vm:AssigneesItem}">
+                        
+                        <controls:TodayCard AssignedPerson="{Binding Name}"
+                                            GroupName="{Binding Group}"/>
+                        <!--<mat:Card UniformCornerRadius="10"
                                   Background="{StaticResource MahApps.Brushes.Accent3}"
                                   Margin="2">
                             <StackPanel Margin="2.5">
@@ -54,7 +57,7 @@
                                 <TextBlock Text="{Binding Name}"
                                            Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
                             </StackPanel>
-                        </mat:Card>
+                        </mat:Card>-->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

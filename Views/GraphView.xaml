@@ -13,7 +13,9 @@
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              d:DataContext="{d:DesignInstance Type=vm:GraphViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800"
+             
+             Name="Graph">
     <Grid Background="{StaticResource MahApps.Brushes.Control.Background}">
 
         <Border x:Name="Calendar_Border" d:LayoutOverrides="Width, Height">
@@ -38,7 +40,24 @@
                     IsOpen="{Binding FlyoutIsOpen}"
                     Header="{Binding LastCalendarDate}"
                     >
-            
+            <ListView ItemsSource="{Binding Assignees}" 
+                      d:ItemsSource="{d:SampleData ItemCount=5}"
+                      Name="List">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <mat:Card UniformCornerRadius="10"
+                                  Background="{StaticResource MahApps.Brushes.Accent3}"
+                                  Margin="2">
+                            <StackPanel Margin="2.5">
+                                <TextBlock Text="{Binding Group}"
+                                           Style="{StaticResource MaterialDesignBody1TextBlock}"/>
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+                            </StackPanel>
+                        </mat:Card>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </mah:Flyout>
 
     </Grid>

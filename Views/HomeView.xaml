@@ -24,7 +24,7 @@
                    VerticalAlignment="Top">
             <!--#region designdata-->
             <d:Border>
-                <controls:TodayCard/>
+                <controls:TodayCard AssignedPerson="Hello" GroupName="Hello"/>
             </d:Border>
             <d:Border>
                 <controls:TodayCard/>

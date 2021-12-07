@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ReactiveUI.Fody.Helpers;
+
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +23,14 @@ namespace gratch_desktop.Views
     /// </summary>
     public partial class GraphView : UserControl
     {
+        [ReactiveDependency("Assignees")]
+        public static DependencyProperty AssigneesProperty { get; set; }
+
         public GraphView()
         {
             InitializeComponent();
             this.DataContext = new ViewModels.GraphViewModel();
         }
-
         // ?
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {

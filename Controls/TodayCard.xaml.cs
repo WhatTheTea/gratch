@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,8 +21,11 @@ namespace gratch_desktop.Controls
     /// </summary>
     public partial class TodayCard : UserControl
     {
-        public static DependencyProperty GroupNameProperty { get; set; }
-        public static DependencyProperty AssignedPersonProperty { get; set; }
+        public static readonly DependencyProperty GroupNameProperty
+        = DependencyProperty.Register("GroupName", typeof(string), typeof(TodayCard));
+        public static readonly DependencyProperty AssignedPersonProperty
+        = DependencyProperty.Register("AssignedPerson", typeof(string), typeof(TodayCard));
+
         public string GroupName
         {
             get => GetValue(GroupNameProperty) as string;
@@ -31,12 +35,6 @@ namespace gratch_desktop.Controls
         {
             get => GetValue(AssignedPersonProperty) as string;
             set => SetValue(AssignedPersonProperty, value);
-        }
-
-        static TodayCard()
-        {
-            GroupNameProperty = DependencyProperty.Register("GroupName", typeof(string), typeof(TodayCard));
-            AssignedPersonProperty = DependencyProperty.Register("AssignedPerson", typeof(string), typeof(TodayCard));
         }
         public TodayCard()
         {

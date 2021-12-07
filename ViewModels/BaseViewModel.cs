@@ -8,7 +8,7 @@ using ReactiveUI;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class BaseViewModel : ReactiveObject
+    public class BaseViewModel : ReactiveObject
     {
     }
 }

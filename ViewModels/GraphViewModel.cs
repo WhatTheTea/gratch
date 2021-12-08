@@ -14,18 +14,10 @@ using System.Windows.Input;
 
 namespace gratch_desktop.ViewModels
 {
-    public class AssigneesItem
-    {
-        [Reactive]
-        public string Name { get; set; }
-        [Reactive]
-        public string Group { get; set; }
-    }
     public class GraphViewModel : BaseViewModel
     {
         [Reactive]
-        public ObservableCollection<AssigneesItem> Assignees { get; set; }
-            = new ObservableCollection<AssigneesItem> { new AssigneesItem { Group = "Sample", Name = "keke" } };
+        public ObservableCollection<AssigneesItem> Assignees { get; set; } = new() { new() { Group = "kek", Name = "lol" } };
 
         [Reactive]
         public bool FlyoutIsOpen { get; set; }
@@ -39,7 +31,7 @@ namespace gratch_desktop.ViewModels
 
 
         public GraphViewModel()
-        {
+        { 
             CalendarDayCommand = ReactiveCommand.Create<DateTime>(date =>
              {
                  if (date != default)

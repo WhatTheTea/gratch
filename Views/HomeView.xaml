@@ -12,57 +12,36 @@
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              
+             xmlns:models="clr-namespace:gratch_core;assembly=gratch-core"
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" 
                   VerticalScrollBarVisibility="Visible"
-                  Background="{StaticResource MahApps.Brushes.Control.Background}">
-        <ScrollViewer.DataContext>
-            <vm:HomeViewModel/>
-        </ScrollViewer.DataContext>
-        <WrapPanel Orientation="Horizontal"
-                   VerticalAlignment="Top">
-            <!--#region designdata-->
-            <d:Border>
-                <controls:TodayCard AssignedPerson="Hello" GroupName="Hello"/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <d:Border>
-                <controls:TodayCard/>
-            </d:Border>
-            <!--#endregion designdata-->
-        </WrapPanel>
+                  Background="{StaticResource MahApps.Brushes.Control.Background}"
+                  x:Name="LayoutRoot">
+
+        <d:ScrollViewer.DataContext>
+            <vm:GraphViewModel/>
+        </d:ScrollViewer.DataContext>
+        
+        <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ItemsSource="{Binding Assignees}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" 
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:AssigneesItem}">
+                    <controls:TodayCard Group="{Binding Group}"
+                                        AssignedPerson="{Binding Name}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </ScrollViewer>
 </UserControl>

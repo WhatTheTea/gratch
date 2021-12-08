@@ -21,15 +21,15 @@ namespace gratch_desktop.Controls
     /// </summary>
     public partial class TodayCard : UserControl
     {
-        public static readonly DependencyProperty GroupNameProperty
-        = DependencyProperty.Register("GroupName", typeof(string), typeof(TodayCard));
+        public static readonly DependencyProperty GroupProperty
+        = DependencyProperty.Register("Group", typeof(string), typeof(TodayCard));
         public static readonly DependencyProperty AssignedPersonProperty
         = DependencyProperty.Register("AssignedPerson", typeof(string), typeof(TodayCard));
 
-        public string GroupName
+        public string Group
         {
-            get => GetValue(GroupNameProperty) as string;
-            set => SetValue(GroupNameProperty, value);
+            get => GetValue(GroupProperty) as string;
+            set => SetValue(GroupProperty, value);
         }
         public string AssignedPerson
         {

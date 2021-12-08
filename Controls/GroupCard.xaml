@@ -29,7 +29,7 @@
                    Style="{StaticResource MaterialDesignLabel}"
                    FontSize="24"
                    Margin="5,0,0,0"
-                   Content="{Binding GrpName}"
+                   Content="{Binding GroupName}"
                    d:Content="GroupName"
                    />
             <!-- Holidays -->

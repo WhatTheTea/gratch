@@ -47,7 +47,7 @@
                     <DataTemplate DataType="{x:Type vm:AssigneesItem}">
                         
                         <controls:TodayCard AssignedPerson="{Binding Name}"
-                                            GroupName="{Binding Group}"/>
+                                            Group="{Binding Group}"/>
                         <!--<mat:Card UniformCornerRadius="10"
                                   Background="{StaticResource MahApps.Brushes.Accent3}"
                                   Margin="2">

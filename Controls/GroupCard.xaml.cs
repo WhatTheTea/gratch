@@ -35,8 +35,8 @@ namespace gratch_desktop.Controls
 
         static GroupCard()
         {
-            GroupNameProperty = DependencyProperty.Register("GroupName", typeof(string), typeof(TodayCard));
-            HolidaysProperty = DependencyProperty.Register("Holidays", typeof(string), typeof(TodayCard));
+            GroupNameProperty = DependencyProperty.Register("GroupName", typeof(string), typeof(GroupCard));
+            HolidaysProperty = DependencyProperty.Register("Holidays", typeof(string), typeof(GroupCard));
         }
         public GroupCard()
         {

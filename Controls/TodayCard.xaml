@@ -27,7 +27,7 @@
                    Style="{StaticResource MaterialDesignLabel}"
                    FontSize="32"
                    Margin="5,0,0,0"
-                   Content="{Binding GroupName}"
+                   Content="{Binding Group}"
                    d:Content="GroupName"
                    />
             <TextBlock Grid.Row="1" Grid.Column="0"

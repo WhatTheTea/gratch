@@ -17,16 +17,17 @@ namespace gratch_desktop.ViewModels
 {
     internal class GroupViewModel : BaseViewModel
     {
-        private readonly ReadOnlyObservableCollection<Group> groups;
-        public ReadOnlyObservableCollection<Group> Groups => groups;
-
+        [Reactive]
+        public ObservableCollection<GroupItem> GroupItems { get; set; } = new();
         public GroupViewModel()
         {
-            var service = new Services.GroupService();
-            service.Connect()
-                   .ObserveOn(RxApp.MainThreadScheduler)
-                   .Bind(out groups)
-                   .Subscribe();
+            var itemCreator = new GroupItemCreator();
+            foreach(var grp in Groups)
+            {
+                itemCreator.SelectedGroup = grp;
+                GroupItems.Add(itemCreator.Create());
+            }
         }
+
     }
 }

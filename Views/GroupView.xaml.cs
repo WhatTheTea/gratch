@@ -23,6 +23,7 @@ namespace gratch_desktop.Views
         public GroupView()
         {
             InitializeComponent();
+            LayoutRoot.DataContext = new ViewModels.GroupViewModel();
         }
     }
 }

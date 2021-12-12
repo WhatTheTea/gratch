@@ -30,8 +30,8 @@ namespace gratch_desktop.ViewModels
                         .ObserveOn(RxApp.MainThreadScheduler)
                         .Subscribe();
 
-            this.WhenAnyValue(x => x.Groups)
-                .Subscribe(x => Create());
+            //this.WhenAnyValue(x => x.Groups)
+            //    .Subscribe(x => Create());
         }
     }
 }

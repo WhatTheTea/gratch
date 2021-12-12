@@ -16,13 +16,11 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer Style="{StaticResource gratch.Styles.Menu.ScrollViewer}">
-        <ScrollViewer.DataContext>
-            <vm:GroupViewModel/>
-        </ScrollViewer.DataContext>
+    <ScrollViewer Style="{StaticResource gratch.Styles.Menu.ScrollViewer}"
+                  x:Name="LayoutRoot">
         <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ItemsSource="{Binding Groups}">
+                  ItemsSource="{Binding GroupItems}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" 
@@ -31,9 +29,9 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:Group}">
+                <DataTemplate DataType="{x:Type vm:GroupItem}">
                     <controls:GroupCard GroupName="{Binding Name}"
-                                        Holidays="{Binding Graph.Weekend}"/>
+                                        Holidays="{Binding Holidays}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
 

@@ -45,19 +45,9 @@
                       Name="List">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type vm:AssigneesItem}">
-                        
+
                         <controls:TodayCard AssignedPerson="{Binding Name}"
                                             Group="{Binding Group}"/>
-                        <!--<mat:Card UniformCornerRadius="10"
-                                  Background="{StaticResource MahApps.Brushes.Accent3}"
-                                  Margin="2">
-                            <StackPanel Margin="2.5">
-                                <TextBlock Text="{Binding Group}"
-                                           Style="{StaticResource MaterialDesignBody1TextBlock}"/>
-                                <TextBlock Text="{Binding Name}"
-                                           Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
-                            </StackPanel>
-                        </mat:Card>-->
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

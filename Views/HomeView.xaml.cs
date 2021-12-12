@@ -22,8 +22,7 @@ namespace gratch_desktop.Views
     /// </summary>
     public partial class HomeView : UserControl
     {
-        [ReactiveDependency("Assignees")]
-        public static DependencyProperty AssigneesProperty { get; set; }
+        
         public HomeView()
         {
             InitializeComponent();

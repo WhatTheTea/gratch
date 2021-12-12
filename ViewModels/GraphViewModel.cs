@@ -17,21 +17,20 @@ namespace gratch_desktop.ViewModels
     public class GraphViewModel : BaseViewModel
     {
         [Reactive]
-        public ObservableCollection<AssigneesItem> Assignees { get; set; } = new() { new() { Group = "kek", Name = "lol" } };
-
+        public ObservableCollection<AssigneesItem> Assignees { get; set; }
         [Reactive]
         public bool FlyoutIsOpen { get; set; }
         //Calendar
         [Reactive]
         public DateTime LastCalendarDate { get; set; }
-        public ReactiveCommand<DateTime,Unit> CalendarDayCommand { get; }
-        public DateTime CalendarStartDate => new(DateTime.Now.Year,DateTime.Now.Month,1);
+        public ReactiveCommand<DateTime, Unit> CalendarDayCommand { get; }
+        public DateTime CalendarStartDate => new(DateTime.Now.Year, DateTime.Now.Month, 1);
         public DateTime CalendarEndDate => new(DateTime.Now.Year, DateTime.Now.Month,
             DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
 
 
         public GraphViewModel()
-        { 
+        {
             CalendarDayCommand = ReactiveCommand.Create<DateTime>(date =>
              {
                  if (date != default)
@@ -41,6 +40,14 @@ namespace gratch_desktop.ViewModels
                      FlyoutIsOpen = true;
                  }
              });
+
+            var itemsCreator = new AssigneesItemsCreator();
+            this.WhenAnyValue(x => x.LastCalendarDate)
+                .Subscribe(x =>
+                {
+                    itemsCreator.AssignedOn = LastCalendarDate;
+                    Assignees = itemsCreator.Create();
+                });
         }
     }
 }

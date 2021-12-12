@@ -23,9 +23,6 @@ namespace gratch_desktop.Views
     /// </summary>
     public partial class GraphView : UserControl
     {
-        [ReactiveDependency("Assignees")]
-        public static DependencyProperty AssigneesProperty { get; set; }
-
         public GraphView()
         {
             InitializeComponent();

@@ -10,7 +10,6 @@
              MaxHeight="150" MaxWidth="250">
     <Border CornerRadius="15" 
             Background="{DynamicResource PrimaryHueMidBrush}"
-            Margin="5"
             
             x:Name="LayoutRoot">
         <Grid>
@@ -25,7 +24,7 @@
                    Grid.ColumnSpan="2"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
                    Style="{StaticResource MaterialDesignLabel}"
-                   FontSize="32"
+                   FontSize="28"
                    Margin="5,0,0,0"
                    Content="{Binding Group}"
                    d:Content="GroupName"

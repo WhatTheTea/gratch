@@ -12,15 +12,16 @@
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              
-             xmlns:models="clr-namespace:gratch_core;assembly=gratch-core"
-             
+             xmlns:models="clr-namespace:gratch_core;assembly=gratch-core" 
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:GroupViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer Style="{StaticResource gratch.Styles.Menu.ScrollViewer}"
                   x:Name="LayoutRoot">
         <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ItemsSource="{Binding GroupItems}">
+                  ItemsSource="{Binding GroupItems}"
+                  Style="{DynamicResource MaterialDesignListView}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" 

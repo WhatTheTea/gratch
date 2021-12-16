@@ -1,6 +1,8 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
+using Splat;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,8 +16,12 @@ using System.Windows.Input;
 
 namespace gratch_desktop.ViewModels
 {
-    public class GraphViewModel : BaseViewModel
+    public class GraphViewModel : BaseViewModel, IRoutableViewModel
     {
+        public string UrlPathSegment => "Graph";
+        public IScreen HostScreen { get; }
+
+
         [Reactive]
         public ObservableCollection<AssigneesItem> Assignees { get; set; }
         [Reactive]
@@ -29,8 +35,10 @@ namespace gratch_desktop.ViewModels
             DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
 
 
-        public GraphViewModel()
+        public GraphViewModel(IScreen screen = null)
         {
+            HostScreen = screen ?? Locator.Current.GetService<IScreen>();
+
             CalendarDayCommand = ReactiveCommand.Create<DateTime>(date =>
              {
                  if (date != default)

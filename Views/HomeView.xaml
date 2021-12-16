@@ -27,7 +27,8 @@
         
         <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ItemsSource="{Binding Assignees}">
+                  ItemsSource="{Binding Assignees}" 
+                  Style="{DynamicResource MaterialDesignListView}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" 

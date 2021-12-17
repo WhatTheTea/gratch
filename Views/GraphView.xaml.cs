@@ -21,7 +21,7 @@ namespace gratch_desktop.Views
     /// <summary>
     /// Логика взаимодействия для GraphView.xaml
     /// </summary>
-    public partial class GraphView : ReactiveUI.ReactiveUserControl<ViewModels.GraphViewModel>
+    public partial class GraphView : UserControl
     {
         public GraphView()
         {

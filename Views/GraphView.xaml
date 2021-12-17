@@ -1,4 +1,4 @@
-﻿<rx:RoutedViewHost x:Class="gratch_desktop.Views.GraphView"
+﻿<UserControl x:Class="gratch_desktop.Views.GraphView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -56,4 +56,4 @@
         </mah:Flyout>
 
     </Grid>
-</rx:<Unknown>>
+</UserControl>

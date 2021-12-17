@@ -21,12 +21,7 @@
                  GlowBrush="Black"
                  Background="{StaticResource MahApps.Brushes.Window.Background}"
                  Icon="{StaticResource Logo}"
-                 ShowIconOnTitleBar="False"
-                 >
-    <mah:MetroWindow.DataContext>
-        <vm:MainWindowViewModel/>
-    </mah:MetroWindow.DataContext>
-
+                 ShowIconOnTitleBar="False">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.36*"/>

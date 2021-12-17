@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
     }
 }

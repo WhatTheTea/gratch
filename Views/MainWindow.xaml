@@ -11,6 +11,7 @@
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
                  xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                 xmlns:rx="http://reactiveui.net"
                  
                  mc:Ignorable="d"
                  Title="gratch desktop V5" 
@@ -59,6 +60,7 @@
             </Button>
         </DockPanel>
         <!-- Сайдбар -->
+        <!--  
         <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                     TabStripPlacement="Left" 
                     VerticalContentAlignment="Stretch" 
@@ -80,5 +82,14 @@
             </TabItem>
 
         </TabControl>
+        -->
+        <!-- ViewSelection -->
+        <ListView Grid.Row="1" Grid.Column="0">
+            <Button Content="Home" x:Name="HomeButton"/>
+            <Button Content="People" x:Name="PeopleButton"/>
+            <Button Content="Graph" x:Name="GraphButton"/>
+        </ListView>
+        <!-- Content -->
+        <rx:RoutedViewHost x:Name="ContentViewHost" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </mah:MetroWindow>

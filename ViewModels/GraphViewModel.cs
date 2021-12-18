@@ -54,7 +54,7 @@ namespace gratch_desktop.ViewModels
                 .Subscribe(x =>
                 {
                     itemsCreator.AssignedOn = LastCalendarDate;
-                    Assignees = itemsCreator.Create();
+                    Assignees = new ObservableCollection<AssigneesItem>(itemsCreator.Create());
                 });
         }
     }

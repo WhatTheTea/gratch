@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class AssigneesItemsCreator : BaseItemCreator<ObservableCollection<AssigneesItem>>
+    internal class AssigneesItemsCreator : BaseItemCreator<List<AssigneesItem>>
     {
         private IEnumerable<string> names;
         private IEnumerable<string> groupnames;
@@ -27,7 +27,7 @@ namespace gratch_desktop.ViewModels
             }
         }
 
-        public override ObservableCollection<AssigneesItem> Create()
+        public override List<AssigneesItem> Create()
         {
             names = Groups.SelectMany(group => group
                                 .Where(person => person.DutyDates
@@ -39,7 +39,7 @@ namespace gratch_desktop.ViewModels
                                 .Any())
                                .Select(group => group.Name);
 
-            var result = new ObservableCollection<AssigneesItem>(names
+            var result = new List<AssigneesItem>(names
                 .Zip(groupnames, (name, group) =>
                 new AssigneesItem
                 {

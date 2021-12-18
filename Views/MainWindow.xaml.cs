@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,6 +45,19 @@ namespace gratch_desktop.Views
             InitializeComponent();
 
             ViewModel = new MainWindowViewModel();
+
+            this.WhenActivated(disposables =>
+           {
+               this.BindCommand(ViewModel, vw => vw.GoHome, vm => vm.HomeButton)
+                   .DisposeWith(disposables);
+               this.BindCommand(ViewModel, vw => vw.GoGroup, vm => vm.PeopleButton)
+                   .DisposeWith(disposables);
+               this.BindCommand(ViewModel, vw => vw.GoGraph, vm => vm.GraphButton)
+                   .DisposeWith(disposables);
+               this.OneWayBind(ViewModel, vm => vm.Router, vw => vw.ContentViewHost.Router)
+                   .DisposeWith(disposables);
+
+           });
         }
 
 

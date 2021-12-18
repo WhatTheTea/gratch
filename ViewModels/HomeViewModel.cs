@@ -15,15 +15,28 @@ using DynamicData;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class HomeViewModel : BaseViewModel
+    public class HomeViewModel : BaseViewModel, IRoutableViewModel
     {
-        [Reactive]
-        public ObservableCollection<AssigneesItem> Assignees { get; set; }
+        public ReadOnlyObservableCollection<AssigneesItem> Assignees => assignees;
+        private readonly ReadOnlyObservableCollection<AssigneesItem> assignees;
+        public string UrlPathSegment => "/home";
 
-        public HomeViewModel()
+        public IScreen HostScreen { get; }
+
+        public HomeViewModel(IScreen screen = null)
         {
+            HostScreen = screen;
+
             var itemsCreator = new AssigneesItemsCreator();
-            Assignees = itemsCreator.Create();
+
+            //Assignees
+            groupService.Connect()
+                        .Transform(x => new AssigneesItem(x))
+                        .ObserveOn(RxApp.MainThreadScheduler)
+                        .Bind(out assignees)
+                        .DisposeMany()
+                        .Subscribe();
+
         }
     }
 }

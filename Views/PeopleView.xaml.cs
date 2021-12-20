@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReactiveUI;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +20,7 @@ namespace gratch_desktop.Views
     /// <summary>
     /// Логика взаимодействия для PeopleView.xaml
     /// </summary>
-    public partial class PeopleView : UserControl
+    public partial class PeopleView : ReactiveUserControl<ViewModels.PeopleViewModel>
     {
         public PeopleView()
         {

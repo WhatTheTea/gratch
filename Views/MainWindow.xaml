@@ -3,7 +3,6 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:local="clr-namespace:gratch_desktop"
                  
                  xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
                  xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
@@ -25,7 +24,7 @@
                  ShowIconOnTitleBar="False">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.36*"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -60,35 +59,51 @@
             </Button>
         </DockPanel>
         <!-- Сайдбар -->
-        <!--  
-        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                    TabStripPlacement="Left" 
-                    VerticalContentAlignment="Stretch" 
-                    HorizontalContentAlignment="Stretch">
-            <TabItem Header="Home"
-                     Style="{StaticResource TabItem.Animated}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Home}">
-                <vw:HomeView/>
-            </TabItem>
-            <TabItem Header="People" 
-                     Style="{StaticResource TabItem.Animated}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}">
-                <vw:GroupView/>
-            </TabItem>
-            <TabItem Header="Graph" 
-                     Style="{StaticResource TabItem.Animated}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}">
-                <vw:GraphView/>
-            </TabItem>
-
-        </TabControl>
-        -->
-        <!-- ViewSelection -->
-        <ListView Grid.Row="1" Grid.Column="0">
-            <Button Content="Home" x:Name="HomeButton"/>
-            <Button Content="People" x:Name="PeopleButton"/>
-            <Button Content="Graph" x:Name="GraphButton"/>
-        </ListView>
+        <StackPanel Grid.Row="1" Grid.Column="0" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Margin="5">
+            <Button x:Name="HomeButton"
+                    Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+                <DockPanel Width="222">
+                    <mat:PackIcon Kind="Home" 
+                                  DockPanel.Dock="Left"
+                                  Width="48"
+                                  Height="48"/>
+                    <TextBlock DockPanel.Dock="Right"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Margin="0,5,0,0">Home</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button x:Name="PeopleButton"
+                    Style="{StaticResource MahApps.Styles.Button.Chromeless}"
+                    Margin="0,5,0,5">
+                <DockPanel Width="222">
+                    <mat:PackIcon Kind="PeopleAdd" 
+                                  DockPanel.Dock="Left"
+                                  Width="48"
+                                  Height="48"/>
+                    <TextBlock DockPanel.Dock="Right"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Margin="0,5,0,0">People</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button x:Name="GraphButton"
+                    Style="{StaticResource MahApps.Styles.Button.Chromeless}"
+                    Margin="0,5,0,5">
+                <DockPanel Width="222">
+                    <mat:PackIcon Kind="CalendarDay" 
+                                  DockPanel.Dock="Left"
+                                  Width="48"
+                                  Height="48"/>
+                    <TextBlock DockPanel.Dock="Right"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Margin="0,5,0,0">Calendar</TextBlock>
+                </DockPanel>
+            </Button>
+        </StackPanel>
         <!-- Content -->
         <rx:RoutedViewHost x:Name="ContentViewHost" Grid.Row="1" Grid.Column="1"/>
     </Grid>

@@ -24,5 +24,12 @@ namespace gratch_desktop.ViewModels
             Name = selectedPerson.Name;
             Group = grp.Name;
         }
+        public AssigneesItem(Group grp, DateTime date)
+        {
+            Person selectedPerson = grp.Graph.AssignedPeople.FirstOrDefault(p =>
+                                                                p.DutyDates.Any(d => d == date));
+            Name = selectedPerson?.Name;
+            Group = grp?.Name;
+        }
     }
 }

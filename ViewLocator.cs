@@ -16,11 +16,15 @@ namespace gratch_desktop
     {
         public IViewFor ResolveView<T>(T viewModel, string contract = null)
         {
-            if (viewModel is MainWindowViewModel)
-                return new MainWindow { ViewModel = viewModel as MainWindowViewModel};
-            if (viewModel is HomeViewModel)
-                return new HomeView { ViewModel = viewModel as HomeViewModel};
-            throw new Exception($"Could not find the view for view model {typeof(T).Name}.");
+            return viewModel switch
+            {
+                MainWindowViewModel => new MainWindow(),
+                HomeViewModel => new HomeView(),
+                GroupViewModel => new GroupView(),
+                GraphViewModel => new GraphView(),
+                PeopleViewModel => new PeopleView(),
+                _ => throw new Exception($"Could not find the view for view model {typeof(T).Name}.")
+            };
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Reactive.Linq;
 
 namespace gratch_desktop.ViewModels
 {
-    public abstract class BaseViewModel : ReactiveObject
+    public class BaseViewModel : ReactiveObject
     {
         private readonly ReadOnlyObservableCollection<Group> groups;
         internal readonly Services.IGroupService groupService;

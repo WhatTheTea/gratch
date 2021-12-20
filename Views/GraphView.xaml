@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="gratch_desktop.Views.GraphView"
+﻿<rx:ReactiveUserControl x:Class="gratch_desktop.Views.GraphView"
+                        x:TypeArguments="vm:GraphViewModel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +12,7 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:rx="http://reactiveui.net"
              
              d:DataContext="{d:DesignInstance Type=vm:GraphViewModel}"
@@ -27,22 +29,24 @@
                     d:Width="750"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignCalendarPortrait}" 
-                    SelectionMode="SingleDate"
-                      
-                    DisplayDateStart="{Binding CalendarStartDate, Mode=OneWay}"
-                    DisplayDateEnd="{Binding CalendarEndDate, Mode=OneWay}"
-                      
-                    SelectedDatesChanged="Calendar_SelectedDatesChanged"
-                      />
+                    SelectionMode="SingleDate">
+                <beh:Interaction.Triggers>
+                    <beh:EventTrigger EventName="SelectedDatesChanged">
+                        <beh:InvokeCommandAction x:Name="Calendar_SelectedDateChanged"
+                                                 CommandParameter="{Binding SelectedDate, 
+                                                                    RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                    AncestorType=Calendar}}"/>
+                    </beh:EventTrigger>
+                </beh:Interaction.Triggers>
+            </Calendar>
         </Border>
         <mah:Flyout Theme="Adapt"
                     Position="Right" 
                     CloseButtonVisibility="Visible" 
                     TitleVisibility="Visible"
-                    IsOpen="{Binding FlyoutIsOpen}"
-                    Header="{Binding LastCalendarDate}"
+                    x:Name="FlyoutAssignees"
                     >
-            <ListView ItemsSource="{Binding Assignees}" 
+            <ListView x:Name="AssigneesList"
                       d:ItemsSource="{d:SampleData ItemCount=5}"
                       Style="{DynamicResource MaterialDesignListView}">
                 <ListView.ItemTemplate>
@@ -56,4 +60,4 @@
         </mah:Flyout>
 
     </Grid>
-</UserControl>
+</rx:ReactiveUserControl>

@@ -48,12 +48,14 @@ namespace gratch_desktop.Views
 
             this.WhenActivated(disposables =>
            {
+               // Buttons
                this.BindCommand(ViewModel, vw => vw.GoHome, vm => vm.HomeButton)
                    .DisposeWith(disposables);
                this.BindCommand(ViewModel, vw => vw.GoGroup, vm => vm.PeopleButton)
                    .DisposeWith(disposables);
                this.BindCommand(ViewModel, vw => vw.GoGraph, vm => vm.GraphButton)
                    .DisposeWith(disposables);
+               // ContentViewHost
                this.OneWayBind(ViewModel, vm => vm.Router, vw => vw.ContentViewHost.Router)
                    .DisposeWith(disposables);
 

@@ -27,8 +27,6 @@ namespace gratch_desktop.ViewModels
         {
             HostScreen = screen;
 
-            var itemsCreator = new AssigneesItemsCreator();
-
             //Assignees
             groupService.Connect()
                         .Transform(x => new AssigneesItem(x))

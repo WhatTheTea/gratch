@@ -12,21 +12,28 @@ using DynamicData;
 
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Splat;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class GroupViewModel : BaseViewModel
+    public class GroupViewModel : BaseViewModel, IRoutableViewModel
     {
-        [Reactive]
-        public ObservableCollection<GroupItem> GroupItems { get; set; } = new();
-        public GroupViewModel()
+        public ReadOnlyObservableCollection<GroupItem> GroupItems => groupItems;
+        private readonly ReadOnlyObservableCollection<GroupItem> groupItems;
+
+        public string UrlPathSegment => "/groups";
+        public IScreen HostScreen { get; }
+
+        public GroupViewModel(IScreen screen = null)
         {
-            var itemCreator = new GroupItemCreator();
-            foreach(var grp in Groups)
-            {
-                itemCreator.SelectedGroup = grp;
-                GroupItems.Add(itemCreator.Create());
-            }
+            HostScreen = screen ?? Locator.Current.GetService<IScreen>();
+
+            groupService.Connect()
+                        .Transform(x => new GroupItem(x))
+                        .ObserveOn(RxApp.MainThreadScheduler)
+                        .Bind(out groupItems)
+                        .DisposeMany()
+                        .Subscribe();
         }
 
     }

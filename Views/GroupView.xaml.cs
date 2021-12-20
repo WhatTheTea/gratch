@@ -1,6 +1,11 @@
-﻿using System;
+﻿using gratch_desktop.ViewModels;
+
+using ReactiveUI;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,12 +23,19 @@ namespace gratch_desktop.Views
     /// <summary>
     /// Логика взаимодействия для GraphView.xaml
     /// </summary>
-    public partial class GroupView : UserControl
+    public partial class GroupView : ReactiveUserControl<GroupViewModel>
     {
         public GroupView()
         {
             InitializeComponent();
-            LayoutRoot.DataContext = new ViewModels.GroupViewModel();
+
+            this.WhenActivated(disposables =>
+            {
+                this.OneWayBind(ViewModel,
+                                vm => vm.GroupItems,
+                                vw => vw.GroupsList.ItemsSource)
+                    .DisposeWith(disposables);
+            });
         }
     }
 }

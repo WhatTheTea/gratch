@@ -7,12 +7,10 @@
              
              xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
              xmlns:controls="clr-namespace:gratch_desktop.Controls"
-             xmlns:vw="clr-namespace:gratch_desktop.Views"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:rx="http://reactiveui.net"
+             xmlns:sys="clr-namespace:Microsoft.CSharp;assembly=System"
              
              d:DataContext="{d:DesignInstance Type=vm:GraphViewModel}"
              mc:Ignorable="d" 

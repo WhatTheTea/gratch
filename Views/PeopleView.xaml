@@ -6,7 +6,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gratch_desktop.Views"
              
-             xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
              xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
              xmlns:controls="clr-namespace:gratch_desktop.Controls"
              xmlns:vw="clr-namespace:gratch_desktop.Views"

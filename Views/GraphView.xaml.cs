@@ -27,18 +27,22 @@ namespace gratch_desktop.Views
                                 vm => vm.CalendarEndDate,
                                 vw => vw.GraphCalendar.DisplayDateEnd)
                     .DisposeWith(disposables);
-                // DateChangedCommand
+                /*// DateChangedCommand
                 this.BindCommand(ViewModel,
                                  vm => vm.CalendarDayCommand,
                                  vw => vw.Calendar_SelectedDateChanged)
-                    .DisposeWith(disposables);
+                    .DisposeWith(disposables);*/
+
+                this.Bind(ViewModel,
+                          vm => vm.SelectedCalendarDate,
+                          vw => vw.GraphCalendar.SelectedDate);
                 // Flyout is Open
                 this.Bind(ViewModel,
                           vm => vm.FlyoutIsOpen,
                           vw => vw.FlyoutAssignees.IsOpen)
                     .DisposeWith(disposables);
                 // Flyout header
-                this.Bind(ViewModel,
+                this.OneWayBind(ViewModel,
                           vm => vm.SelectedCalendarDate,
                           vw => vw.FlyoutAssignees.Header)
                     .DisposeWith(disposables);

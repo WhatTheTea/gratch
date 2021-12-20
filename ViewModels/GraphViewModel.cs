@@ -5,8 +5,11 @@ using ReactiveUI.Fody.Helpers;
 using Splat;
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using DynamicData;
+using System.Linq;
 
 namespace gratch_desktop.ViewModels
 {
@@ -15,15 +18,13 @@ namespace gratch_desktop.ViewModels
         public string UrlPathSegment => "/graph";
         public IScreen HostScreen { get; }
 
-        public ReadOnlyObservableCollection<AssigneesItem> Assignees => assignees;
-        private readonly ReadOnlyObservableCollection<AssigneesItem> assignees;
+        public ObservableCollection<AssigneesItem> Assignees { get; set; }
 
         [Reactive]
         public bool FlyoutIsOpen { get; set; }
         //Calendar
         [Reactive]
-        public DateTime SelectedCalendarDate { get; set; }
-        public ReactiveCommand<DateTime, Unit> CalendarDayCommand { get; }
+        public DateTime? SelectedCalendarDate { get; set; }
         public DateTime CalendarStartDate => new(DateTime.Now.Year, DateTime.Now.Month, 1);
         public DateTime CalendarEndDate => new(DateTime.Now.Year, DateTime.Now.Month,
             DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
@@ -33,15 +34,25 @@ namespace gratch_desktop.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-            CalendarDayCommand = ReactiveCommand.Create<DateTime>(date =>
-             {
-                 if (date != default)
-                 {
-                     FlyoutIsOpen = false;
-                     SelectedCalendarDate = date;
-                     FlyoutIsOpen = true;
-                 }
-             });
+            SelectedCalendarDate = null;
+            Assignees = new();
+
+            this.WhenAnyValue(x => x.SelectedCalendarDate)
+                .Subscribe(x =>
+                {
+                    if (SelectedCalendarDate != null || SelectedCalendarDate != default)
+                    {
+                        FlyoutIsOpen = false;
+                        Assignees.Clear();
+
+                        foreach (var grp in Groups)
+                        {
+                            Assignees.Add(new AssigneesItem(grp, x.Value));
+                        }
+
+                        FlyoutIsOpen = true;
+                    }
+                }); 
         }
     }
 }

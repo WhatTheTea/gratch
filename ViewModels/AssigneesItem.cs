@@ -13,24 +13,22 @@ namespace gratch_desktop.ViewModels
         public string Name { get; set; }
         [Reactive]
         public string Group { get; set; }
+        [Reactive]
+        public DateTime Date { get; set; }
+
+        private DateTime today => DateTime.Today;
 
         public AssigneesItem()
         {
         }
 
-        public AssigneesItem(Group grp)
+        public AssigneesItem(Group grp, DateTime? date = null)
         {
+            Date = date ?? DateTime.Today;
             Person selectedPerson = grp.Graph.AssignedPeople.FirstOrDefault(p =>
-                                                                p.DutyDates.Any(d => d == DateTime.Today));
+                                                                p.DutyDates.Any(d => d == Date));
             Name = selectedPerson.Name;
             Group = grp.Name;
-        }
-        public AssigneesItem(Group grp, DateTime date)
-        {
-            Person selectedPerson = grp.Graph.AssignedPeople.FirstOrDefault(p =>
-                                                                p.DutyDates.Any(d => d == date));
-            Name = selectedPerson?.Name;
-            Group = grp?.Name;
         }
     }
 }

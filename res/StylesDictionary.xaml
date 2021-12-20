@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-                    xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
+                    
                     >
     <!-- DotsMenu -->
     <Style x:Key="gratch.Styles.Menu.Dots" 

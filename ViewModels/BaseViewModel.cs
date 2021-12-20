@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DynamicData;
+
+using gratch_core;
 
 using ReactiveUI;
 
-using gratch_core;
-using DynamicData;
+using System;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 
 namespace gratch_desktop.ViewModels

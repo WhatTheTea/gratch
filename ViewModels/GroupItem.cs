@@ -5,8 +5,6 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace gratch_desktop.ViewModels
 {
@@ -54,11 +52,11 @@ namespace gratch_desktop.ViewModels
                 foreach (var day in holidays)
                 {
                     holidaysResult = (day != holidays.Last()) ? $@"{day:ddd}, " : $@"{day:ddd}";
-}
+                }
                 Holidays = holidaysResult;
             }
             else
-{
+            {
                 Holidays = "Holidays: None";
             }
 

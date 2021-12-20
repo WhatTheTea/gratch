@@ -1,8 +1,9 @@
 ﻿using gratch_core;
-using System.Linq;
-using System;
 
 using ReactiveUI.Fody.Helpers;
+
+using System;
+using System.Linq;
 
 namespace gratch_desktop.ViewModels
 {
@@ -19,7 +20,7 @@ namespace gratch_desktop.ViewModels
 
         public AssigneesItem(Group grp)
         {
-            Person selectedPerson = grp.Graph.AssignedPeople.FirstOrDefault(p => 
+            Person selectedPerson = grp.Graph.AssignedPeople.FirstOrDefault(p =>
                                                                 p.DutyDates.Any(d => d == DateTime.Today));
             Name = selectedPerson.Name;
             Group = grp.Name;

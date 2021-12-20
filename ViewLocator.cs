@@ -1,14 +1,9 @@
-﻿using ReactiveUI;
+﻿using gratch_desktop.ViewModels;
+using gratch_desktop.Views;
+
+using ReactiveUI;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-
-using gratch_desktop.ViewModels;
-using gratch_desktop.Views;
 
 namespace gratch_desktop
 {

@@ -1,21 +1,12 @@
-﻿using DynamicData;
-
+﻿
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using Splat;
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace gratch_desktop.ViewModels
 {

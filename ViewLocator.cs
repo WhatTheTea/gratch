@@ -1,4 +1,7 @@
-﻿using gratch_desktop.ViewModels;
+﻿using gratch_desktop.Controls;
+using gratch_desktop.ControlModels;
+
+using gratch_desktop.ViewModels;
 using gratch_desktop.Views;
 
 using ReactiveUI;
@@ -13,11 +16,14 @@ namespace gratch_desktop
         {
             return viewModel switch
             {
+                // IScreen
                 MainWindowViewModel => new MainWindow(),
+                // Pages
                 HomeViewModel => new HomeView(),
                 GroupViewModel => new GroupView(),
                 GraphViewModel => new GraphView(),
                 PeopleViewModel => new PeopleView(),
+                // else
                 _ => throw new Exception($"Could not find the view for view model {typeof(T).Name}.")
             };
         }

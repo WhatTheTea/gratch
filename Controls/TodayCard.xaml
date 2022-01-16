@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:gratch_desktop.Controls"
+             xmlns:local="clr-namespace:gratch_desktop.Controls" 
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="200"
              MinHeight="150" MinWidth="250"
-             MaxHeight="150" MaxWidth="250">
+             MaxHeight="150" MaxWidth="250"
+             d:DataContext="{d:DesignInstance Type=local:TodayCard}">
     <Border CornerRadius="15" 
             Background="{DynamicResource PrimaryHueMidBrush}"
-            
             x:Name="LayoutRoot">
         <Grid>
             <Grid.ColumnDefinitions>

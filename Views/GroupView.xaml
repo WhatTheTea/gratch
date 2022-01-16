@@ -12,6 +12,7 @@
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:rx="http://reactiveui.net"
+             xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
              
              xmlns:models="clr-namespace:gratch_core;assembly=gratch-core" 
              mc:Ignorable="d" 

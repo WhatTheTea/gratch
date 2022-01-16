@@ -14,9 +14,9 @@ namespace gratch_desktop.Views
         public GroupView()
         {
             InitializeComponent();
-
             this.WhenActivated(disposables =>
             {
+                // Groups
                 this.OneWayBind(ViewModel,
                                 vm => vm.GroupItems,
                                 vw => vw.GroupsList.ItemsSource)

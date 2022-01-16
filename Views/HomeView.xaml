@@ -38,7 +38,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
 
-        
+
         </ListView>
     </ScrollViewer>
 </rx:ReactiveUserControl>

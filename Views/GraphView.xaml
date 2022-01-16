@@ -10,7 +10,6 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:rx="http://reactiveui.net"
-             xmlns:sys="clr-namespace:Microsoft.CSharp;assembly=System"
              
              d:DataContext="{d:DesignInstance Type=vm:GraphViewModel}"
              mc:Ignorable="d" 

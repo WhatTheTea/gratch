@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace gratch_desktop.Controls
 {
@@ -28,5 +29,14 @@ namespace gratch_desktop.Controls
             InitializeComponent();
             LayoutRoot.DataContext = this;
         }
+
+        public static readonly DependencyProperty CommandProperty
+        = DependencyProperty.Register("Command", typeof(ICommand), typeof(TodayCard));
+        public ICommand Command
+        {
+            get => GetValue(CommandProperty) as ICommand;
+            set => SetValue(CommandProperty, value);
+        }
+
     }
 }

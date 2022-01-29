@@ -33,8 +33,11 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type vm:GroupItem}">
-                    <controls:GroupCard GroupName="{Binding Name}"
+                    <Button Command="{Binding Command}"
+                            Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+                        <controls:GroupCard GroupName="{Binding Name}"
                                         Holidays="{Binding Holidays}"/>
+                    </Button>
                 </DataTemplate>
             </ListView.ItemTemplate>
 

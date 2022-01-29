@@ -3,21 +3,26 @@
 using gratch_core;
 
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace gratch_desktop.Services
 {
     internal class GroupService : IGroupService
     {
-        private readonly gratch_core.Models.GroupRepository repository = new();
-        private readonly SourceList<Group> groups = new();
+        private static readonly gratch_core.Models.GroupRepository repository = new();
+        //private readonly SourceList<Group> groups = new();
 
-        public IObservable<IChangeSet<Group>> Connect() => groups.Connect();
+        static private ObservableCollection<Group> Groups { get; }
 
-        public GroupService()
+        
+
+        static GroupService()
         {
             //Загрузка существующих груп из БД
-            groups.AddRange(repository.LoadAllGroups().Cast<Group>());
+            Groups = new(repository.LoadAllGroups().Cast<Group>());
         }
+
+        public ObservableCollection<Group> Connect() => Groups;
     }
 }

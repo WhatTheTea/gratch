@@ -1,5 +1,4 @@
 ﻿using gratch_desktop.Controls;
-using gratch_desktop.ControlModels;
 
 using gratch_desktop.ViewModels;
 using gratch_desktop.Views;

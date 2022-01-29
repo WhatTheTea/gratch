@@ -1,5 +1,6 @@
 ﻿using gratch_core;
 
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using System;
@@ -17,6 +18,8 @@ namespace gratch_desktop.ViewModels
         public string Name { get; set; }
         [Reactive]
         public string Holidays { get; set; }
+        [Reactive]
+        public ICommand Command { get; set; }
 
         private List<DateTime> holidays
         {
@@ -42,7 +45,7 @@ namespace gratch_desktop.ViewModels
         public GroupItem()
         {
         }
-        public GroupItem(Group grp)
+        public GroupItem(Group grp, IScreen screen)
         {
             selectedGroup = grp;
 
@@ -61,6 +64,8 @@ namespace gratch_desktop.ViewModels
                 Holidays = "Holidays: None";
             }
 
+            Command = ReactiveCommand.CreateFromObservable(() =>
+            screen.Router.Navigate.Execute(new PeopleViewModel(grp, screen)));
         }
 
     }

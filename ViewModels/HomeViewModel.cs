@@ -21,12 +21,13 @@ namespace gratch_desktop.ViewModels
             HostScreen = screen;
 
             //Assignees
-            groupService.Connect()
+            /*groupService.Connect()
                         .Transform(x => new AssigneesItem(x))
                         .ObserveOn(RxApp.MainThreadScheduler)
                         .Bind(out assignees)
                         .DisposeMany()
                         .Subscribe();
+            */
 
         }
     }

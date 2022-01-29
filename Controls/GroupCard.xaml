@@ -1,5 +1,4 @@
-﻿<rx:ReactiveUserControl x:Class="gratch_desktop.Controls.GroupCard"
-                        x:TypeArguments="vm:GroupCardModel"
+﻿<UserControl x:Class="gratch_desktop.Controls.GroupCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +7,6 @@
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
              xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:vm="clr-namespace:gratch_desktop.ControlModels"
              xmlns:rx="http://reactiveui.net"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:GroupCard}"
@@ -28,24 +26,23 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-            <!-- GroupName -->
-                <TextBlock Grid.Row="0" Grid.Column="0"
+            
+            <Label Grid.Row="0" Grid.Column="0"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Style="{StaticResource MaterialDesignTextBlock}"
+                   Style="{StaticResource MaterialDesignLabel}"
                    FontSize="28"
                    Margin="5,0,0,0"
-                   d:Text="GroupName"
-                   x:Name="GroupNameText"
-                           Foreground="{DynamicResource MaterialDesignBody}"
+                   Content="{Binding GroupName}"
+                   d:Content="GroupName"
                    />
-                <!-- Holidays -->
-                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                           x:Name="HolidaysText"
+            <!-- Holidays -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
                    Style="{StaticResource MaterialDesignTextBlock}"
                    FontSize="18"
                    Margin="10,10"
                    TextWrapping="Wrap"
+                   Text="{Binding Holidays}" 
                    Foreground="{DynamicResource MaterialDesignBody}"
                    d:Text="Holidays: Mon, Tue, Wed, Thu, Fri, Sat, Sun"/>
                 <!-- Settings -->
@@ -65,4 +62,4 @@
                 </Menu>
             </Grid>
     </Border>
-</rx:ReactiveUserControl>
+    </UserControl>

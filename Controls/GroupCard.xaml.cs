@@ -11,7 +11,7 @@ namespace gratch_desktop.Controls
     /// <summary>
     /// Логика взаимодействия для GroupCard.xaml
     /// </summary>
-    public partial class GroupCard : ReactiveUserControl<ControlModels.GroupCardModel>
+    public partial class GroupCard : UserControl
     {
         public static DependencyProperty GroupNameProperty;
         public static DependencyProperty HolidaysProperty;
@@ -34,25 +34,7 @@ namespace gratch_desktop.Controls
         public GroupCard()
         {
             InitializeComponent();
-
-            ViewModel = new ControlModels.GroupCardModel();
-
-            this.WhenAnyValue(x => x.GroupName)
-                .Subscribe(x => ViewModel.GroupName = x);
-            this.WhenAnyValue(x => x.Holidays)
-                .Subscribe(x => ViewModel.Holidays = x);
-
-            this.WhenActivated(disposables =>
-            {
-                this.Bind(ViewModel,
-                          vm => vm.GroupName,
-                          vw => vw.GroupNameText.Text)
-                    .DisposeWith(disposables);
-                this.Bind(ViewModel,
-                          vm => vm.Holidays,
-                          vw => vw.HolidaysText.Text)
-                    .DisposeWith(disposables);
-            });
+            LayoutRoot.DataContext = this;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace gratch_desktop.ViewModels
                         FlyoutIsOpen = false;
                         Assignees.Clear();
 
-                        foreach (var grp in Groups)
+                        foreach (var grp in groupService.Connect())
                         {
                             Assignees.Add(new AssigneesItem(grp, x.Value));
                         }

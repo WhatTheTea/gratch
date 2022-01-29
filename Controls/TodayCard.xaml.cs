@@ -30,13 +30,5 @@ namespace gratch_desktop.Controls
             LayoutRoot.DataContext = this;
         }
 
-        public static readonly DependencyProperty CommandProperty
-        = DependencyProperty.Register("Command", typeof(ICommand), typeof(TodayCard));
-        public ICommand Command
-        {
-            get => GetValue(CommandProperty) as ICommand;
-            set => SetValue(CommandProperty, value);
-        }
-
     }
 }

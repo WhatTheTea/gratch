@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 
+using System.Reactive.Disposables;
+
 namespace gratch_desktop.Views
 {
     /// <summary>
@@ -10,6 +12,15 @@ namespace gratch_desktop.Views
         public PeopleView()
         {
             InitializeComponent();
+
+            this.WhenActivated(disposables =>
+            {
+                // Add Person
+                this.BindCommand(ViewModel,
+                                 vm => vm.AddPerson,
+                                 vw => vw.AddButton)
+                    .DisposeWith(disposables);
+            });
         }
     }
 }

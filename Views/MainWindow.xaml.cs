@@ -2,6 +2,8 @@
 
 using MahApps.Metro.Controls;
 
+using MaterialDesignThemes.Wpf;
+
 using ReactiveUI;
 
 using System.Reactive.Disposables;
@@ -45,6 +47,15 @@ namespace gratch_desktop.Views
                // ContentViewHost
                this.OneWayBind(ViewModel, vm => vm.Router, vw => vw.ContentViewHost.Router)
                    .DisposeWith(disposables);
+
+               // Interaction handlers
+               Interactions.TextDialog
+                           .RegisterHandler(async interaction =>
+                           {
+                               var getname = await DialogHost.Show(interaction.Input);
+                               interaction.SetOutput(getname as string);
+                           })
+                           .DisposeWith(disposables);
 
            });
         }

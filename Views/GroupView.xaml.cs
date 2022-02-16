@@ -22,14 +22,6 @@ namespace gratch_desktop.Views
             InitializeComponent();
             this.WhenActivated(disposables =>
             {
-                // getName handler
-                this.ViewModel.GetName
-                    .RegisterHandler(async interaction =>
-                    {
-                        var getname = await DialogHost.Show("Group name: ");
-                        interaction.SetOutput(getname as string);
-                    })
-                    .DisposeWith(disposables);
                 // Groups
                 this.OneWayBind(ViewModel,
                                 vm => vm.GroupItems,

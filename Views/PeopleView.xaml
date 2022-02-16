@@ -43,7 +43,8 @@
             </Border>
             <Button DockPanel.Dock="Bottom"
                     VerticalAlignment="Bottom"
-                    Margin="10">
+                    Margin="10"
+                    x:Name="AddButton">
                 <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}">Add Person</TextBlock>
             </Button>
         </DockPanel>

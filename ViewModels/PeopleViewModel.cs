@@ -19,6 +19,7 @@ namespace gratch_desktop.ViewModels
         public PeopleViewModel(IGroup group, IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
+
             _group = group;
         }
     }

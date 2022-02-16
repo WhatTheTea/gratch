@@ -45,7 +45,7 @@ namespace gratch_desktop.ViewModels
         public GroupItem()
         {
         }
-        public GroupItem(Group grp, IScreen screen)
+        public GroupItem(Group grp, IScreen parentVM)
         {
             selectedGroup = grp;
 
@@ -55,6 +55,7 @@ namespace gratch_desktop.ViewModels
                 string holidaysResult = "Holidays: ";
                 foreach (var day in holidays)
                 {
+                    // Вставка запятой
                     holidaysResult = (day != holidays.Last()) ? $@"{day:ddd}, " : $@"{day:ddd}";
                 }
                 Holidays = holidaysResult;
@@ -65,7 +66,7 @@ namespace gratch_desktop.ViewModels
             }
 
             Command = ReactiveCommand.CreateFromObservable(() =>
-            screen.Router.Navigate.Execute(new PeopleViewModel(grp, screen)));
+            parentVM.Router.Navigate.Execute(new PeopleViewModel(grp, parentVM)));
         }
 
     }

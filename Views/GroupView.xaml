@@ -20,28 +20,57 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer Style="{StaticResource gratch.Styles.Menu.ScrollViewer}"
                   x:Name="LayoutRoot">
-        <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
-                  x:Name="GroupsList"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  Style="{DynamicResource MaterialDesignListView}">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" 
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Stretch"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:GroupItem}">
-                    <Button Command="{Binding Command}"
-                            Style="{StaticResource MahApps.Styles.Button.Chromeless}">
-                        <controls:GroupCard GroupName="{Binding Name}"
-                                        Holidays="{Binding Holidays}"/>
-                    </Button>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <mat:DialogHost x:Name="NameBoxHost" 
+                            Foreground="{x:Null}"
+                            CloseOnClickAway="True">
+            <!-- Dialog Markup -->
+            <mat:DialogHost.DialogContentTemplate>
+                <DataTemplate DataType="system:String">
+                    <StackPanel Margin="20">
 
-        </ListView>
+                        <TextBlock Text="{Binding}"/>
+                        <TextBox x:Name="result"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                            <!--To close a dialog and pass a result; bind the command to the CloseDialogCommand, and pass the result and the CommandParameter-->
+                            <Button Content="OK" MinWidth="80" Margin="0,0,20,0"
+                                    Command="{x:Static mat:DialogHost.CloseDialogCommand}" 
+                                    CommandParameter="{Binding ElementName=result, Path=Text}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </mat:DialogHost.DialogContentTemplate>
+            <!-- Page Content -->
+            <DockPanel>
+                <ListView d:ItemsSource="{d:SampleData ItemCount=4}"
+                x:Name="GroupsList"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                DockPanel.Dock="Top"
+                Style="{DynamicResource MaterialDesignListView}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" 
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Stretch"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:GroupItem}">
+                            <Button Command="{Binding Command}"
+                            Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+                                <controls:GroupCard GroupName="{Binding Name}"
+                                Holidays="{Binding Holidays}"/>
+                            </Button>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                <Button x:Name="AddButton" DockPanel.Dock="Bottom"
+                    VerticalAlignment="Bottom"
+                    Margin="10">Add group</Button>
+
+            </DockPanel>
+        </mat:DialogHost>
 
     </ScrollViewer>
 </rx:ReactiveUserControl>

@@ -25,8 +25,7 @@ namespace gratch_desktop.ViewModels
         public AssigneesItem(Group grp, DateTime? date = null)
         {
             Date = date ?? DateTime.Today;
-            Person selectedPerson = grp.Graph.AssignedPeople.FirstOrDefault(p =>
-                                                                p.DutyDates.Any(d => d == Date));
+            Person selectedPerson = grp.First(p => p.DutyDates.Any(d => d == Date));
             Name = selectedPerson.Name;
             Group = grp.Name;
         }

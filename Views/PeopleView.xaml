@@ -27,18 +27,19 @@
                     Background="{StaticResource MahApps.Brushes.Accent4}">
                 <ListView VerticalAlignment="Stretch"
                           Margin="2"
-                          Style="{StaticResource MahApps.Styles.ListBox}">
-                    <!--#region DesignData-->
-                    <d:Border>
-                        <controls:PersonListItem PersonName="Hello"/>
-                    </d:Border>
-                    <d:Border>
-                        <controls:PersonListItem PersonName="World"/>
-                    </d:Border>
-                    <d:Border>
-                        <controls:PersonListItem PersonName="Kek"/>
-                    </d:Border>
-                    <!--#endregion-->
+                          Style="{StaticResource MahApps.Styles.ListBox}"
+                          x:Name="PeopleListView"
+                          d:ItemsSource="{d:SampleData ItemCount=4}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:PeopleItemViewModel}">
+                            <controls:PersonListItem PersonName="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </Border>
             <Button DockPanel.Dock="Bottom"

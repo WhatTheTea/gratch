@@ -23,20 +23,21 @@
                  ShowIconOnTitleBar="False">
     <mat:DialogHost x:Name="NameBoxHost" 
                             Foreground="{x:Null}"
-                            CloseOnClickAway="True">
+                            CloseOnClickAway="True"
+                            Identifier="TextDialog">
         <!-- Dialog Markup -->
         <mat:DialogHost.DialogContentTemplate>
-            <DataTemplate DataType="system:String">
-                <StackPanel Margin="20">
+            <DataTemplate DataType="vm:TextDialogViewModel">
+                <StackPanel Margin="10">
 
-                    <TextBlock Text="{Binding}"/>
-                    <TextBox x:Name="result"/>
+                    <TextBlock Text="{Binding Text}"/>
+                    <TextBox x:Name="result" Text="{Binding Result}"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                         <!--To close a dialog and pass a result; bind the command to the CloseDialogCommand, and pass the result and the CommandParameter-->
                         <Button Content="OK" MinWidth="80" Margin="0,0,20,0"
                                     Command="{x:Static mat:DialogHost.CloseDialogCommand}" 
-                                    CommandParameter="{Binding ElementName=result, Path=Text}"/>
+                                    CommandParameter="{Binding Result}"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>

@@ -11,6 +11,6 @@ namespace gratch_desktop.ViewModels
 {
     internal static class Interactions
     {
-        public static Interaction<string, string> TextDialog = new();
+        public static Interaction<TextDialogViewModel, string> TextDialog = new();
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace gratch_desktop.ViewModels
 {
-    public class AssigneesItem
+    public class AssigneesItemViewModel
     {
         [Reactive]
         public string Name { get; set; }
@@ -18,11 +18,11 @@ namespace gratch_desktop.ViewModels
 
         private DateTime today => DateTime.Today;
 
-        public AssigneesItem()
+        public AssigneesItemViewModel()
         {
         }
 
-        public AssigneesItem(Group grp, DateTime? date = null)
+        public AssigneesItemViewModel(Group grp, DateTime? date = null)
         {
             Date = date ?? DateTime.Today;
             Person selectedPerson = grp.First(p => p.DutyDates.Any(d => d == Date));

@@ -54,6 +54,7 @@ namespace gratch_desktop.Views
                            {
                                var getname = await DialogHost.Show(interaction.Input);
                                interaction.SetOutput(getname as string);
+                               //interaction.Input.Result = null;
                            })
                            .DisposeWith(disposables);
 
@@ -63,7 +64,7 @@ namespace gratch_desktop.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new HolidaysCheckDialogWindow().ShowDialog();
+            throw new System.NotImplementedException();
         }
     }
 }

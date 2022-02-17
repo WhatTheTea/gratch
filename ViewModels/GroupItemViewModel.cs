@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace gratch_desktop.ViewModels
 {
-    public class GroupItem
+    public class GroupItemViewModel
     {
         private readonly Group selectedGroup;
 
@@ -42,10 +42,10 @@ namespace gratch_desktop.ViewModels
 
             }
         }
-        public GroupItem()
+        public GroupItemViewModel()
         {
         }
-        public GroupItem(Group grp, IScreen parentVM)
+        public GroupItemViewModel(Group grp, IScreen screen)
         {
             selectedGroup = grp;
 
@@ -66,7 +66,7 @@ namespace gratch_desktop.ViewModels
             }
 
             Command = ReactiveCommand.CreateFromObservable(() =>
-            parentVM.Router.Navigate.Execute(new PeopleViewModel(grp, parentVM)));
+            screen.Router.Navigate.Execute(new PeopleViewModel(grp, screen)));
         }
 
     }

@@ -32,7 +32,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:AssigneesItem}">
+                <DataTemplate DataType="{x:Type vm:AssigneesItemViewModel}">
                     <controls:TodayCard Group="{Binding Group}"
                                         AssignedPerson="{Binding Name}"/>
                 </DataTemplate>

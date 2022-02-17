@@ -19,10 +19,10 @@ namespace gratch_desktop.ViewModels
 {
     public class GroupViewModel : BaseViewModel, IRoutableViewModel
     {
-        private ObservableCollection<GroupItem> groupItems;
+        private ObservableCollection<GroupItemViewModel> groupItems;
         private ReactiveCommand<Unit, Unit> addGroup;
 
-        public ObservableCollection<GroupItem> GroupItems => groupItems;
+        public ObservableCollection<GroupItemViewModel> GroupItems => groupItems;
         public ReactiveCommand<Unit, Unit> AddGroup => addGroup;
 
         public string UrlPathSegment => "/groups";
@@ -40,11 +40,16 @@ namespace gratch_desktop.ViewModels
 
             addGroup = ReactiveCommand.CreateFromTask(async () =>
             {
-                var name = await Interactions.TextDialog.Handle("Group name: ");
+                var name = await Interactions.TextDialog.Handle(new("Group name: "));
+                //Validation
                 if (string.IsNullOrWhiteSpace(name)) return;
                 if (groups.Any(grp => grp.Name == name)) return;
+
                 groups.Add(new Group(name));
             });
+#if DEBUG
+            addGroup.ThrownExceptions.Subscribe();
+#endif
         }
 
  
@@ -55,7 +60,7 @@ namespace gratch_desktop.ViewModels
 
             var groupitems = from grp in groupService.Connect()
                              where grp != null
-                             select new GroupItem(grp, HostScreen);
+                             select new GroupItemViewModel(grp, HostScreen);
 
             groupitems.ToList().ForEach(item => groupItems.Add(item));
         }

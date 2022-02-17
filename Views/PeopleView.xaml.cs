@@ -20,6 +20,11 @@ namespace gratch_desktop.Views
                                  vm => vm.AddPerson,
                                  vw => vw.AddButton)
                     .DisposeWith(disposables);
+                // List
+                this.OneWayBind(ViewModel,
+                                vm => vm.People,
+                                vw => vw.PeopleListView.ItemsSource)
+                    .DisposeWith(disposables);
             });
         }
     }

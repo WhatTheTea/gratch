@@ -12,8 +12,8 @@ namespace gratch_desktop.ViewModels
 {
     public class HomeViewModel : BaseViewModel, IRoutableViewModel
     {
-        public ObservableCollection<AssigneesItem> Assignees => assignees;
-        private readonly ObservableCollection<AssigneesItem> assignees = new();
+        public ObservableCollection<AssigneesItemViewModel> Assignees => assignees;
+        private readonly ObservableCollection<AssigneesItemViewModel> assignees = new();
         public string UrlPathSegment => "/home";
 
         public IScreen HostScreen { get; }
@@ -40,8 +40,8 @@ namespace gratch_desktop.ViewModels
             assignees.Clear();
 
             var groupitems = from grp in groupService.Connect()
-                             where grp != null
-                             select new AssigneesItem(grp);
+                             where grp.Any()
+                             select new AssigneesItemViewModel(grp);
 
             groupitems.ToList().ForEach(item => assignees.Add(item));
         }

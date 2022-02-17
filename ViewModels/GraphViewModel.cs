@@ -18,7 +18,7 @@ namespace gratch_desktop.ViewModels
         public string UrlPathSegment => "/graph";
         public IScreen HostScreen { get; }
 
-        public ObservableCollection<AssigneesItem> Assignees { get; set; }
+        public ObservableCollection<AssigneesItemViewModel> Assignees { get; set; }
 
         [Reactive]
         public bool FlyoutIsOpen { get; set; }
@@ -47,12 +47,15 @@ namespace gratch_desktop.ViewModels
 
                         foreach (var grp in groupService.Connect())
                         {
-                            Assignees.Add(new AssigneesItem(grp, x.Value));
+                            if (grp.Any())
+                            {
+                                Assignees.Add(new AssigneesItemViewModel(grp, x.Value));
+                            }
                         }
 
                         FlyoutIsOpen = true;
                     }
-                }); 
+                });
         }
     }
 }

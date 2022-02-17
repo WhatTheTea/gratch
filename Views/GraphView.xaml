@@ -46,7 +46,7 @@
                       d:ItemsSource="{d:SampleData ItemCount=5}"
                       Style="{DynamicResource MaterialDesignListView}">
                 <ListView.ItemTemplate>
-                    <DataTemplate DataType="{x:Type vm:AssigneesItem}">
+                    <DataTemplate DataType="{x:Type vm:AssigneesItemViewModel}">
 
                         <controls:TodayCard AssignedPerson="{Binding Name}"
                                             Group="{Binding Group}"/>

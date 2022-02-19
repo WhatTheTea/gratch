@@ -18,8 +18,10 @@ namespace gratch_desktop.ViewModels
         public string Name { get; set; }
         [Reactive]
         public string Holidays { get; set; }
-        [Reactive]
-        public ICommand Command { get; set; }
+        public ICommand ClickCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand RenameCommand { get; set; }
+        public ICommand HolidaysCommand { get; set; }
 
         private List<DateTime> holidays
         {
@@ -48,15 +50,16 @@ namespace gratch_desktop.ViewModels
         public GroupItemViewModel(Group grp, IScreen screen)
         {
             selectedGroup = grp;
-
             Name = grp.Name;
+            var grpService = new Services.GroupService();
+            //Holidays
             if (holidays != null)
             {
                 string holidaysResult = "Holidays: ";
                 foreach (var day in holidays)
                 {
                     // Вставка запятой
-                    holidaysResult = (day != holidays.Last()) ? $@"{day:ddd}, " : $@"{day:ddd}";
+                    holidaysResult += (day != holidays.Last()) ? $@"{day:ddd}, " : $@"{day:ddd}";
                 }
                 Holidays = holidaysResult;
             }
@@ -64,9 +67,12 @@ namespace gratch_desktop.ViewModels
             {
                 Holidays = "Holidays: None";
             }
-
-            Command = ReactiveCommand.CreateFromObservable(() =>
-            screen.Router.Navigate.Execute(new PeopleViewModel(grp, screen)));
+            //Commands
+            ClickCommand = ReactiveCommand.Create(() =>
+                screen.Router.Navigate.Execute(
+                    new PeopleViewModel(selectedGroup, screen)));
+            DeleteCommand = ReactiveCommand.Create(() => 
+                grpService.Remove(selectedGroup));
         }
 
     }

@@ -15,6 +15,7 @@ namespace gratch_desktop.Controls
     {
         public static DependencyProperty GroupNameProperty;
         public static DependencyProperty HolidaysProperty;
+        public static DependencyProperty DeleteCommandProperty;
         public string GroupName
         {
             get => GetValue(GroupNameProperty) as string;
@@ -25,11 +26,17 @@ namespace gratch_desktop.Controls
             get => GetValue(HolidaysProperty) as string;
             set => SetValue(HolidaysProperty, value);
         }
+        public ICommand DeleteCommand
+        {
+            get => GetValue(DeleteCommandProperty) as ICommand;
+            set => SetValue(DeleteCommandProperty, value);
+        }
 
         static GroupCard()
         {
             GroupNameProperty = DependencyProperty.Register("GroupName", typeof(string), typeof(GroupCard));
             HolidaysProperty = DependencyProperty.Register("Holidays", typeof(string), typeof(GroupCard));
+            DeleteCommandProperty = DependencyProperty.Register("DeleteCommand", typeof(ICommand), typeof(GroupCard));
         }
         public GroupCard()
         {

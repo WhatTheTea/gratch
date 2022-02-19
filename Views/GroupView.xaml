@@ -35,10 +35,11 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type vm:GroupItemViewModel}">
-                        <Button Command="{Binding Command}"
+                        <Button Command="{Binding ClickCommand}"
                             Style="{StaticResource MahApps.Styles.Button.Chromeless}">
                             <controls:GroupCard GroupName="{Binding Name}"
-                                Holidays="{Binding Holidays}"/>
+                                                Holidays="{Binding Holidays}"
+                                                DeleteCommand="{Binding DeleteCommand}"/>
                         </Button>
                     </DataTemplate>
                 </ListView.ItemTemplate>

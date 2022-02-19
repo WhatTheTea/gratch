@@ -16,8 +16,6 @@ namespace gratch_desktop.ViewModels
         [Reactive]
         public DateTime Date { get; set; }
 
-        private DateTime today => DateTime.Today;
-
         public AssigneesItemViewModel()
         {
         }

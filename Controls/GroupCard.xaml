@@ -18,15 +18,15 @@
             x:Name="LayoutRoot">
 
         <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="0.175*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.175*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
             <Label Grid.Row="0" Grid.Column="0"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
                    Style="{StaticResource MaterialDesignLabel}"
@@ -45,21 +45,27 @@
                    Text="{Binding Holidays}" 
                    Foreground="{DynamicResource MaterialDesignBody}"
                    d:Text="Holidays: Mon, Tue, Wed, Thu, Fri, Sat, Sun"/>
-                <!-- Settings -->
-                <Menu Style="{StaticResource gratch.Styles.Menu.Dots}"
+            <!-- Settings -->
+            <Menu Style="{StaticResource gratch.Styles.Menu.Dots}"
                   Grid.Column="1" Grid.Row="0"
                   DockPanel.Dock="Right"
                   Margin="0,10,6,28">
-                    <MenuItem Icon="{icons:Material Kind=DotsVertical}"
+                <MenuItem Icon="{icons:Material Kind=DotsVertical}"
                           Background="Transparent"
                           Width="30"
                           Height="30"
                           HorizontalAlignment="Center">
+                    <Button>
                         <TextBlock>Holidays</TextBlock>
+                    </Button>
+                    <Button>
                         <TextBlock>Rename</TextBlock>
+                    </Button>
+                    <Button Command="{Binding DeleteCommand}">
                         <TextBlock>Delete</TextBlock>
-                    </MenuItem>
-                </Menu>
-            </Grid>
+                    </Button>
+                </MenuItem>
+            </Menu>
+        </Grid>
     </Border>
-    </UserControl>
+</UserControl>

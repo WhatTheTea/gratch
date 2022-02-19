@@ -12,7 +12,7 @@ namespace gratch_desktop.ViewModels
 {
     public class BaseViewModel : ReactiveObject
     {
-        internal readonly Services.IGroupService groupService;
+        internal readonly Services.GroupService groupService;
 
         public BaseViewModel()
         {

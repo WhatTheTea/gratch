@@ -3,14 +3,13 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:local="clr-namespace:gratch_desktop"
                  
-                 xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
                  xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
                  xmlns:vw="clr-namespace:gratch_desktop.Views"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
                  xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                 xmlns:rx="http://reactiveui.net"
                  
                  mc:Ignorable="d"
                  Title="gratch desktop V5" 
@@ -22,63 +21,112 @@
                  Background="{StaticResource MahApps.Brushes.Window.Background}"
                  Icon="{StaticResource Logo}"
                  ShowIconOnTitleBar="False">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.36*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="72"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <mat:DialogHost x:Name="NameBoxHost" 
+                            Foreground="{x:Null}"
+                            CloseOnClickAway="True"
+                            Identifier="TextDialog">
+        <!-- Dialog Markup -->
+        <mat:DialogHost.DialogContentTemplate>
+            <DataTemplate DataType="vm:TextDialogViewModel">
+                <StackPanel Margin="10">
 
-        <!-- Лого и заголовок -->
-        <DockPanel Grid.ColumnSpan="2" 
+                    <TextBlock Text="{Binding Text}"/>
+                    <TextBox x:Name="result" Text="{Binding Result}"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                        <!--To close a dialog and pass a result; bind the command to the CloseDialogCommand, and pass the result and the CommandParameter-->
+                        <Button Content="OK" MinWidth="80" Margin="0,0,20,0"
+                                    Command="{x:Static mat:DialogHost.CloseDialogCommand}" 
+                                    CommandParameter="{Binding Result}"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </mat:DialogHost.DialogContentTemplate>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="72"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Лого и заголовок -->
+            <DockPanel Grid.ColumnSpan="2" 
                    Background="{StaticResource MahApps.Brushes.Accent2}"
                    x:Name="TopCard">
-            <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                             DockPanel.Dock="Left"
                             VerticalAlignment="Center"
                             >
-                <Image Source="{DynamicResource Logo}"
+                    <Image Source="{DynamicResource Logo}"
                        HorizontalAlignment="Left"
                        Margin="5,0"/>
-                <Label Style="{StaticResource MahApps.Styles.Label}" 
+                    <Label Style="{StaticResource MahApps.Styles.Label}" 
                        Content="gratch" FontSize="39"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Margin="10,0,10,5"/>
-            </StackPanel>
-            <!-- Инфо -->
-            <Button Style="{StaticResource MahApps.Styles.Button.Circle}"
+                </StackPanel>
+                <!-- Инфо -->
+                <Button Style="{StaticResource MahApps.Styles.Button.Circle}"
                     Margin="20" 
                     DockPanel.Dock="Right"
                     HorizontalAlignment="Right"
                     Click="Button_Click">
-                <Image Source="{icons:MaterialImage Kind=Information,Brush=WhiteSmoke}"/>
-            </Button>
-        </DockPanel>
-        <!-- Сайдбар -->
-        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                    TabStripPlacement="Left" 
-                    VerticalContentAlignment="Stretch" 
-                    HorizontalContentAlignment="Stretch">
-            <TabItem Header="Home"
-                     Style="{StaticResource TabItem.Animated}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Home}">
-                <vw:HomeView/>
-            </TabItem>
-            <TabItem Header="People" 
-                     Style="{StaticResource TabItem.Animated}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=HumanQueue}">
-                <vw:GroupView/>
-            </TabItem>
-            <TabItem Header="Graph" 
-                     Style="{StaticResource TabItem.Animated}"
-                     helpers:TabItemHelper.Icon="{icons:MaterialImage Brush=White, Kind=Table}">
-                <vw:GraphView/>
-            </TabItem>
-
-        </TabControl>
-    </Grid>
+                    <Image Source="{icons:MaterialImage Kind=Information,Brush=WhiteSmoke}"/>
+                </Button>
+            </DockPanel>
+            <!-- Сайдбар -->
+            <StackPanel Grid.Row="1" Grid.Column="0" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Margin="5">
+                <Button x:Name="HomeButton"
+                    Style="{StaticResource MahApps.Styles.Button.Chromeless}">
+                    <DockPanel Width="222">
+                        <mat:PackIcon Kind="Home" 
+                                  DockPanel.Dock="Left"
+                                  Width="48"
+                                  Height="48"/>
+                        <TextBlock DockPanel.Dock="Right"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Margin="0,5,0,0">Home</TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="PeopleButton"
+                    Style="{StaticResource MahApps.Styles.Button.Chromeless}"
+                    Margin="0,5,0,5">
+                    <DockPanel Width="222">
+                        <mat:PackIcon Kind="PeopleAdd" 
+                                  DockPanel.Dock="Left"
+                                  Width="48"
+                                  Height="48"/>
+                        <TextBlock DockPanel.Dock="Right"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Margin="0,5,0,0">People</TextBlock>
+                    </DockPanel>
+                </Button>
+                <Button x:Name="GraphButton"
+                    Style="{StaticResource MahApps.Styles.Button.Chromeless}"
+                    Margin="0,5,0,5">
+                    <DockPanel Width="222">
+                        <mat:PackIcon Kind="CalendarDay" 
+                                  DockPanel.Dock="Left"
+                                  Width="48"
+                                  Height="48"/>
+                        <TextBlock DockPanel.Dock="Right"
+                               HorizontalAlignment="Center"
+                               FontSize="28"
+                               Margin="0,5,0,0">Calendar</TextBlock>
+                    </DockPanel>
+                </Button>
+            </StackPanel>
+            <!-- Content -->
+            <rx:RoutedViewHost x:Name="ContentViewHost" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+    </mat:DialogHost>
 </mah:MetroWindow>

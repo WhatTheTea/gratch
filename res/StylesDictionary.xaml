@@ -2,68 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-                    xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
+                    
                     >
-    <!--Выделение кнопки в сайдбаре-->
-    <Style TargetType="TabItem" x:Key="TabItem.Animated" BasedOn="{StaticResource MahApps.Styles.TabItem}">
-        <Setter Property="HeaderTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" 
-                                Margin="5,10">
-                        <Image x:Name="HeaderImage" 
-                               Margin="10,0,0,0" 
-                               Height="32" Width="32" 
-                               Source="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}},
-                                    Path=(helpers:TabItemHelper.Icon)}">
-                        </Image>
-                        <TextBlock Text="{Binding Header, RelativeSource={RelativeSource 
-                                                          AncestorType={x:Type TabItem}}}"
-                                   x:Name="HeaderText"
-                                   VerticalAlignment="Center"  
-                                   Margin="10,0,0,0"
-                                   Foreground="{StaticResource MahApps.Brushes.Gray}"/>
-                    </StackPanel>
-                    <DataTemplate.Triggers>
-                        <!-- Если выбрано - поменять цвет текста -->
-                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource 
-                                                                   AncestorType={x:Type TabItem}}}" 
-                                     Value="true">
-                            <Setter TargetName="HeaderText" 
-                                    Property="Foreground" 
-                                    Value="{StaticResource MahApps.Brushes.Accent2}"/>
-                        </DataTrigger>
-                        <!-- Если курсор над кнопкой, подсветить текст -->
-                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource 
-                                                                    AncestorType={x:Type TabItem}}}"
-                                     Value="true">
-                            <Setter TargetName="HeaderText" 
-                                    Property="Foreground" 
-                                    Value="{StaticResource MahApps.Brushes.Gray.MouseOver}"/>
-                        </DataTrigger>
-                        <!-- Если курсор над ВЫБРАННОЙ кнопкой - подсветить -->
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource 
-                                                                         AncestorType={x:Type TabItem}}}"
-                                           Value="true"/>
-                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource 
-                                                                         AncestorType={x:Type TabItem}}}"
-                                           Value="true"/>
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.Setters>
-                                <Setter TargetName="HeaderText" 
-                                        Property="Foreground" 
-                                        Value="{StaticResource MahApps.Brushes.Accent}"/>
-                            </MultiDataTrigger.Setters>
-                        </MultiDataTrigger>
-                        
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
     <!-- DotsMenu -->
     <Style x:Key="gratch.Styles.Menu.Dots" 
            TargetType="Menu" 
@@ -73,7 +13,7 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
-    
+
     <!-- ScrollViewer -->
     <Style x:Key="gratch.Styles.Menu.ScrollViewer"
            TargetType="ScrollViewer"
@@ -81,5 +21,72 @@
         <Setter Property="Background" Value="{StaticResource MahApps.Brushes.Control.Background}"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+    </Style>
+    <!-- SideMenu -->
+    <Style x:Key="gratch.Styles.SideMenu.Button" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Transparent}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--<ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="PART_ContentPresenter" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" 
+                                          Opacity="0.75" 
+                                          RecognizesAccessKey="{TemplateBinding}" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value=".5"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     Value="True">
+                            <Setter Property="Background" Value="{StaticResource MahApps.Brushes.Accent2}"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>-->
+
+                <ControlTemplate TargetType="Button">
+                    <Border>
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="PART_ContentPresenter" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" 
+                                          Opacity="0.75" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value=".5"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBoxItem}}"
+                                     Value="True">
+                            <Setter Property="Background" Value="{StaticResource MahApps.Brushes.Accent}"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 </ResourceDictionary>

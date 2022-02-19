@@ -1,17 +1,18 @@
-﻿<UserControl x:Class="gratch_desktop.Views.PeopleView"
+﻿<rx:ReactiveUserControl x:Class="gratch_desktop.Views.PeopleView"
+                        x:TypeArguments="vm:PeopleViewModel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:gratch_desktop.Views"
              
-             xmlns:helpers="clr-namespace:gratch_desktop.Helpers"
              xmlns:vm="clr-namespace:gratch_desktop.ViewModels"
              xmlns:controls="clr-namespace:gratch_desktop.Controls"
              xmlns:vw="clr-namespace:gratch_desktop.Views"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mat="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:rx="http://reactiveui.net"
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -26,25 +27,27 @@
                     Background="{StaticResource MahApps.Brushes.Accent4}">
                 <ListView VerticalAlignment="Stretch"
                           Margin="2"
-                          Style="{StaticResource MahApps.Styles.ListBox}">
-                    <!--#region DesignData-->
-                    <d:Border>
-                        <controls:PersonListItem PersonName="Hello"/>
-                    </d:Border>
-                    <d:Border>
-                        <controls:PersonListItem PersonName="World"/>
-                    </d:Border>
-                    <d:Border>
-                        <controls:PersonListItem PersonName="Kek"/>
-                    </d:Border>
-                    <!--#endregion-->
+                          Style="{StaticResource MahApps.Styles.ListBox}"
+                          x:Name="PeopleListView"
+                          d:ItemsSource="{d:SampleData ItemCount=4}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:PeopleItemViewModel}">
+                            <controls:PersonListItem PersonName="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </Border>
             <Button DockPanel.Dock="Bottom"
                     VerticalAlignment="Bottom"
-                    Margin="10">
+                    Margin="10"
+                    x:Name="AddButton">
                 <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}">Add Person</TextBlock>
             </Button>
         </DockPanel>
     </ContentControl>
-</UserControl>
+</rx:ReactiveUserControl>

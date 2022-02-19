@@ -1,29 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using gratch_desktop.ViewModels;
+
+using MaterialDesignThemes.Wpf;
+
+using ReactiveUI;
+
+using MahApps.Metro.Controls.Dialogs;
+
+using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace gratch_desktop.Views
 {
     /// <summary>
     /// Логика взаимодействия для GraphView.xaml
     /// </summary>
-    public partial class GroupView : UserControl
+    public partial class GroupView : ReactiveUserControl<GroupViewModel>
     {
         public GroupView()
         {
             InitializeComponent();
-            LayoutRoot.DataContext = new ViewModels.GroupViewModel();
+            this.WhenActivated(disposables =>
+            {
+                // Groups
+                this.OneWayBind(ViewModel,
+                                vm => vm.GroupItems,
+                                vw => vw.GroupsList.ItemsSource)
+                    .DisposeWith(disposables);
+                // Add Group
+                this.BindCommand(ViewModel,
+                                 vm => vm.AddGroup,
+                                 vw => vw.AddButton)
+                    .DisposeWith(disposables);
+            });
         }
     }
 }

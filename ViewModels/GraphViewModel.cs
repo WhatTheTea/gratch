@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using Splat;
@@ -6,30 +7,24 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+using DynamicData;
+using System.Linq;
 
 namespace gratch_desktop.ViewModels
 {
     public class GraphViewModel : BaseViewModel, IRoutableViewModel
     {
-        public string UrlPathSegment => "Graph";
+        public string UrlPathSegment => "/graph";
         public IScreen HostScreen { get; }
 
+        public ObservableCollection<AssigneesItemViewModel> Assignees { get; set; }
 
-        [Reactive]
-        public ObservableCollection<AssigneesItem> Assignees { get; set; }
         [Reactive]
         public bool FlyoutIsOpen { get; set; }
         //Calendar
         [Reactive]
-        public DateTime LastCalendarDate { get; set; }
-        public ReactiveCommand<DateTime, Unit> CalendarDayCommand { get; }
+        public DateTime? SelectedCalendarDate { get; set; }
         public DateTime CalendarStartDate => new(DateTime.Now.Year, DateTime.Now.Month, 1);
         public DateTime CalendarEndDate => new(DateTime.Now.Year, DateTime.Now.Month,
             DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
@@ -39,22 +34,27 @@ namespace gratch_desktop.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-            CalendarDayCommand = ReactiveCommand.Create<DateTime>(date =>
-             {
-                 if (date != default)
-                 {
-                     FlyoutIsOpen = false;
-                     LastCalendarDate = date;
-                     FlyoutIsOpen = true;
-                 }
-             });
+            SelectedCalendarDate = null;
+            Assignees = new();
 
-            var itemsCreator = new AssigneesItemsCreator();
-            this.WhenAnyValue(x => x.LastCalendarDate)
+            this.WhenAnyValue(x => x.SelectedCalendarDate)
                 .Subscribe(x =>
                 {
-                    itemsCreator.AssignedOn = LastCalendarDate;
-                    Assignees = itemsCreator.Create();
+                    if (SelectedCalendarDate != null || SelectedCalendarDate != default)
+                    {
+                        FlyoutIsOpen = false;
+                        Assignees.Clear();
+
+                        foreach (var grp in groupService.Connect())
+                        {
+                            if (grp.Any())
+                            {
+                                Assignees.Add(new AssigneesItemViewModel(grp, x.Value));
+                            }
+                        }
+
+                        FlyoutIsOpen = true;
+                    }
                 });
         }
     }

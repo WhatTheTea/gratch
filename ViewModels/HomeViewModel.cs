@@ -1,29 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reactive.Linq;
-using System.Reactive;
+﻿using DynamicData;
 
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 
-using gratch_core;
-using DynamicData;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Windows.Controls;
 
 namespace gratch_desktop.ViewModels
 {
-    internal class HomeViewModel : BaseViewModel
+    public class HomeViewModel : BaseViewModel, IRoutableViewModel
     {
-        [Reactive]
-        public ObservableCollection<AssigneesItem> Assignees { get; set; }
+        public ObservableCollection<AssigneesItemViewModel> Assignees => assignees;
+        private readonly ObservableCollection<AssigneesItemViewModel> assignees = new();
+        public string UrlPathSegment => "/home";
 
-        public HomeViewModel()
+        public IScreen HostScreen { get; }
+
+        public HomeViewModel(IScreen screen = null)
         {
-            var itemsCreator = new AssigneesItemsCreator();
-            Assignees = itemsCreator.Create();
+            HostScreen = screen;
+
+            groupService.Connect().CollectionChanged += Groups_CollectionChanged;
+            Groups_CollectionChanged();
+            //Assignees
+            /*groupService.Connect()
+                        .Transform(x => new AssigneesItem(x))
+                        .ObserveOn(RxApp.MainThreadScheduler)
+                        .Bind(out assignees)
+                        .DisposeMany()
+                        .Subscribe();
+            */
+
+        }
+
+        private void Groups_CollectionChanged(object sender = null, System.Collections.Specialized.NotifyCollectionChangedEventArgs e = null)
+        {
+            assignees.Clear();
+
+            var groupitems = from grp in groupService.Connect()
+                             where grp.Any()
+                             select new AssigneesItemViewModel(grp);
+
+            groupitems.ToList().ForEach(item => assignees.Add(item));
         }
     }
 }

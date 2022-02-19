@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:gratch_desktop.Controls"
              xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+             xmlns:beh="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:rx="http://reactiveui.net"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:GroupCard}"
              d:DesignHeight="150" d:DesignWidth="200"
@@ -14,6 +16,7 @@
     <Border CornerRadius="15" 
             Background="{DynamicResource PrimaryHueMidBrush}"
             x:Name="LayoutRoot">
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -23,7 +26,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <!-- GroupName -->
+
             <Label Grid.Row="0" Grid.Column="0"
                    HorizontalAlignment="Left" VerticalAlignment="Center"
                    Style="{StaticResource MaterialDesignLabel}"
@@ -52,9 +55,15 @@
                           Width="30"
                           Height="30"
                           HorizontalAlignment="Center">
-                    <TextBlock>Holidays</TextBlock>
-                    <TextBlock>Rename</TextBlock>
-                    <TextBlock>Delete</TextBlock>
+                    <Button>
+                        <TextBlock>Holidays</TextBlock>
+                    </Button>
+                    <Button>
+                        <TextBlock>Rename</TextBlock>
+                    </Button>
+                    <Button Command="{Binding DeleteCommand}">
+                        <TextBlock>Delete</TextBlock>
+                    </Button>
                 </MenuItem>
             </Menu>
         </Grid>

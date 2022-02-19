@@ -1,8 +1,6 @@
 ﻿<Application x:Class="gratch_desktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:gratch_desktop"
-             xmlns:rx="http://reactiveui.net"
              StartupUri="/Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -17,7 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <!-- Theme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Purple.xaml" />
-                <!-- Иконки -->
+                <!-- Icons -->
                 <ResourceDictionary Source="res/GraphicsDictionary.xaml"/>
                 <!-- Styles -->
                 <ResourceDictionary Source="res/StylesDictionary.xaml"/>

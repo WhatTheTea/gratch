@@ -20,7 +20,7 @@ namespace gratch_desktop.ViewModels
 
         public MainWindowViewModel()
         {
-            var groups = groupService.Connect();
+            var groups = groupService.Groups;
             //Update logic
             static bool isMonthDiffer(gratch_core.Group grp) =>
                                       grp.Any(p =>

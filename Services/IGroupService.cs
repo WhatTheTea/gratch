@@ -14,6 +14,6 @@ namespace gratch_desktop.Services
         void Remove(string name);
         void Remove(Group group);
         Group Get(string name);
-        ReadOnlyObservableCollection<Group> Groups { get; }
+        //ReadOnlyObservableCollection<Group> Groups { get; }
     }
 }

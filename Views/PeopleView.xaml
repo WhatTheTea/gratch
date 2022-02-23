@@ -37,7 +37,8 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type vm:PeopleItemViewModel}">
-                            <controls:PersonListItem PersonName="{Binding Name}"/>
+                            <controls:PersonListItem PersonName="{Binding Name}"
+                                                     DeleteCommand="{Binding DeleteCommand}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

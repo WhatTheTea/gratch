@@ -8,6 +8,7 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -32,11 +33,11 @@ namespace gratch_desktop.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-            var groups = groupService.Connect();
+            var groups = groupService.Groups;
 
             groupItems = new();
             Groups_CollectionChanged();
-            groups.CollectionChanged += Groups_CollectionChanged;
+            ((INotifyCollectionChanged)groups).CollectionChanged += Groups_CollectionChanged;
 
             addGroup = ReactiveCommand.CreateFromTask(async () =>
             {
@@ -45,7 +46,7 @@ namespace gratch_desktop.ViewModels
                 if (string.IsNullOrWhiteSpace(name)) return;
                 if (groups.Any(grp => grp.Name == name)) return;
 
-                groups.Add(new Group(name));
+                groupService.Add(new Group(name));
             });
 #if DEBUG
             addGroup.ThrownExceptions.Subscribe();
@@ -58,7 +59,7 @@ namespace gratch_desktop.ViewModels
         {
             groupItems.Clear();
 
-            var groupitems = from grp in groupService.Connect()
+            var groupitems = from grp in groupService.Groups
                              where grp != null
                              select new GroupItemViewModel(grp, HostScreen);
 

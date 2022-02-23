@@ -55,15 +55,21 @@
                           Width="30"
                           Height="30"
                           HorizontalAlignment="Center">
-                    <Button>
-                        <TextBlock>Holidays</TextBlock>
-                    </Button>
-                    <Button>
-                        <TextBlock>Rename</TextBlock>
-                    </Button>
-                    <Button Command="{Binding DeleteCommand}">
-                        <TextBlock>Delete</TextBlock>
-                    </Button>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock>Holidays</TextBlock>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <TextBlock>Rename</TextBlock>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Command="{Binding DeleteCommand}">
+                        <MenuItem.Header>
+                            <TextBlock>Delete</TextBlock>
+                        </MenuItem.Header>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </Grid>

@@ -8,26 +8,25 @@ using System.Linq;
 
 namespace gratch_desktop.Services
 {
+    //TODO: Сделать из этого Singleton
     internal class GroupService : IGroupService
     {
         private static readonly gratch_core.Models.GroupRepository repository = new();
-        static private ObservableCollection<Group> groups;
+        private static ObservableCollection<Group> groups;
         /// <summary>
         /// Gets immutable set of all groups
         /// </summary>
-        public ReadOnlyObservableCollection<Group> Groups { get => new(groups); }
 
+        public ReadOnlyObservableCollection<Group> Groups { get => new(groups); }
         static GroupService()
         {
             //Загрузка существующих груп из БД
             groups = new(repository.LoadAllGroups().Cast<Group>());
         }
-        //В скором времени надо убрать
-        public ObservableCollection<Group> Connect() => groups;
 
         public void Add(Group group)
         {
-            throw new NotImplementedException();
+            groups.Add(group);
         }
 
         public void Add(string name)
@@ -42,12 +41,11 @@ namespace gratch_desktop.Services
         }
         public void Remove(Group group)
         {
-            group.Clear();
+            if(group.Count > 0) group.Clear();
             groups.Remove(group);
         }
         /// <param name="name">Name of the group, can be found in <see cref="Groups"/></param>
         /// <returns>Single mutable <see cref="Group"/></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public Group Get(string name) => groups.First(grp => grp.Name == name);
+        public Group Get(string name) => groups.FirstOrDefault(grp => grp.Name == name);
     }
 }

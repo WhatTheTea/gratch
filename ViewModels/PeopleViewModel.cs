@@ -55,7 +55,7 @@ namespace gratch_desktop.ViewModels
             people.Clear();
 
             var peoplevm = from p in _group
-                           select new PeopleItemViewModel(p);
+                           select new PeopleItemViewModel(p, Group);
 
             foreach(var p in peoplevm)
             {

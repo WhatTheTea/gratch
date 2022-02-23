@@ -4,6 +4,7 @@ using ReactiveUI;
 
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace gratch_desktop.ViewModels
         {
             HostScreen = screen;
 
-            groupService.Connect().CollectionChanged += Groups_CollectionChanged;
+            ((INotifyCollectionChanged)groupService.Groups).CollectionChanged += Groups_CollectionChanged;
             Groups_CollectionChanged();
             //Assignees
             /*groupService.Connect()
@@ -39,7 +40,7 @@ namespace gratch_desktop.ViewModels
         {
             assignees.Clear();
 
-            var groupitems = from grp in groupService.Connect()
+            var groupitems = from grp in groupService.Groups
                              where grp.Any()
                              select new AssigneesItemViewModel(grp);
 

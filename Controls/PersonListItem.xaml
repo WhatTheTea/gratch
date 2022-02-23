@@ -8,11 +8,13 @@
              mc:Ignorable="d"
              d:DesignHeight="30" d:DesignWidth="150">
     <DockPanel Background="{StaticResource MahApps.Brushes.Control.Background}"
-               x:Name="LayoutRoot">
+               x:Name="LayoutRoot"
+               d:DataContext="{d:DesignInstance Type=local:PersonListItem}">
         <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
                    Foreground="{StaticResource MaterialDesignDarkForeground}"
                    VerticalAlignment="Center"
-                   Text="{Binding PersonName}"/>
+                   Text="{Binding PersonName}"
+                   d:Text="PersonName"/>
         <Menu Style="{StaticResource gratch.Styles.Menu.Dots}"
               DockPanel.Dock="Right">
             <MenuItem Icon="{icons:Material Kind=DotsVertical}"
@@ -21,7 +23,11 @@
                           Height="30"
                           HorizontalAlignment="Center">
                 <TextBlock>Rename</TextBlock>
-                <TextBlock>Delete</TextBlock>
+                <MenuItem Command="{Binding DeleteCommand}">
+                    <MenuItem.Header>
+                        <TextBlock>Delete</TextBlock>
+                    </MenuItem.Header>
+                </MenuItem>
             </MenuItem>
         </Menu>
     </DockPanel>

@@ -6,6 +6,8 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Windows.Input;
 
 namespace gratch_desktop.ViewModels
@@ -73,6 +75,19 @@ namespace gratch_desktop.ViewModels
                     new PeopleViewModel(selectedGroup, screen)));
             DeleteCommand = ReactiveCommand.Create(() => 
                 grpService.Remove(selectedGroup));
+
+            RenameCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var name = await Interactions.TextDialog.Handle(new("New group name: "));
+                //Validation
+                if (string.IsNullOrWhiteSpace(name)) return;
+                if (grpService.Groups.Any(grp => grp.Name == name)) return;
+
+                grp.Name = name;
+            });
+#if DEBUG
+            (RenameCommand as ReactiveCommand<Unit, Unit>).ThrownExceptions.Subscribe();
+#endif
         }
 
     }

@@ -17,7 +17,6 @@ namespace gratch_desktop.ViewModels
     {
         public string UrlPathSegment => "/graph";
         public IScreen HostScreen { get; }
-
         public ObservableCollection<AssigneesItemViewModel> Assignees { get; set; }
 
         [Reactive]

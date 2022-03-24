@@ -22,7 +22,7 @@ namespace gratch_desktop.ViewModels
     {
         private ObservableCollection<GroupItemViewModel> groupItems;
         private ReactiveCommand<Unit, Unit> addGroup;
-
+        
         public ObservableCollection<GroupItemViewModel> GroupItems => groupItems;
         public ReactiveCommand<Unit, Unit> AddGroup => addGroup;
 

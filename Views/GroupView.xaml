@@ -39,7 +39,8 @@
                             Style="{StaticResource MahApps.Styles.Button.Chromeless}">
                             <controls:GroupCard GroupName="{Binding Name}"
                                                 Holidays="{Binding Holidays}"
-                                                DeleteCommand="{Binding DeleteCommand}"/>
+                                                DeleteCommand="{Binding DeleteCommand}"
+                                                RenameCommand="{Binding RenameCommand}"/>
                         </Button>
                     </DataTemplate>
                 </ListView.ItemTemplate>

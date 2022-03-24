@@ -60,7 +60,7 @@
                             <TextBlock>Holidays</TextBlock>
                         </MenuItem.Header>
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem Command="{Binding RenameCommand}">
                         <MenuItem.Header>
                             <TextBlock>Rename</TextBlock>
                         </MenuItem.Header>

@@ -13,8 +13,7 @@ namespace gratch_desktop.ViewModels
 {
     public class HomeViewModel : BaseViewModel, IRoutableViewModel
     {
-        public ObservableCollection<AssigneesItemViewModel> Assignees => assignees;
-        private readonly ObservableCollection<AssigneesItemViewModel> assignees = new();
+        public ReadOnlyObservableCollection<AssigneesItemViewModel> Assignees;
         public string UrlPathSegment => "/home";
 
         public IScreen HostScreen { get; }
@@ -23,28 +22,12 @@ namespace gratch_desktop.ViewModels
         {
             HostScreen = screen;
 
-            ((INotifyCollectionChanged)groupService.Groups).CollectionChanged += Groups_CollectionChanged;
-            Groups_CollectionChanged();
-            //Assignees
-            /*groupService.Connect()
-                        .Transform(x => new AssigneesItem(x))
-                        .ObserveOn(RxApp.MainThreadScheduler)
-                        .Bind(out assignees)
+            groupService.Connect()
+                        .Transform(grp => new AssigneesItemViewModel(grp))
+                        .ObserveOnDispatcher()
+                        .Bind(out Assignees)
                         .DisposeMany()
                         .Subscribe();
-            */
-
-        }
-
-        private void Groups_CollectionChanged(object sender = null, System.Collections.Specialized.NotifyCollectionChangedEventArgs e = null)
-        {
-            assignees.Clear();
-
-            var groupitems = from grp in groupService.Groups
-                             where grp.Any()
-                             select new AssigneesItemViewModel(grp);
-
-            groupitems.ToList().ForEach(item => assignees.Add(item));
         }
     }
 }

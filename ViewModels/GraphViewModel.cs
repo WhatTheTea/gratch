@@ -4,12 +4,14 @@ using ReactiveUI.Fody.Helpers;
 
 using Splat;
 
+using DynamicData;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
-using DynamicData;
 using System.Linq;
+using System.Reactive.Linq;
 
 namespace gratch_desktop.ViewModels
 {
@@ -17,7 +19,7 @@ namespace gratch_desktop.ViewModels
     {
         public string UrlPathSegment => "/graph";
         public IScreen HostScreen { get; }
-        public ObservableCollection<AssigneesItemViewModel> Assignees { get; set; }
+        public ReadOnlyObservableCollection<AssigneesItemViewModel> Assignees; 
 
         [Reactive]
         public bool FlyoutIsOpen { get; set; }
@@ -34,27 +36,29 @@ namespace gratch_desktop.ViewModels
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
             SelectedCalendarDate = null;
-            Assignees = new();
 
-            this.WhenAnyValue(x => x.SelectedCalendarDate)
+            var test = this.WhenAnyValue(x => x.SelectedCalendarDate)
                 .Subscribe(x =>
                 {
                     if (SelectedCalendarDate != null || SelectedCalendarDate != default)
                     {
                         FlyoutIsOpen = false;
-                        Assignees.Clear();
-
-                        foreach (var grp in groupService.Groups)
-                        {
-                            if (grp.Any())
-                            {
-                                Assignees.Add(new AssigneesItemViewModel(grp, x.Value));
-                            }
-                        }
-
+                        //SelectedCalendarDate.ObservableForProperty(x => )
                         FlyoutIsOpen = true;
                     }
                 });
+            var assignees = groupService.Connect()
+                .Filter(x => x.Any())
+                .Transform(g => new AssigneesItemViewModel(g, SelectedCalendarDate))
+                .ObserveOnDispatcher()
+                .Bind(out Assignees)
+                .DisposeMany()
+                .Subscribe();
+            /*var assignees = groupService.Connect()
+                .Filter(x => x.Any())
+                .Transform(x => new AssigneesItemViewModel(x, SelectedCalendarDate))
+                .Subscribe();*/
+
         }
     }
 }

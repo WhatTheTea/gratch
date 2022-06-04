@@ -1,11 +1,15 @@
 ﻿
+using DynamicData;
+
 using ReactiveUI;
 
 using Splat;
 
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Linq;
 
 namespace gratch_desktop.ViewModels
 {
@@ -20,20 +24,23 @@ namespace gratch_desktop.ViewModels
 
         public MainWindowViewModel()
         {
-            var groups = groupService.Groups;
             //Update logic
             static bool isMonthDiffer(gratch_core.Group grp) =>
                                       grp.Any(p =>
                                       p.DutyDates.Any(d =>
                                       d.Month != DateTime.Now.Month));
-            foreach (var group in groups)
-            {
-                if (isMonthDiffer(group))
-                {
-                    group.Graph.MonthlyUpdate();
 
-                }
-            }
+            var groupsToUpdate = groupService.Connect()
+                                             .Filter(g => isMonthDiffer(g))
+                                             .ToCollection()
+                                             .Subscribe(list =>
+                                             {
+                                                 foreach (var group in list)
+                                                 {
+                                                     group.Graph.MonthlyUpdate();
+                                                 }
+                                             });
+
             //Router things
             Router = new RoutingState();
 
@@ -42,13 +49,13 @@ namespace gratch_desktop.ViewModels
             Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
 
             GoHome = ReactiveCommand.CreateFromObservable(() =>
-            Router.Navigate.Execute(new HomeViewModel()));
+            Router.Navigate.Execute(new HomeViewModel(this)));
 
             GoGroup = ReactiveCommand.CreateFromObservable(() =>
-            Router.Navigate.Execute(new GroupViewModel()));
+            Router.Navigate.Execute(new GroupViewModel(this)));
 
             GoGraph = ReactiveCommand.CreateFromObservable(() =>
-            Router.Navigate.Execute(new GraphViewModel()));
+            Router.Navigate.Execute(new GraphViewModel(this)));
 
 
         }

@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using gratch_desktop.ViewModels;
+
 using ReactiveUI;
 
 namespace gratch_desktop.Controls
@@ -11,9 +13,10 @@ namespace gratch_desktop.Controls
     /// <summary>
     /// Логика взаимодействия для GroupCard.xaml
     /// </summary>
-    public partial class GroupCard : UserControl
+    public partial class GroupCard : ReactiveUserControl<GroupItemViewModel>
     {
-        public static readonly DependencyProperty GroupNameProperty = 
+        #region old
+        /*public static readonly DependencyProperty GroupNameProperty = 
             DependencyProperty.Register("GroupName", typeof(string), typeof(GroupCard));
         public static readonly DependencyProperty HolidaysProperty = 
             DependencyProperty.Register("Holidays", typeof(string), typeof(GroupCard));
@@ -43,10 +46,34 @@ namespace gratch_desktop.Controls
             get => GetValue(HolidaysProperty) as string;
             set => SetValue(HolidaysProperty, value);
         }
+        */
+        #endregion
         public GroupCard()
         {
             InitializeComponent();
-            LayoutRoot.DataContext = this;
+            //LayoutRoot.DataContext = this;
+
+            /*this.WhenActivated(disposables =>
+            {
+                // Text
+                this.OneWayBind(ViewModel,
+                                vm => vm.Holidays,
+                                vw => vw.HolidaysTextBlock.Text)
+                    .DisposeWith(disposables);
+                this.OneWayBind(ViewModel,
+                                vm => vm.Name,
+                                vw => vw.NameLabel.Content)
+                    .DisposeWith(disposables);
+                // Commands
+                this.BindCommand(ViewModel,
+                                 vm => vm.DeleteCommand,
+                                 vw => vw.DeleteMenuItem.Command)
+                    .DisposeWith(disposables);
+                this.BindCommand(ViewModel,
+                                 vm => vm.RenameCommand,
+                                 vw => vw.RenameMenuItem.Command)
+                    .DisposeWith(disposables);
+            });*/
         }
     }
 }

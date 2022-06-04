@@ -12,12 +12,11 @@ using System.Windows.Input;
 
 namespace gratch_desktop.ViewModels
 {
-    public class GroupItemViewModel
+    public class GroupItemViewModel : BaseViewModel
     {
         private readonly Group selectedGroup;
 
-        [Reactive]
-        public string Name { get; set; }
+        public string Name => selectedGroup.Name;
         [Reactive]
         public string Holidays { get; set; }
         public ICommand ClickCommand { get; set; }
@@ -52,8 +51,6 @@ namespace gratch_desktop.ViewModels
         public GroupItemViewModel(Group grp, IScreen screen)
         {
             selectedGroup = grp;
-            Name = grp.Name;
-            var grpService = new Services.GroupService();
             //Holidays
             if (holidays != null)
             {
@@ -74,16 +71,17 @@ namespace gratch_desktop.ViewModels
                 screen.Router.Navigate.Execute(
                     new PeopleViewModel(selectedGroup, screen)));
             DeleteCommand = ReactiveCommand.Create(() => 
-                grpService.Remove(selectedGroup));
+                groupService.Remove(selectedGroup));
 
             RenameCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                var name = await Interactions.TextDialog.Handle(new("New group name: "));
+                var name = await Interactions.GetTextDialogInteraction("New group name: ", grp.Name);
                 //Validation
                 if (string.IsNullOrWhiteSpace(name)) return;
-                if (grpService.Groups.Any(grp => grp.Name == name)) return;
+                if (groupService.GetByName(name) != default) return;
 
                 grp.Name = name;
+                Interactions.InvokeEvent();
             });
 #if DEBUG
             (RenameCommand as ReactiveCommand<Unit, Unit>).ThrownExceptions.Subscribe();

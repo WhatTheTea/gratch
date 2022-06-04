@@ -1,4 +1,5 @@
 ﻿
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace gratch_desktop.Views
     /// <summary>
     /// Логика взаимодействия для HolidaysCheckDialogWindow.xaml
     /// </summary>
-    public partial class HolidaysCheckDialogWindow : MahApps.Metro.Controls.MetroWindow
+    public partial class HolidaysCheckDialogWindow : MahApps.Metro.Controls.MetroWindow, IViewFor<HolidaysCheckDialogWindow>
     {
         public HolidaysCheckDialogWindow()
         {
@@ -35,7 +36,7 @@ namespace gratch_desktop.Views
                 new CheckedListItem{Name = "Saturday", IsChecked = false},
                 new CheckedListItem{Name = "Sunday",  IsChecked = false},
             };
-        [ReactiveDependency("Holidays")]
-        public static DependencyProperty HolidaysProperty { get; set; }
+        public HolidaysCheckDialogWindow ViewModel { get; set; }
+        object IViewFor.ViewModel { get; set; }
     }
 }

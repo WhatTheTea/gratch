@@ -1,5 +1,7 @@
 ﻿using gratch_core;
 
+using DynamicData;
+
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -20,10 +22,9 @@ namespace gratch_desktop.ViewModels
 {
     public class GroupViewModel : BaseViewModel, IRoutableViewModel
     {
-        private ObservableCollection<GroupItemViewModel> groupItems;
         private ReactiveCommand<Unit, Unit> addGroup;
         
-        public ObservableCollection<GroupItemViewModel> GroupItems => groupItems;
+        public ReadOnlyObservableCollection<GroupItemViewModel> GroupItems;
         public ReactiveCommand<Unit, Unit> AddGroup => addGroup;
 
         public string UrlPathSegment => "/groups";
@@ -32,38 +33,28 @@ namespace gratch_desktop.ViewModels
         public GroupViewModel(IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
-
-            var groups = groupService.Groups;
-
-            groupItems = new();
-            Groups_CollectionChanged();
-            ((INotifyCollectionChanged)groups).CollectionChanged += Groups_CollectionChanged;
+            // GroupItems
+            groupService.Connect()
+                .Transform(grp => new GroupItemViewModel(grp, HostScreen))
+                .Filter(grp => grp != null)
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Bind(out GroupItems)
+                .DisposeMany()
+                .Subscribe();
 
             addGroup = ReactiveCommand.CreateFromTask(async () =>
             {
-                var name = await Interactions.TextDialog.Handle(new("Group name: "));
+                var name = await Interactions.GetTextDialogInteraction("Group name: ");
                 //Validation
                 if (string.IsNullOrWhiteSpace(name)) return;
-                if (groups.Any(grp => grp.Name == name)) return;
+                if (groupService.GetByName(name) != default) return;
 
                 groupService.Add(new Group(name));
             });
+
 #if DEBUG
             addGroup.ThrownExceptions.Subscribe();
 #endif
-        }
-
- 
-
-        private void Groups_CollectionChanged(object sender = null, System.Collections.Specialized.NotifyCollectionChangedEventArgs e = null)
-        {
-            groupItems.Clear();
-
-            var groupitems = from grp in groupService.Groups
-                             where grp != null
-                             select new GroupItemViewModel(grp, HostScreen);
-
-            groupitems.ToList().ForEach(item => groupItems.Add(item));
-        }
+        } 
     }
 }

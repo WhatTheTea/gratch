@@ -40,7 +40,7 @@ namespace gratch_desktop.ViewModels
 
             addPerson = ReactiveCommand.CreateFromTask(async () =>
             {
-                var name = await Interactions.TextDialog.Handle(new("Name: "));
+                var name = await Interactions.GetTextDialogInteraction("Name: ");
                 if (string.IsNullOrWhiteSpace(name)) return;
                 if (Group.Any(person => person.Name == name)) return;
                 Group.Add(name);

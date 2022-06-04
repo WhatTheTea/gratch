@@ -22,6 +22,7 @@ namespace gratch_desktop
                 GroupViewModel => new GroupView(),
                 GraphViewModel => new GraphView(),
                 PeopleViewModel => new PeopleView(),
+                HolidaysDialogWindowViewModel => new HolidaysCheckDialogWindow(),
                 // else
                 _ => throw new Exception($"Could not find the view for view model {typeof(T).Name}.")
             };

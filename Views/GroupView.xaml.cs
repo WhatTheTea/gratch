@@ -33,6 +33,18 @@ namespace gratch_desktop.Views
                                  vw => vw.AddButton)
                     .DisposeWith(disposables);
             });
+
+            Interactions.TextDialogClicked += Interactions_TextDialogClicked;
+        }
+
+        private void Interactions_TextDialogClicked(object sender, TextDialogViewModel e)
+        {
+            if (sender != null)
+            {
+                //int index = this.GroupsList.Items.IndexOf(sender as string);
+                //this.GroupsList.Items[index] = e.Result;
+                this.GroupsList.Items.Refresh();
+            }
         }
     }
 }

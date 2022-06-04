@@ -31,7 +31,7 @@ namespace gratch_desktop.ViewModels
         }
         public PeopleItemViewModel(string name, string groupname) : this()
         {
-            ownerGroup = groupService.Get(groupname);
+            ownerGroup = groupService.GetByName(groupname);
             person = ownerGroup.First(p => p.Name == name);
             Name = person.Name;
         }

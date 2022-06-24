@@ -7,28 +7,18 @@ namespace gratchLib
         private bool disposedValue;
         protected List<Person> people = new();
 
-        private List<IDisposable> subscriptions = new();
+        protected List<IDisposable> subscriptions = new();
 
         public virtual string Name { get; set; } = string.Empty;
         public virtual IList<Person> People => people.AsReadOnly();
         public virtual IList<Person> ActivePeople => activePeople.ToList()
                                                                  .AsReadOnly();
-        public virtual Calendar Calendar { get; } = new Calendar();
+        public abstract Calendar Calendar { get; }
 
         protected IEnumerable<Person> activePeople => people.Where(x => x.Position > 0)
                                                             .OrderBy(x => x.Position);
 
-        public virtual void AddPerson(string name)
-        {
-            if (!Contains(name))
-            {
-                var person = new Person(this, name);
-                var sub = person.WhenPositionChanged.Subscribe(x => ShiftPositionsAfter(x));
-
-                people.Add(person);
-                subscriptions.Add(sub);
-            }
-        }
+        public abstract void AddPerson(string name);
         public virtual void RemovePerson(Person person)
         {
             if (People.Contains(person))

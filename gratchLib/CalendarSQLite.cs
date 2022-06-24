@@ -1,6 +1,6 @@
 ﻿namespace gratchLib
 {
-    public class CalendarSQLite
+    public class CalendarSQLite : Calendar
     {
     }
 }

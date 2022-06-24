@@ -1,6 +1,7 @@
 ﻿namespace gratchLib
 {
-    public class Calendar
+    public abstract class Calendar
     { 
+        IList<Holiday>
     }
 }

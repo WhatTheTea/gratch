@@ -2,40 +2,40 @@
 
 namespace gratchLib
 {
-    public class Person : IDisposable, IAssignable<Schedule>
+    public abstract class Person : IDisposable, IAssignable<Schedule>
     {
         // fields
-        private string name = string.Empty;
-        private int position = 0;
+        protected string name = string.Empty;
+        protected int position = 0;
         private bool disposedValue;
 
-        private Group group;
+        protected Group group;
 
         private readonly Subject<Person> whenNameChanged = new();
         private readonly Subject<Person> whenPositionChanged = new();
 
         // properties
-        public Group Group => GroupReadOnly.Get(group);
-        public string Name { get => name; set => Rename(value); }
-        public int Position { get => position; internal set => position = value; }
+        public virtual Group Group => GroupReadOnly.Get(group);
+        public virtual string Name { get => name; set => Rename(value); }
+        public virtual int Position { get => position; internal set => position = value; }
 
         // observables
         public IObservable<Person> WhenNameChanged => whenNameChanged;
         public IObservable<Person> WhenPositionChanged => whenPositionChanged;
 
         // interface
-        public void AssignTo(Schedule schedule) => schedule.Assign(this); // TODO: smth better
+        public virtual void AssignTo(Schedule schedule) => schedule.Assign(this); // TODO: smth better
 
-        // constructors
+        /* constructors
         internal Person(Group group, string name)
         {
             this.group = group;
             this.name = name;
             Position = 0;
         }
-
+        */
         // methods
-        public void Rename(string newname)
+        public virtual void Rename(string newname)
         {
             if (!Group.Contains(newname))
             {
@@ -43,7 +43,7 @@ namespace gratchLib
                 whenNameChanged.OnNext(this);
             }
         }
-        public void ChangePosition(int pos)
+        public virtual void ChangePosition(int pos)
         {
             var isPosValid = pos >= 0 && pos <= group.ActivePeople.Count + 1;
 

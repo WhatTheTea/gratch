@@ -2,7 +2,7 @@
 
 namespace gratchLib
 {
-    public abstract class Group : IDisposable, IAssignable
+    public abstract class Group : IDisposable, IAssignable<Schedule>
     {
         private bool disposedValue;
         protected List<Person> people = new();
@@ -40,7 +40,7 @@ namespace gratchLib
             }
         }
 
-        public virtual void AssignTo(ISchedule schedule)
+        public virtual void AssignTo(Schedule schedule)
         {
             foreach (var person in People)
             {

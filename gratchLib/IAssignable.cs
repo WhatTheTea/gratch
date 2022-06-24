@@ -1,7 +1,7 @@
 ﻿namespace gratchLib
 {
-    public interface IAssignable
+    public interface IAssignable<T> where T : class
     {
-        void AssignTo(ISchedule schedule);
+        void AssignTo(T schedule);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace gratchLib
 {
-    public class Person : IDisposable, IAssignable
+    public class Person : IDisposable, IAssignable<Schedule>
     {
         // fields
         private string name = string.Empty;
@@ -15,7 +15,7 @@ namespace gratchLib
         private readonly Subject<Person> whenPositionChanged = new();
 
         // properties
-        public IGroup Group => GroupReadOnly.Get((IGroup)group);
+        public Group Group => GroupReadOnly.Get(group);
         public string Name { get => name; set => Rename(value); }
         public int Position { get => position; internal set => position = value; }
 
@@ -24,7 +24,7 @@ namespace gratchLib
         public IObservable<Person> WhenPositionChanged => whenPositionChanged;
 
         // interface
-        public void AssignTo(ISchedule schedule) => schedule.Assign(this); // TODO: smth better
+        public void AssignTo(Schedule schedule) => schedule.Assign(this); // TODO: smth better
 
         // constructors
         internal Person(Group group, string name)

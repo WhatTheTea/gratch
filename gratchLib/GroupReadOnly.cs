@@ -26,7 +26,7 @@ namespace gratchLib
 
         public override void RemovePerson(Person person) => throw new NotSupportedException();
 
-        public override void AssignTo(ISchedule schedule)
+        public override void AssignTo(Schedule schedule)
         {
             _original.AssignTo(schedule); // this method shouldn't change group's behaviour
         }

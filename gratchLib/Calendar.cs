@@ -1,6 +1,6 @@
 ﻿namespace gratchLib
 {
-    internal class Calendar : ICalendar
+    public class Calendar
     {
     }
 }

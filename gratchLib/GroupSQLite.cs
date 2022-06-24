@@ -21,10 +21,10 @@ namespace gratchLib
         }
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public new IList<IPerson> People => base.People;
+        public new IList<Person> People => base.People;
 
         [OneToOne(nameof(CalendarId), CascadeOperations = CascadeOperation.All)]
-        public new ICalendar Calendar => base.Calendar;
+        public new Calendar Calendar => base.Calendar;
 
     }
 }

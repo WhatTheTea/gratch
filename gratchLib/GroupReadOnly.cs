@@ -6,55 +6,60 @@ using System.Threading.Tasks;
 
 namespace gratchLib
 {
-    public class GroupReadOnly : Group
+    public static class GroupReadOnly
     {
-        private static readonly List<GroupReadOnly> instances = new();
-        private readonly Group _original;
-
-        public override string Name
+        private static readonly List<GroupReadOnlyWrapper> instances = new();
+        /// <returns>ReadOnlyWrapper of Group</returns>
+        public static Group AsReadOnly(this Group group)
         {
-            get => _original.Name;
-            set => throw new NotSupportedException();
+                GroupReadOnlyWrapper? instance = instances.FirstOrDefault(ro => ro._original == group);
+
+                if (instance == null)
+                {
+                    return new GroupReadOnlyWrapper(group);
+                }
+                else
+                {
+                    return instance;
+                }
         }
 
-        public override IList<Person> People => _original.People;
-        public override IList<Person> ActivePeople => _original.ActivePeople;
-
-        public override Calendar Calendar => _original.Calendar;
-
-        public override void AddPerson(string name) => throw new NotSupportedException();
-
-        public override void RemovePerson(Person person) => throw new NotSupportedException();
-
-        public override void AssignTo(Schedule schedule)
+        private class GroupReadOnlyWrapper : Group
         {
-            _original.AssignTo(schedule); // this method shouldn't change group's behaviour
-        }
+            public readonly Group _original;
 
-        public override bool Contains(string name)
-        {
-            return _original.Contains(name);
-        }
-
-        private GroupReadOnly(Group original)
-        {
-            _original = original;
-
-            instances.Add(this);
-        }
-
-        public static GroupReadOnly Get(Group group)
-        {
-            GroupReadOnly? instance = instances.FirstOrDefault(ro => ro._original == group);
-
-            if (instance == null)
+            public override string Name
             {
-                return new GroupReadOnly(group);
+                get => _original.Name;
+                set => throw new NotSupportedException();
             }
-            else
+
+            public override IList<Person> People => _original.People;
+            public override IList<Person> ActivePeople => _original.ActivePeople;
+
+            public override Calendar Calendar => _original.Calendar;
+
+            public override void AddPerson(string name) => throw new NotSupportedException();
+
+            public override void RemovePerson(Person person) => throw new NotSupportedException();
+
+            public override void AssignTo(Schedule schedule)
             {
-                return instance;
+                _original.AssignTo(schedule); // this method shouldn't change group's behaviour
+            }
+
+            public override bool Contains(string name)
+            {
+                return _original.Contains(name);
+            }
+
+            public GroupReadOnlyWrapper(Group original)
+            {
+                _original = original;
+
+                GroupReadOnly.instances.Add(this);
             }
         }
+        
     }
 }

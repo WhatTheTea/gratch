@@ -15,7 +15,7 @@ namespace gratchLib
         private readonly Subject<Person> whenPositionChanged = new();
 
         // properties
-        public virtual Group Group => GroupReadOnly.Get(group);
+        public virtual Group Group => group.AsReadOnly();
         public virtual string Name { get => name; set => Rename(value); }
         public virtual int Position { get => position; internal set => position = value; }
 

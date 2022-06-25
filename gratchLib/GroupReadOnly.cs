@@ -9,7 +9,7 @@ namespace gratchLib
     public static class GroupReadOnly
     {
         private static readonly List<GroupReadOnlyWrapper> instances = new();
-        /// <returns>ReadOnlyWrapper of Group</returns>
+        /// <returns>ReadOnlyWrapper of <see cref="Group"/></returns>
         public static Group AsReadOnly(this Group group)
         {
                 GroupReadOnlyWrapper? instance = instances.FirstOrDefault(ro => ro._original == group);
@@ -24,7 +24,7 @@ namespace gratchLib
                 }
         }
 
-        private class GroupReadOnlyWrapper : Group
+        private sealed class GroupReadOnlyWrapper : Group
         {
             public readonly Group _original;
 

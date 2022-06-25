@@ -29,11 +29,8 @@ namespace gratchLib
         [Column(nameof(Position))]
         public new int Position { get => base.Position; internal set => base.Position = value; }
         #endregion
-        internal PersonSQLite(Group group, string name)
+        internal PersonSQLite(Group group, string name) : base(group, name)
         {
-            this.group = group;
-            this.name = name;
-            Position = 0;
         }
     }
 }

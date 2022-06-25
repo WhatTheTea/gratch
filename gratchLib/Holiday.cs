@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace gratchLib
 {
-    public struct Holiday
+    public abstract class Holiday
     {
-        public DateTime Date { get; private set; }
-        public string Name { get; private set; }
+        public virtual DateTime Date { get; } = DateTime.MinValue;
+        public virtual string Name { get; } = string.Empty;
 
         public Holiday(DateTime date, string name)
         {
@@ -17,7 +17,7 @@ namespace gratchLib
             Name = name;
         }
 
-        public bool IsToday() => Date.Date == DateTime.Today;
-        public bool IsEqual(DateTime date) => Date.Date == date.Date;
+        public virtual bool IsToday() => Date.Date == DateTime.Today;
+        public virtual bool IsEqual(DateTime date) => Date.Date == date.Date;
     }
 }

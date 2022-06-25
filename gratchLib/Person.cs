@@ -26,14 +26,13 @@ namespace gratchLib
         // interface
         public virtual void AssignTo(Schedule schedule) => schedule.Assign(this); // TODO: smth better
 
-        /* constructors
+        // constructors
         internal Person(Group group, string name)
         {
             this.group = group;
             this.name = name;
             Position = 0;
         }
-        */
         // methods
         public virtual void Rename(string newname)
         {

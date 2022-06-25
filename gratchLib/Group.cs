@@ -36,6 +36,8 @@ namespace gratchLib
             {
                 person.AssignTo(schedule);
             }
+
+
         }
         public virtual bool Contains(string name) => People.Any(p => p.Name == name);
         protected virtual void NormalizePositions()

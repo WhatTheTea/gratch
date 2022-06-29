@@ -7,7 +7,7 @@ namespace gratchLib
     [Table("Groups")]
     public class GroupSQLite : Group
     {
-#region DBMapping
+        #region DBMapping
         [PrimaryKey, AutoIncrement, Unique]
         public int Id { get; set; }
 
@@ -25,8 +25,12 @@ namespace gratchLib
         public new IList<Person> People => base.People;
 
         [OneToOne(nameof(CalendarId), CascadeOperations = CascadeOperation.All)]
-        public override Calendar Calendar { get; } = new CalendarSQLite();
-#endregion
+        public override Calendar Calendar { get; protected set; }
+        #endregion
+        public GroupSQLite(string name) : base(name)
+        {
+            Calendar = new CalendarSQLite(this);
+        }
         public override void AddPerson(string name)
         {
             if (!Contains(name))

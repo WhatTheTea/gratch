@@ -2,7 +2,7 @@
 
 namespace gratchLib
 {
-    public abstract class Group : IDisposable, IAssignable<Schedule>
+    public abstract class Group : IDisposable
     {
         private bool disposedValue;
         protected List<Person> people = new();
@@ -11,12 +11,20 @@ namespace gratchLib
 
         public virtual string Name { get; set; } = string.Empty;
         public virtual IList<Person> People => people.AsReadOnly();
+        /// <summary>
+        /// Readonly collection of <see cref="Person"/> with <see cref="Person.Position"/> bigger than 0 and ordered by ascending of <see cref="Person.Position"/>
+        /// </summary>
         public virtual IList<Person> ActivePeople => activePeople.ToList()
                                                                  .AsReadOnly();
-        public abstract Calendar Calendar { get; }
+        public abstract Calendar Calendar { get; protected set; }
 
-        protected IEnumerable<Person> activePeople => people.Where(x => x.Position > 0)
+        protected IEnumerable<Person> activePeople => people.Where(x => x.IsActive)
                                                             .OrderBy(x => x.Position);
+
+        public Group(string name)
+        {
+            this.Name = name;
+        }
 
         public abstract void AddPerson(string name);
         public virtual void RemovePerson(Person person)
@@ -30,13 +38,6 @@ namespace gratchLib
             }
         }
 
-        public virtual void AssignTo(Schedule schedule)
-        {
-            foreach (var person in People)
-            {
-                person.AssignTo(schedule);
-            }
-        }
         public virtual bool Contains(string name) => People.Any(p => p.Name == name);
         protected virtual void NormalizePositions()
         {
@@ -51,15 +52,19 @@ namespace gratchLib
         }
         protected virtual void ShiftPositionsAfter(Person person)
         {
-            // TODO: Logic to change position
-            if(person.Position > 0)
+            if(person.IsActive)
             {
+                List<Person> peopleToSkip = new() { person }; // Skip this <person>
+                // Skip person with <person.Position>, that is not the same person
+                activePeople.Where(p => p.Position == person.Position && p != person) 
+                            .Select(p => p.Position += 1); // Also, shift its position right
+                // NOTE: <person> and peopleToSkip may be in this collection too
                 var peopleAfterPerson = activePeople.SkipWhile(x => x.Position != person.Position);
 
                 foreach (var p in peopleAfterPerson)
                 {
-                    if (p == person) continue;
-                    p.Position += 1;
+                    if (peopleToSkip.Contains(p)) continue; // skip peopleToSkip
+                    p.Position += 1; // move everyone else
                 }
             }
         }

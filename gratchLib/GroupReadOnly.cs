@@ -12,16 +12,16 @@ namespace gratchLib
         /// <returns>ReadOnlyWrapper of <see cref="Group"/></returns>
         public static Group AsReadOnly(this Group group)
         {
-                GroupReadOnlyWrapper? instance = instances.FirstOrDefault(ro => ro._original == group);
+            GroupReadOnlyWrapper? instance = instances.FirstOrDefault(ro => ro._original == group);
 
-                if (instance == null)
-                {
-                    return new GroupReadOnlyWrapper(group);
-                }
-                else
-                {
-                    return instance;
-                }
+            if (instance == null)
+            {
+                return new GroupReadOnlyWrapper(group);
+            }
+            else
+            {
+                return instance;
+            }
         }
 
         private sealed class GroupReadOnlyWrapper : Group
@@ -37,29 +37,30 @@ namespace gratchLib
             public override IList<Person> People => _original.People;
             public override IList<Person> ActivePeople => _original.ActivePeople;
 
-            public override Calendar Calendar => _original.Calendar;
+            public override Calendar Calendar
+            {
+                get => _original.Calendar;
+                protected set => throw new NotSupportedException();
+            }
 
             public override void AddPerson(string name) => throw new NotSupportedException();
 
             public override void RemovePerson(Person person) => throw new NotSupportedException();
 
-            public override void AssignTo(Schedule schedule)
-            {
-                _original.AssignTo(schedule); // this method shouldn't change group's behaviour
-            }
+
 
             public override bool Contains(string name)
             {
                 return _original.Contains(name);
             }
 
-            public GroupReadOnlyWrapper(Group original)
+            public GroupReadOnlyWrapper(Group original) : base(original.Name)
             {
                 _original = original;
 
                 GroupReadOnly.instances.Add(this);
             }
         }
-        
+
     }
 }

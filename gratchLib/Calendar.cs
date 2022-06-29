@@ -2,9 +2,10 @@
 
 namespace gratchLib
 {
-    public abstract class Calendar : IDisposable
+    public abstract class Calendar : IDisposable, ICalendar
     {
         protected bool disposedValue;
+        protected DateTime startDate;
 
         protected Subject<Calendar> whenHolidaysChanged = new();
         protected Subject<Calendar> whenWeekendsChanged = new();
@@ -14,9 +15,11 @@ namespace gratchLib
 
         public virtual IList<Holiday> Holidays => holidays.AsReadOnly();
         public virtual IList<DayOfWeek> Weekend => weekend.AsReadOnly();
+        public virtual DateTime StartDate => startDate;
 
         public IObservable<Calendar> WhenHolidaysChanged => whenHolidaysChanged;
         public IObservable<Calendar> WhenWeekendsChanged => whenWeekendsChanged;
+
 
         public virtual void AddHoliday(Holiday holiday)
         {
@@ -48,7 +51,7 @@ namespace gratchLib
         /// <summary>Determines if date belongs to <see cref="Holidays"/> or <see cref="Weekend"/></summary>
         public virtual bool IsHoliday(DateTime date)
         {
-            return Weekend.Contains(date.DayOfWeek) || 
+            return Weekend.Contains(date.DayOfWeek) ||
                    Holidays.Any(day => day.IsEqual(date));
         }
 
@@ -63,7 +66,7 @@ namespace gratchLib
                     whenWeekendsChanged.Dispose();
                 }
 
-                
+
                 disposedValue = true;
             }
         }

@@ -2,7 +2,7 @@
 
 namespace gratchLib
 {
-    public abstract class Person : IDisposable, IAssignable<Schedule>
+    public abstract class Person : IDisposable
     {
         // fields
         protected string name = string.Empty;
@@ -18,16 +18,17 @@ namespace gratchLib
         public virtual Group Group => group.AsReadOnly();
         public virtual string Name { get => name; set => Rename(value); }
         public virtual int Position { get => position; internal set => position = value; }
+        public virtual bool IsActive => Position > 0;
 
         // observables
         public IObservable<Person> WhenNameChanged => whenNameChanged;
         public IObservable<Person> WhenPositionChanged => whenPositionChanged;
 
         // interface
-        public virtual void AssignTo(Schedule schedule) => schedule.Assign(this); // TODO: smth better
+        //public virtual void AssignTo(Schedule schedule) => schedule.Assign(this); // TODO: smth better
 
         // constructors
-        internal Person(Group group, string name)
+        public Person(Group group, string name)
         {
             this.group = group;
             this.name = name;

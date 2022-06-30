@@ -14,6 +14,7 @@ namespace gratchLib
         {
             this.Group = group;
             this.Period = period;
+            BuildSchedule();
         }
 
         protected void BuildSchedule()
@@ -26,6 +27,9 @@ namespace gratchLib
                 _schedule.Add(dateToAssign, Group.ActivePeople[j]);
             }
         }
+        /// <summary>
+        /// Returns <see cref="Person.Position"/> for <see cref="Period"/> first date
+        /// </summary>
         protected int FirstPosition
         {
             get

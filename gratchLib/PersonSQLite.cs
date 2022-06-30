@@ -32,5 +32,11 @@ namespace gratchLib
         internal PersonSQLite(Group group, string name) : base(group, name)
         {
         }
+        /// <summary>
+        /// For internal use
+        /// </summary>
+        public PersonSQLite() : base(null, string.Empty)
+        { 
+        }
     }
 }

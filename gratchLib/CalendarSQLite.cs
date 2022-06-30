@@ -34,5 +34,12 @@ namespace gratchLib
         {
             this.Group = group;
         }
+        /// <summary>
+        /// For internal use
+        /// </summary>
+        public CalendarSQLite() : base()
+        {
+
+        }
     }
 }

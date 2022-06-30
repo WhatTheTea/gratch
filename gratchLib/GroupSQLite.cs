@@ -31,6 +31,10 @@ namespace gratchLib
         {
             Calendar = new CalendarSQLite(this);
         }
+        /// <summary>
+        /// For internal use
+        /// </summary>
+        public GroupSQLite() : base(default) { }
         public override void AddPerson(string name)
         {
             if (!Contains(name))

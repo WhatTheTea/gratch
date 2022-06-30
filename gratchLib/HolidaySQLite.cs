@@ -25,5 +25,12 @@ namespace gratchLib
         {
 
         }
+        /// <summary>
+        /// For internal use
+        /// </summary>
+        public HolidaySQLite() : base(default, default)
+        {
+
+        }
     }
 }

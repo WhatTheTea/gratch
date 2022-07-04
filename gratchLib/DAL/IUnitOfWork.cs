@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gratchLib.Database
+namespace gratchLib.DAL
 {
     public interface IUnitOfWork<TConnection, TGroup, TPerson, TCalendar, THoliday> 
         where TConnection : class
@@ -14,8 +14,7 @@ namespace gratchLib.Database
         where THoliday : Holiday, new()
     {
         void BeginTransaction();
-        void SaveChanges();
-        bool Commit();
+        void Commit();
         void Rollback();
 
         IRepository<TPerson, TConnection> People { get; }

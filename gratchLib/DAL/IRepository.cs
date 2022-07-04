@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gratchLib.Database
+namespace gratchLib.DAL
 {
     public interface IRepository<T,TConnection> 
         where T : new()

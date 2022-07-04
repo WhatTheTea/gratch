@@ -10,19 +10,20 @@ using System.Threading.Tasks;
 
 namespace gratchLib.Database
 {
-    public abstract class SQLiteRepository<T> : IRepository<T, SQLiteConnection>
+    public class SQLiteRepository<T> : IRepository<T, SQLiteConnection>
                     where T : new()
     {
-        protected SQLiteConnection _connection = new(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\gratch.db3");
+        protected SQLiteConnection _connection;
         public virtual SQLiteConnection Connection => _connection;
 
-        protected SQLiteRepository()
+        public SQLiteRepository(SQLiteConnection connection = null)
         {
+            if (connection == null) _connection = new(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\gratch.db3");
             Connection.CreateTable<T>();
         }
 
-        public virtual void GetAllItems() => _connection.GetAllWithChildren<T>();
-        public virtual void Insert(T item) => _connection.InsertOrReplaceWithChildren(item);
+        public virtual List<T> GetAllItems() => _connection.GetAllWithChildren<T>(recursive: true);
+        public virtual void Insert(T item) => _connection.InsertOrReplaceWithChildren(item, true);
         public virtual void Remove(T item) => _connection.Delete(item);
         public virtual void Update(T item) => _connection.UpdateWithChildren(item);
     }

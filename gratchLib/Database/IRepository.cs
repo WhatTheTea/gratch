@@ -15,6 +15,6 @@ namespace gratchLib.Database
         void Insert(T item);
         void Update(T item);
         void Remove(T item);
-        void GetAllItems();
+        List<T> GetAllItems();
     }
 }

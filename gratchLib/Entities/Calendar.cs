@@ -8,7 +8,7 @@
         public int Id { get; set; }
         public IList<Holiday> Holidays => holidays.AsReadOnly();
         public IList<DayOfWeek> Weekend => weekend.AsReadOnly();
-        public DateTime StartDate { get; set; }
+        public DateOnly StartDate { get; set; }
 
         public int GroupId { get; set; }
         public Group Group { get; set; }

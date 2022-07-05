@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace gratchLib.Entities
 {
-    public class Group
+    public class Group : IEnumerable<Person>
     {
         protected List<Person> _people = new();
-        protected IEnumerable<Person> activePeople => _people.AsReadOnly()
-                                                            .Where(x => x.IsActive)
-                                                            .OrderBy(x => x.Position);
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -19,7 +17,8 @@ namespace gratchLib.Entities
         /// <summary>
         /// Readonly collection of <see cref="Person"/> with <see cref="Person.Position"/> bigger than 0 and ordered by ascending of <see cref="Person.Position"/>
         /// </summary>
-        public IEnumerable<Person> ActivePeople => activePeople;
+        public IEnumerable<Person> ActivePeople => _people.Where(x => x.IsActive)
+                                                          .OrderBy(x => x.Position);
 
         public Calendar Calendar { get; set; }
 
@@ -34,7 +33,6 @@ namespace gratchLib.Entities
         {
             var person = new Person(name, this);
             person.Position = (ActivePeople?.Count() ?? 0) + 1;
-
             _people.Add(person);
         }
         public virtual void RemovePerson(Person person)
@@ -42,15 +40,17 @@ namespace gratchLib.Entities
             if (People.Contains(person))
             {
                 _people.Remove(person);
-                NormalizePositions();
             }
         }
 
         public virtual bool Contains(string name) => People.Any(p => p.Name == name);
+        /// <summary>
+        /// Makes people positions go from 1 to <see cref="ActivePeople"/>.Count()
+        /// </summary>
         protected virtual void NormalizePositions()
         {
             // Select all people with positions in ascending order
-            var activepeople = activePeople;
+            var activepeople = ActivePeople;
             // remove gaps in positions
             for (int i = 0; i < activepeople.Count(); i++)
             {
@@ -58,16 +58,26 @@ namespace gratchLib.Entities
             }
 
         }
+        /// <summary>
+        /// Adds 1 to all people's positions after <paramref name="person"/>
+        /// </summary>
+        /// <param name="person"></param>
         protected virtual void ShiftPositionsAfter(Person person)
         {
             if (person.IsActive)
             {
                 List<Person> peopleToSkip = new() { person }; // Skip this <person>
-                // Skip person with <person.Position>, that is not the same person
-                activePeople.Where(p => p.Position == person.Position && p != person)
-                            .Select(p => p.Position += 1); // Also, shift its position right
+                
+                var overlappingPeople = ActivePeople.Where(p => p.Position == person.Position && p != person)
+                                                    .Select(p =>
+                                                    {
+                                                        p.Position += 1;
+                                                        return p;
+                                                    });
+                peopleToSkip.AddRange(overlappingPeople);
+
                 // NOTE: <person> and peopleToSkip may be in this collection too
-                var peopleAfterPerson = activePeople.SkipWhile(x => x.Position != person.Position);
+                var peopleAfterPerson = ActivePeople.SkipWhile(x => x.Position != person.Position);
 
                 foreach (var p in peopleAfterPerson)
                 {
@@ -77,5 +87,7 @@ namespace gratchLib.Entities
             }
         }
 
+        public IEnumerator<Person> GetEnumerator() => People.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

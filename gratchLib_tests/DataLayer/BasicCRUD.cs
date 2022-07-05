@@ -10,6 +10,9 @@ namespace gratchLib_tests.DataLayer
 
         public BasicCRUD()
         {
+            string dbpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\gratch.db3";
+            File.Delete(dbpath);
+
             context = new();
             context.Database.EnsureCreated();
 
@@ -26,10 +29,8 @@ namespace gratchLib_tests.DataLayer
         public void Insert()
         {
             context.Groups.Add(TestGroup);
-            //context.People.AddRange(TestGroup.People);
             context.SaveChanges();
-
-            Assert.True(context.Groups.Contains(TestGroup));
+            Assert.True(TestGroup == context.Groups.Single());
         }
         [Fact]
         public void Read()
@@ -54,11 +55,7 @@ namespace gratchLib_tests.DataLayer
 
         public void Dispose()
         {
-            string dbpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\gratch.db3";
-
             context.Dispose();
-
-            //File.Delete(dbpath);
         }
     }
 }

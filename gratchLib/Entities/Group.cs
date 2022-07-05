@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reactive.Subjects;
 
 namespace gratchLib.Entities
 {
-    public class Group : IEnumerable<Person>
+    public class Group
     {
-        protected List<Person> _people = new();
+        protected List<Person> _people;
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -19,20 +20,23 @@ namespace gratchLib.Entities
         /// </summary>
         public IEnumerable<Person> ActivePeople => _people.Where(x => x.IsActive)
                                                           .OrderBy(x => x.Position);
-
         public Calendar Calendar { get; set; }
+
+
 
 
         public Group(string name)
         {
             Name = name;
             Calendar = new Calendar();
+            _people = new();
         }
 
-        public virtual void AddPerson(string name)
+        public virtual void AddPerson(string name, bool isActive = true)
         {
             var person = new Person(name, this);
-            person.Position = (ActivePeople?.Count() ?? 0) + 1;
+            // Assign or not position based on isActive
+            person.Position = isActive ? (ActivePeople?.Count() ?? 0) + 1 : 0;
             _people.Add(person);
         }
         public virtual void RemovePerson(Person person)
@@ -86,8 +90,5 @@ namespace gratchLib.Entities
                 }
             }
         }
-
-        public IEnumerator<Person> GetEnumerator() => People.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 }

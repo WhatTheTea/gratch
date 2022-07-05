@@ -1,9 +1,11 @@
 ﻿
 using System.Collections;
 
+using gratchLib.Entities;
+
 namespace gratchLib
 {
-    /*public class Schedule : IEnumerable<KeyValuePair<DateTime, Person>>
+    public class Schedule : IEnumerable<KeyValuePair<DateTime, Person>>
     {
         protected Dictionary<DateTime, Person> _schedule = new();
 
@@ -24,8 +26,8 @@ namespace gratchLib
             {
                 var dateToAssign = Period.ElementAt(i);
                 if (Group.Calendar.IsHoliday(dateToAssign)) continue; // skip if holiday
-                if (j > Group.ActivePeople.Count) j = 1;              // first pos on overflow
-                _schedule.Add(dateToAssign, Group.ActivePeople[j]);
+                if (j > Group.ActivePeople.Count()) j = 1;              // first pos on overflow
+                _schedule.Add(dateToAssign, Group.ActivePeople.ElementAt(j));
             }
         }
         /// <summary>
@@ -35,11 +37,11 @@ namespace gratchLib
         {
             get
             {
-                var peoplecount = Group.People.Count;
+                var peoplecount = Group.People.Count();
                 var startdate = Group.Calendar.StartDate;
                 var periodstart = Period.Start;
                 // period between first init and start of schedule's period;
-                var period = new DateTimeRange(startdate, periodstart);
+                var period = new DateTimeRange(startdate.ToDateTime(TimeOnly.MinValue), periodstart);
                 return (period.DaysSpan - (periodstart.Day - 1)) % peoplecount + 1;
             }
         }
@@ -59,5 +61,5 @@ namespace gratchLib
 
         public IEnumerator GetEnumerator() => _schedule.GetEnumerator();
         IEnumerator<KeyValuePair<DateTime, Person>> IEnumerable<KeyValuePair<DateTime, Person>>.GetEnumerator() => _schedule.GetEnumerator();
-    }*/
+    }
 }

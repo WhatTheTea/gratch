@@ -10,10 +10,8 @@ namespace gratchLib_tests.DataLayer
 
         public BasicCRUD()
         {
-            string dbpath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\gratch.db3";
-            File.Delete(dbpath);
-
             context = new();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             TestGroup = new("Group1");
@@ -52,10 +50,10 @@ namespace gratchLib_tests.DataLayer
         {
 
         }
-
         public void Dispose()
         {
             context.Dispose();
+            context = null;
         }
     }
 }

@@ -11,13 +11,8 @@ using Microsoft.Data.Sqlite;
 
 namespace gratchLib.DAL
 {
-    public class SqliteContext : DbContext
+    public class SqliteContext : BaseContext
     {
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Person> People { get; set; }
-        public DbSet<Calendar> Calendars { get; set; }
-        public DbSet<Holiday> Holidays { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder();
@@ -25,13 +20,9 @@ namespace gratchLib.DAL
 
             optionsBuilder.UseSqlite(connectionStringBuilder.ConnectionString);
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public SqliteContext() : base()
         {
-            modelBuilder
-                        .ApplyConfiguration(new Configurations.GroupConfiguration())
-                        .ApplyConfiguration(new Configurations.PersonConfiguration())
-                        .ApplyConfiguration(new Configurations.CalendarConfiguration())
-                        .ApplyConfiguration(new Configurations.HolidayConfiguration());
+
         }
     }
 }

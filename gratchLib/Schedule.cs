@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 
 namespace gratchLib
 {
-    public class Schedule : IEnumerable<KeyValuePair<DateTime, Person>>
+    /*public class Schedule : IEnumerable<KeyValuePair<DateTime, Person>>
     {
         protected Dictionary<DateTime, Person> _schedule = new();
 
@@ -12,8 +13,8 @@ namespace gratchLib
 
         public Schedule(Group group, DateTimeRange period)
         {
-            this.Group = group;
-            this.Period = period;
+            Group = group;
+            Period = period;
             BuildSchedule();
         }
 
@@ -39,7 +40,7 @@ namespace gratchLib
                 var periodstart = Period.Start;
                 // period between first init and start of schedule's period;
                 var period = new DateTimeRange(startdate, periodstart);
-                return ((period.DaysSpan - (periodstart.Day - 1)) % peoplecount) + 1;
+                return (period.DaysSpan - (periodstart.Day - 1)) % peoplecount + 1;
             }
         }
 
@@ -58,5 +59,5 @@ namespace gratchLib
 
         public IEnumerator GetEnumerator() => _schedule.GetEnumerator();
         IEnumerator<KeyValuePair<DateTime, Person>> IEnumerable<KeyValuePair<DateTime, Person>>.GetEnumerator() => _schedule.GetEnumerator();
-    }
+    }*/
 }

@@ -25,4 +25,8 @@
     <ProjectReference Include="..\gratchLib\gratchLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BusinessLayer\" />
+  </ItemGroup>
+
 </Project>

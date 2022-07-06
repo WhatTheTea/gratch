@@ -2,19 +2,17 @@
 {
     public class Holiday
     {
-        private string name = string.Empty;
-        private DateTime date = DateTime.MinValue;
+        protected DateTime _date;
+        protected string _name;
 
         public int Id { get; set; }
-        public Calendar Calendar { get; set; }
-        public virtual DateTime Date { get => date; protected set => date = value; }
-        public virtual string Name { get => name; protected set => name = value; }
-        public Holiday(DateTime date, string name)
-        {
-            Date = date;
-            Name = name;
-        }
-        public Holiday() { }
+        public Calendar? Calendar { get; set; }
+        public virtual DateTime Date => _date;
+        public virtual string Name => _name;
+
+
+        public Holiday() => (_name, _date) = (string.Empty, DateTime.MinValue);
+        public Holiday(DateTime date, string name) => (_name, _date) = (name, date);
 
         public virtual bool IsToday() => Date.Date == DateTime.Today;
         public virtual bool IsEqual(DateTime date) => Date.Date == date.Date;

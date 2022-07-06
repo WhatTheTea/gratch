@@ -4,28 +4,22 @@ namespace gratchLib.Entities
 {
     public class Person
     {
-        private int _position;
-        private string _name;
+        private int _position = 0;
+        private string _name = string.Empty;
 
         public int Id { get; set; }
         public string Name { get => _name; set => Rename(value); }
         public int Position { get => _position; set => ChangePosition(value); }
         public bool IsActive => Position > 0;
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
 
-        public Person() { }
-        public Person(string name, Group group)
-        {
-            _name = name;
-            Group = group;
-        }
+        public Person(string name) => _name = name;
+        public Person(string name, Group group) : this(name) => Group = group;
 
         public virtual void Rename(string name)
         {
-            if (!Group.Contains(name))
-            {
-                _name = name;
-            }
+            _name = name;
+            // TODO: OnNext();
         }
         /// <summary>
         /// Changes person's position.
@@ -34,15 +28,9 @@ namespace gratchLib.Entities
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public virtual void ChangePosition(int position)
         {
-            var isPosInRange = position >= 0 && position <= Group.ActivePeople?.Count() + 1;
-
-            if (isPosInRange)
-            {
-                _position = position;
-            } else
-            {
-                throw new ArgumentOutOfRangeException(nameof(position));
-            }
+            var isPosInRange = position >= 0 && position <= Group.ActivePeople.Count() + 1;
+            _position = isPosInRange ? position 
+                                     : throw new ArgumentOutOfRangeException(nameof(position));
         }
     }
 }

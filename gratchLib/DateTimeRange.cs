@@ -2,16 +2,15 @@
 
 namespace gratchLib
 {
-    public struct DateTimeRange : IEnumerable<DateTime>
+    public readonly struct DateTimeRange : IEnumerable<DateTime>
     {
-        private List<DateTime> range = new();
-        public DateTime Start { get; private set; }
-        public DateTime End { get; private set; }
+        private readonly List<DateTime> range = new();
+        public DateTime Start { get; }
+        public DateTime End { get; }
         public int DaysSpan => (int)Math.Round((End.Date - Start.Date).TotalDays);
         public DateTimeRange(DateTime start, DateTime end)
         {
-            this.Start = start;
-            this.End = end;
+            (Start, End) = (start, end);
 
             foreach (int n in Enumerable.Range(0, DaysSpan))
             {
@@ -22,6 +21,4 @@ namespace gratchLib
         public IEnumerator<DateTime> GetEnumerator() => range.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
-
-
 }

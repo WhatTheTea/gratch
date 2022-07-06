@@ -15,8 +15,7 @@ namespace gratchLib
 
         public Schedule(Group group, DateTimeRange period)
         {
-            Group = group;
-            Period = period;
+            (Group, Period) = (group, period);
             BuildSchedule();
         }
 
@@ -41,7 +40,7 @@ namespace gratchLib
                 var startdate = Group.Calendar.StartDate;
                 var periodstart = Period.Start;
                 // period between first init and start of schedule's period;
-                var period = new DateTimeRange(startdate.ToDateTime(TimeOnly.MinValue), periodstart);
+                var period = new DateTimeRange(startdate, periodstart);
                 return (period.DaysSpan - (periodstart.Day - 1)) % peoplecount + 1;
             }
         }

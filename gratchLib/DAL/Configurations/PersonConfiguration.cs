@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace gratchLib.DAL.Configurations
 {
-    public class PersonConfiguration : IEntityTypeConfiguration<Person>
+    internal class PersonConfiguration : IEntityTypeConfiguration<Person>
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {

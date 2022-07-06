@@ -14,7 +14,7 @@ namespace gratchLib.Entities
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Person> People => _people.AsReadOnly();
+        public IEnumerable<Person> People => _people;
         /// <summary>
         /// Readonly collection of <see cref="Person"/> with <see cref="Person.Position"/> bigger than 0 and ordered by ascending of <see cref="Person.Position"/>
         /// </summary>
@@ -22,14 +22,10 @@ namespace gratchLib.Entities
                                                           .OrderBy(x => x.Position);
         public Calendar Calendar { get; set; }
 
-
-
-
-        public Group(string name)
+        public Group() => (Name, Calendar, _people) = (string.Empty, new(this), new());
+        public Group(string name) : this()
         {
             Name = name;
-            Calendar = new Calendar();
-            _people = new();
         }
 
         public virtual void AddPerson(string name, bool isActive = true)
@@ -37,16 +33,10 @@ namespace gratchLib.Entities
             var person = new Person(name, this);
             // Assign or not position based on isActive
             person.Position = isActive ? (ActivePeople?.Count() ?? 0) + 1 : 0;
+            
             _people.Add(person);
         }
-        public virtual void RemovePerson(Person person)
-        {
-            if (People.Contains(person))
-            {
-                _people.Remove(person);
-            }
-        }
-
+        public virtual void RemovePerson(Person person) => _people.Remove(person);   
         public virtual bool Contains(string name) => People.Any(p => p.Name == name);
         /// <summary>
         /// Makes people positions go from 1 to <see cref="ActivePeople"/>.Count()

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace gratchLib.DAL.Configurations
 {
-    public class GroupConfiguration : IEntityTypeConfiguration<Group>
+    internal class GroupConfiguration : IEntityTypeConfiguration<Group>
     {
         public void Configure(EntityTypeBuilder<Group> builder)
         {

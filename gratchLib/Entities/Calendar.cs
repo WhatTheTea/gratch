@@ -8,10 +8,22 @@
         public int Id { get; set; }
         public IList<Holiday> Holidays => holidays.AsReadOnly();
         public IList<DayOfWeek> Weekend => weekend.AsReadOnly();
-        public DateOnly StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         public int GroupId { get; set; }
-        public Group Group { get; set; }
+        public Group? Group { get; set; }
+
+        public Calendar() {}
+
+        public Calendar(Group group) : this()
+        {
+            Group = group;
+        }
+
+        public Calendar(Group group, DateTime startDate) : this(group)
+        {
+            StartDate = startDate;
+        }
 
         public virtual void AddHoliday(Holiday holiday)
         {

@@ -17,6 +17,9 @@ namespace gratchLib.DAL.Configurations
                    .HasConversion(
                         v => JsonSerializer.Serialize(v, serializerOptions),
                         v => JsonSerializer.Deserialize<IList<DayOfWeek>>(v, serializerOptions) ?? new List<DayOfWeek>());
+            builder.Property(x => x.StartDate)
+                   .HasConversion(d => DateOnly.FromDateTime(d),
+                                  d => d.ToDateTime(TimeOnly.MinValue));
         }
     }
 }

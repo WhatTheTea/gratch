@@ -15,7 +15,9 @@ namespace gratchLib.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Holiday> builder)
         {
-
+            builder.Property(x => x.Date)
+                   .HasConversion(d => DateOnly.FromDateTime(d),
+                                  d => d.ToDateTime(TimeOnly.MinValue));
         }
     }
 }

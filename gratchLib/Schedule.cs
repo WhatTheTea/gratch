@@ -21,12 +21,15 @@ namespace gratchLib
 
         protected void BuildSchedule()
         {
-            for (int i = 0, j = 1; i < Period.DaysSpan; i++, j++)
+            for (int i = 0, j = 0; i < Period.DaysSpan; i++, j++)
             {
                 var dateToAssign = Period.ElementAt(i);
-                if (Group.Calendar.IsHoliday(dateToAssign)) continue; // skip if holiday
-                if (j > Group.ActivePeople.Count()) j = 1;              // first pos on overflow
-                _schedule.Add(dateToAssign, Group.ActivePeople.ElementAt(j));
+
+                if (Group.Calendar.IsHoliday(dateToAssign)) continue;   // skip if holiday
+                if (j >= Group.ActivePeople.Count()) j = 0;              // first pos on overflow
+
+                var personToAssign = Group.ActivePeople.ElementAt(j);
+                _schedule.Add(dateToAssign, personToAssign);
             }
         }
         /// <summary>

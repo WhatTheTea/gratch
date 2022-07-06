@@ -18,6 +18,8 @@ namespace gratchLib.DAL.Configurations
             builder.Property(x => x.Date)
                    .HasConversion(d => DateOnly.FromDateTime(d),
                                   d => d.ToDateTime(TimeOnly.MinValue));
+            builder.Property(x => x.Name)
+                   .HasField("_name");
         }
     }
 }

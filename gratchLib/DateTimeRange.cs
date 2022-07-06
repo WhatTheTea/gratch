@@ -7,7 +7,7 @@ namespace gratchLib
         private readonly List<DateTime> range = new();
         public DateTime Start { get; }
         public DateTime End { get; }
-        public int DaysSpan => (int)Math.Round((End.Date - Start.Date).TotalDays);
+        public int DaysSpan => (int)Math.Round((End.Date - Start.Date).TotalDays) + 1;
         public DateTimeRange(DateTime start, DateTime end)
         {
             (Start, End) = (start, end);

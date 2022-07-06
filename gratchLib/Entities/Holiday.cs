@@ -3,7 +3,7 @@
     public class Holiday
     {
         protected DateTime _date;
-        protected string _name;
+        protected string _name; // TODO: Fix name in DB
 
         public int Id { get; set; }
         public Calendar? Calendar { get; set; }

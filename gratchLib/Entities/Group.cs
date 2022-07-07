@@ -8,12 +8,19 @@ using System.Reactive.Subjects;
 
 namespace gratchLib.Entities
 {
-    public class Group
+    public class Group : IDisposable
     {
-        protected List<Person> _people;
+        private bool disposedValue;
+        protected List<Person> _people = new();
+        protected string _name;
+        protected Subject<(int id, string newname)> whenNameChanged = new();
 
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name 
+        { 
+            get => _name;
+            set => Rename(value);
+        }
         public IEnumerable<Person> People => _people;
         /// <summary>
         /// Readonly collection of <see cref="Person"/> with <see cref="Person.Position"/> bigger than 0 and ordered by ascending of <see cref="Person.Position"/>
@@ -21,11 +28,21 @@ namespace gratchLib.Entities
         public IEnumerable<Person> ActivePeople => _people.Where(x => x.IsActive)
                                                           .OrderBy(x => x.Position);
         public Calendar Calendar { get; set; }
+        public IObservable<(int id, string newname)> WhenNameChanged => whenNameChanged;
 
-        public Group() => (Name, Calendar, _people) = (string.Empty, new(this), new());
+        public Group() => (_name, Calendar) = (string.Empty, new(this));
         public Group(string name) : this()
         {
-            Name = name;
+            _name = name;
+        }
+
+        public virtual void Rename(string name)
+        {
+            if(name != string.Empty)
+            {
+                _name = name;
+                whenNameChanged.OnNext((Id, Name));
+            } else whenNameChanged.OnError(new ArgumentException(paramName: nameof(name), message: "Name can't be empty"));
         }
 
         public virtual void AddPerson(string name, bool isActive = true)
@@ -79,6 +96,29 @@ namespace gratchLib.Entities
                     p.Position += 1; // move everyone else
                 }
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    foreach(var p in _people)
+                    {
+                        p.Dispose();
+                    }
+                    whenNameChanged.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

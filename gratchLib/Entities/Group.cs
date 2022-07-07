@@ -38,27 +38,45 @@ namespace gratchLib.Entities
 
         public virtual void Rename(string name)
         {
-            if(name != string.Empty)
+            try
             {
-                _name = name;
-                whenNameChanged.OnNext((Id, Name));
-            } else whenNameChanged.OnError(new ArgumentException(paramName: nameof(name), message: "Name can't be empty"));
+                if(name != string.Empty)
+                {
+                    _name = name;
+                    whenNameChanged.OnNext((Id, Name));
+                } else throw new ArgumentException(paramName: nameof(name), message: "Name can't be empty");
+            }
+            catch (ArgumentException exception)
+            {
+                whenNameChanged.OnError(exception);
+            }
         }
 
         public virtual void AddPerson(string name, bool isActive = true)
         {
-            var person = new Person(name, this);
-            // Assign or not position based on isActive
-            person.Position = isActive ? (ActivePeople?.Count() ?? 0) + 1 : 0;
-            
-            _people.Add(person);
+            var person = new Person(name);
+            AddPerson(person);
         }
+
+        public virtual void AddPerson(Person person, bool isActive = true)
+        {
+            if(person.Group != this)
+            {
+                person.Group = this;
+                // Assign or not position based on isActive
+                person.Position = isActive ? (ActivePeople?.Count() ?? 0) + 1 : 0;
+            
+                _people.Add(person);
+            } 
+            else throw new ArgumentException("Group have this person already", nameof(person));
+        }
+
         public virtual void RemovePerson(Person person) => _people.Remove(person);   
         public virtual bool Contains(string name) => People.Any(p => p.Name == name);
         /// <summary>
         /// Makes people positions go from 1 to <see cref="ActivePeople"/>.Count()
         /// </summary>
-        protected virtual void NormalizePositions()
+        public virtual void NormalizePositions()
         {
             // Select all people with positions in ascending order
             var activepeople = ActivePeople;
@@ -73,9 +91,10 @@ namespace gratchLib.Entities
         /// Adds 1 to all people's positions after <paramref name="person"/>
         /// </summary>
         /// <param name="person"></param>
-        protected virtual void ShiftPositionsAfter(Person person)
+        public virtual void ShiftPositionsAfter(Person person)
         {
-            if (person.IsActive)
+            _ = person ?? throw new ArgumentNullException(nameof(person));
+            if (People.Contains(person) && person.IsActive)
             {
                 List<Person> peopleToSkip = new() { person }; // Skip this <person>
                 

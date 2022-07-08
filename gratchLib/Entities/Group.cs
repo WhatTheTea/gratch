@@ -40,11 +40,10 @@ namespace gratchLib.Entities
         {
             try
             {
-                if(name != string.Empty)
-                {
-                    _name = name;
-                    whenNameChanged.OnNext((Id, Name));
-                } else throw new ArgumentException(paramName: nameof(name), message: "Name can't be empty");
+                _ = string.IsNullOrWhiteSpace(name) ? throw new ArgumentException(paramName: nameof(name), message: "Value can't be string.Empty") : name;
+                
+                _name = name;
+                whenNameChanged.OnNext((Id, Name));
             }
             catch (ArgumentException exception)
             {
@@ -60,6 +59,8 @@ namespace gratchLib.Entities
 
         public virtual void AddPerson(Person person, bool isActive = true)
         {
+            _ = person ?? throw new ArgumentNullException(nameof(person));
+
             if(person.Group != this)
             {
                 person.Group = this;
@@ -94,6 +95,7 @@ namespace gratchLib.Entities
         public virtual void ShiftPositionsAfter(Person person)
         {
             _ = person ?? throw new ArgumentNullException(nameof(person));
+
             if (People.Contains(person) && person.IsActive)
             {
                 List<Person> peopleToSkip = new() { person }; // Skip this <person>

@@ -24,8 +24,18 @@ namespace gratchLib.Entities
 
         public virtual void Rename(string name)
         {
-            _name = name;
-            whenNameChanged.OnNext((Id, _name));
+            try
+            {
+                _ = string.IsNullOrWhiteSpace(name) ? throw new ArgumentException(paramName: nameof(name), message: "Value can't be string.Empty") : name;
+
+                _name = name;
+                whenNameChanged.OnNext((Id, Name));
+            } 
+            catch (ArgumentException ex)
+            {
+                whenNameChanged.OnError(ex);
+            }
+
         }
         /// <summary>
         /// Changes person's position.
@@ -34,14 +44,17 @@ namespace gratchLib.Entities
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public virtual void ChangePosition(int position)
         {
-            var isPosInRange = position >= 0 && position <= Group.ActivePeople.Count() + 1;
-            if(isPosInRange)
+            try
             {
+                var isPosInRange = position >= 0 && position <= Group.ActivePeople.Count() + 1;
+                _ = !isPosInRange ? throw new ArgumentOutOfRangeException(nameof(position)) : true;
+
                 _position = position;
-                whenPositionChanged.OnNext((Id, _position));
-            } else 
+                whenPositionChanged.OnNext((Id, Position));
+            } 
+            catch (ArgumentOutOfRangeException ex)
             {
-                whenPositionChanged.OnError(new ArgumentOutOfRangeException(nameof(position)));
+                whenPositionChanged.OnError(ex);
             }
         }
 

@@ -2,7 +2,7 @@
 
 namespace gratchLib.Entities
 {
-    public class Person : IDisposable
+    public class Person : IDisposable, Arrangement.IArrangeable
     {
         private bool disposedValue;
         protected int _position = 0;
@@ -13,7 +13,7 @@ namespace gratchLib.Entities
         public int Id { get; set; }
         public string Name { get => _name; set => Rename(value); }
         public int Position { get => _position; set => ChangePosition(value); }
-        public bool IsActive => Position > 0;
+        public bool IsArranged => Position > 0;
         public Group? Group { get; set; }
         public IObservable<(int Id,string newname)> WhenNameChanged => whenNameChanged;
         public IObservable<(int Id,int newpos)> WhenPositionChanged => whenPositionChanged;

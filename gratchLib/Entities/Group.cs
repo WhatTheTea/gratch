@@ -6,9 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reactive.Subjects;
 
+using gratchLib.Entities.Arrangement;
+
 namespace gratchLib.Entities
 {
-    public class Group : IDisposable
+
+    public class Group : IGroup, IDisposable
     {
         private bool disposedValue;
         protected List<Person> _people = new();
@@ -16,8 +19,8 @@ namespace gratchLib.Entities
         protected Subject<(int id, string newname)> whenNameChanged = new();
 
         public int Id { get; set; }
-        public string Name 
-        { 
+        public string Name
+        {
             get => _name;
             set => Rename(value);
         }
@@ -25,12 +28,18 @@ namespace gratchLib.Entities
         /// <summary>
         /// Readonly collection of <see cref="Person"/> with <see cref="Person.Position"/> bigger than 0 and ordered by ascending of <see cref="Person.Position"/>
         /// </summary>
-        public IEnumerable<Person> ActivePeople => _people.Where(x => x.IsActive)
+        public IEnumerable<Person> ActivePeople => _people.Where(x => x.IsArranged)
                                                           .OrderBy(x => x.Position);
         public Calendar Calendar { get; set; }
         public IObservable<(int id, string newname)> WhenNameChanged => whenNameChanged;
 
-        public Group() => (_name, Calendar) = (string.Empty, new(this));
+        public IArrangementStrategy ArrangementStrategy { get; set; }
+
+        public Group()
+        {
+            (_name, Calendar) = (string.Empty, new(this));
+            ArrangementStrategy = new BaseArrangementStrategy(People.Cast<IArrangeable>());
+        }
         public Group(string name) : this()
         {
             _name = name;
@@ -41,7 +50,7 @@ namespace gratchLib.Entities
             try
             {
                 _ = string.IsNullOrWhiteSpace(name) ? throw new ArgumentException(paramName: nameof(name), message: "Value can't be string.Empty") : name;
-                
+
                 _name = name;
                 whenNameChanged.OnNext((Id, Name));
             }
@@ -51,29 +60,25 @@ namespace gratchLib.Entities
             }
         }
 
-        public virtual void AddPerson(string name, bool isActive = true)
+        public virtual void CreatePerson(string name)
         {
             var person = new Person(name);
             AddPerson(person);
         }
 
-        public virtual void AddPerson(Person person, bool isActive = true)
+        public virtual void AddPerson(Person person)
         {
             _ = person ?? throw new ArgumentNullException(nameof(person));
-
-            if(person.Group != this)
-            {
-                person.Group = this;
-                // Assign or not position based on isActive
-                person.Position = isActive ? (ActivePeople?.Count() ?? 0) + 1 : 0;
-            
-                _people.Add(person);
-            } 
-            else throw new ArgumentException("Group have this person already", nameof(person));
+            if (person.Group == this) return;
+            person.Group = this;
+            ArrangementStrategy.Arrange(person);
+            _people.Add(person);
         }
 
-        public virtual void RemovePerson(Person person) => _people.Remove(person);   
+        public virtual void RemovePerson(Person person) => _people.Remove(person);
         public virtual bool Contains(string name) => People.Any(p => p.Name == name);
+#region move
+        // TODO: Move to strategy
         /// <summary>
         /// Makes people positions go from 1 to <see cref="ActivePeople"/>.Count()
         /// </summary>
@@ -92,40 +97,15 @@ namespace gratchLib.Entities
         /// Adds 1 to all people's positions after <paramref name="person"/>
         /// </summary>
         /// <param name="person"></param>
-        public virtual void ShiftPositionsAfter(Person person)
-        {
-            _ = person ?? throw new ArgumentNullException(nameof(person));
-
-            if (People.Contains(person) && person.IsActive)
-            {
-                List<Person> peopleToSkip = new() { person }; // Skip this <person>
-                
-                var overlappingPeople = ActivePeople.Where(p => p.Position == person.Position && p != person)
-                                                    .Select(p =>
-                                                    {
-                                                        p.Position += 1;
-                                                        return p;
-                                                    });
-                peopleToSkip.AddRange(overlappingPeople);
-
-                // NOTE: <person> and peopleToSkip may be in this collection too
-                var peopleAfterPerson = ActivePeople.SkipWhile(x => x.Position != person.Position);
-
-                foreach (var p in peopleAfterPerson)
-                {
-                    if (peopleToSkip.Contains(p)) continue; // skip peopleToSkip
-                    p.Position += 1; // move everyone else
-                }
-            }
-        }
-
+        
+#endregion
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
-                    foreach(var p in _people)
+                    foreach (var p in _people)
                     {
                         p.Dispose();
                     }

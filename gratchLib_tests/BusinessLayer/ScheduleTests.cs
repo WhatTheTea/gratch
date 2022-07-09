@@ -24,9 +24,9 @@ namespace gratchLib_tests.BusinessLayer
             var EndDate = new DateTime(2022, 07, 31);
 
             var TestGroup = new Group("TestGroup");
-            TestGroup.AddPerson("TP1");
-            TestGroup.AddPerson("TP2");
-            TestGroup.AddPerson("TP3");
+            TestGroup.CreatePerson("TP1");
+            TestGroup.CreatePerson("TP2");
+            TestGroup.CreatePerson("TP3");
 
             var firstPerson = TestGroup.People.ElementAt(0);
 

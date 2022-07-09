@@ -15,9 +15,9 @@ namespace gratchLib_tests.Integration
             context.Database.EnsureCreated();
 
             TestGroup = new("Group1");
-            TestGroup.AddPerson("Pers1");
-            TestGroup.AddPerson("Pers2");
-            TestGroup.AddPerson("Pers3");
+            TestGroup.CreatePerson("Pers1");
+            TestGroup.CreatePerson("Pers2");
+            TestGroup.CreatePerson("Pers3");
             TestGroup.Calendar.AddDayOff(DayOfWeek.Monday);
             TestGroup.Calendar.AddDayOff(DayOfWeek.Tuesday);
             TestGroup.Calendar.AddHoliday(new Holiday(DateTime.Today, "Holiday1"));

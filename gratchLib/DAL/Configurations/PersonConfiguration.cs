@@ -9,7 +9,7 @@ namespace gratchLib.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {
-            builder.Ignore(p => p.IsActive);
+            builder.Ignore(p => p.IsArranged);
         }
     }
 }

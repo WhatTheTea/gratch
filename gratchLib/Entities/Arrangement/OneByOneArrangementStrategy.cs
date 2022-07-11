@@ -2,8 +2,6 @@ namespace gratchLib.Entities.Arrangement
 {
     public class OneByOneArrangementStrategy : BaseArrangementStrategy
     {
-        private IEnumerable<IArrangeable> arranged => arrangeables.Where(x => x.IsArranged)
-                                                                  .OrderBy(x => x.Position);
         public OneByOneArrangementStrategy(IEnumerable<IArrangeable> arrangeables) : base(arrangeables)
         {
 
@@ -13,9 +11,9 @@ namespace gratchLib.Entities.Arrangement
             base.Arrange(arrangeable);
             arrangeable.Position = (arranged?.Count() ?? 0) + 1;
         }
-        public override void ArrangeAt(IArrangeable arrangeable, int position)
+        public override void ArrangeTo(IArrangeable arrangeable, int position)
         {
-            base.ArrangeAt(arrangeable, position);
+            base.ArrangeTo(arrangeable, position);
 
             arrangeable.Position = position;
             ShiftPositionsAfter(arrangeable);
@@ -36,18 +34,23 @@ namespace gratchLib.Entities.Arrangement
                 arrangeablesToArrange.ElementAt(i).Position = i + 1;
             }
         }
-        protected void ShiftPositionsAfter(IArrangeable arrangeable)
+
+        public override void RemoveArrangement(IArrangeable arrangeable) 
+        {
+            base.RemoveArrangement(arrangeable);
+
+            ShiftPositionsAfter(arrangeable, EDirection.Left);
+            arrangeable.Position = 0;
+        }
+
+        protected void ShiftPositionsAfter(IArrangeable arrangeable, EDirection direction = EDirection.Right)
         {
             if (arranged.Contains(arrangeable))
             {
                 List<IArrangeable> arrangeablesToSkip = new() { arrangeable }; // Skip this arrangeable
 
                 var overlappingArrangeables = arranged.Where(a => a.Position == arrangeable.Position && a != arrangeable)
-                                                .Select(p =>
-                                                {
-                                                    p.Position += 1;
-                                                    return p;
-                                                });
+                                                      .Select(a => ShiftPosition(a, direction));
                 arrangeablesToSkip.AddRange(overlappingArrangeables);
 
                 // NOTE: arrangeable and arrangeablesToSkip may be in this collection too
@@ -59,6 +62,22 @@ namespace gratchLib.Entities.Arrangement
                     a.Position += 1; // move everyone else
                 }
             }
+        }
+        /// <returns> Shifted arrangeable </returns>
+        protected IArrangeable ShiftPosition(IArrangeable arrangeable, EDirection direction)
+        {
+            _ = direction switch
+                {
+                    EDirection.Right => arrangeable.Position += 1,
+                    EDirection.Left => arrangeable.Position -= 1,
+                    _ => throw new ArgumentOutOfRangeException(nameof(direction))
+                };
+            return arrangeable;
+        }
+        protected enum EDirection
+        {
+            Right,
+            Left
         }
     }
 }

@@ -40,8 +40,8 @@ namespace gratchLib_tests.BusinessLayer
                 if(p == null) continue;
                 group.AddPerson(p);
             }
-
-            group.ShiftPositionsAfter(p1);
+            // TODO: use ArrangementStrategy
+            //group.ShiftPositionsAfter(p1);
 
             Assert.True(p1.Position == 1);
             Assert.True(p2?.Position == 3 || p2 == null);

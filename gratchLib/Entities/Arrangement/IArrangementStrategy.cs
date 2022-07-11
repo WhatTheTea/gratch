@@ -4,12 +4,7 @@ namespace gratchLib.Entities.Arrangement
     {
         void ArrangeAll(EArrangementMode mode = EArrangementMode.All);
         void Arrange(IArrangeable arrangeable);
-        void ArrangeAt(IArrangeable arrangeable, int position);
-    }
-
-    public enum EArrangementMode
-    {
-        All,
-        Arranged
+        void ArrangeTo(IArrangeable arrangeable, int position);
+        void RemoveArrangement(IArrangeable arrangeable);
     }
 }

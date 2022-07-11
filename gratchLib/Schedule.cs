@@ -19,7 +19,7 @@ namespace gratchLib
             BuildSchedule();
         }
 
-        protected void BuildSchedule()
+        public Schedule BuildSchedule()
         {
             for (int i = 0, j = 0; i < Period.DaysSpan; i++, j++)
             {
@@ -31,6 +31,8 @@ namespace gratchLib
                 var personToAssign = Group.ActivePeople.ElementAt(j);
                 _schedule.Add(dateToAssign, personToAssign);
             }
+
+            return this;
         }
         /// <summary>
         /// Returns <see cref="Person.Position"/> for <see cref="Period"/> first date

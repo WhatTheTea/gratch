@@ -1,10 +1,11 @@
 namespace gratchLib.Entities.Arrangement
 {
-    public interface IArrangementStrategy
+    public interface IArrangement
     {
         void ArrangeAll(EArrangementMode mode = EArrangementMode.All);
         void Arrange(IArrangeable arrangeable);
         void ArrangeTo(IArrangeable arrangeable, int position);
         void RemoveArrangement(IArrangeable arrangeable);
+        void SetContext(IArrangeableGroup context);
     }
 }

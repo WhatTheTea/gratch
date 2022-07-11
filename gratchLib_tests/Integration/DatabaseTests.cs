@@ -1,5 +1,6 @@
 using gratchLib.DAL;
 using gratchLib.Entities;
+using gratchLib.Entities.Arrangement;
 
 namespace gratchLib_tests.Integration
 {
@@ -14,7 +15,7 @@ namespace gratchLib_tests.Integration
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-            TestGroup = new("Group1");
+            TestGroup = new("Group1", new OneByOneArrangement());
             TestGroup.CreatePerson("Pers1");
             TestGroup.CreatePerson("Pers2");
             TestGroup.CreatePerson("Pers3");

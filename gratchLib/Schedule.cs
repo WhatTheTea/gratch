@@ -26,9 +26,9 @@ namespace gratchLib
                 var dateToAssign = Period.ElementAt(i);
 
                 if (Group.Calendar.IsHoliday(dateToAssign)) continue;   // skip if holiday
-                if (j >= Group.ActivePeople.Count()) j = 0;              // first pos on overflow
+                if (j >= Group.ArrangedPeople.Count()) j = 0;              // first pos on overflow
 
-                var personToAssign = Group.ActivePeople.ElementAt(j);
+                var personToAssign = Group.ArrangedPeople.ElementAt(j);
                 _schedule.Add(dateToAssign, personToAssign);
             }
 

@@ -1,14 +1,23 @@
 namespace gratchLib.Entities.Arrangement
 {
-    public class BaseArrangementStrategy : IArrangementStrategy
+    public class BaseArrangement : IArrangement
     {
-        protected IEnumerable<IArrangeable> arrangeables;
-        protected IEnumerable<IArrangeable> arranged => arrangeables.Where(x => x.IsArranged)
-                                                                    .OrderBy(x => x.Position);
+        protected IArrangeableGroup? context;
 
-        public BaseArrangementStrategy(IEnumerable<IArrangeable> arrangeables)
+        protected IArrangeableGroup? Context => context;
+        public BaseArrangement()
         {
-            this.arrangeables = arrangeables;
+
+        }
+
+        public BaseArrangement(IArrangeableGroup context)
+        {
+            SetContext(context);
+        }
+
+        public virtual void SetContext(IArrangeableGroup context)
+        {
+            this.context = context;
         }
 
         public virtual void Arrange(IArrangeable arrangeable)

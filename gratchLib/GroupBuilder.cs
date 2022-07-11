@@ -4,6 +4,6 @@ namespace gratchLib
 {
     public class GroupBuilder
     {
-        protected Group group;
+        //protected Group group;
     }
 }

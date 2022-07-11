@@ -46,7 +46,7 @@ namespace gratchLib.Entities
         {
             try
             {
-                var isPosInRange = position >= 0 && position <= Group.ActivePeople.Count() + 1;
+                var isPosInRange = position >= 0 && position <= Group.ArrangedPeople.Count() + 1;
                 _ = !isPosInRange ? throw new ArgumentOutOfRangeException(nameof(position)) : true;
 
                 _position = position;

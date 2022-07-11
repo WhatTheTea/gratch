@@ -1,4 +1,5 @@
 ﻿using gratchLib.Entities;
+using gratchLib.Entities.Arrangement;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace gratchLib.DAL.Configurations
@@ -15,8 +17,11 @@ namespace gratchLib.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Group> builder)
         {
-            builder.Ignore(p => p.ActivePeople);
+            //var serializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.General);
 
+            builder.Ignore(p => p.ArrangedPeople);
+
+            builder.Property(p => p.Arrangement);
         }
 
     }

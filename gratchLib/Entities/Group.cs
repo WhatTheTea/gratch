@@ -11,11 +11,12 @@ using gratchLib.Entities.Arrangement;
 namespace gratchLib.Entities
 {
 
-    public class Group : IGroup, IDisposable
+    public class Group : IArrangeableGroup, IDisposable
     {
         private bool disposedValue;
-        protected List<Person> _people = new();
         protected string _name;
+        protected List<Person> _people = new();
+        protected IArrangement arrangement;
         protected Subject<(int id, string newname)> whenNameChanged = new();
 
         public int Id { get; set; }
@@ -25,26 +26,30 @@ namespace gratchLib.Entities
             set => Rename(value);
         }
         public IEnumerable<Person> People => _people;
-        /// <summary>
-        /// Readonly collection of <see cref="Person"/> with <see cref="Person.Position"/> bigger than 0 and ordered by ascending of <see cref="Person.Position"/>
-        /// </summary>
-        public IEnumerable<Person> ActivePeople => _people.Where(x => x.IsArranged)
-                                                          .OrderBy(x => x.Position);
+        public IEnumerable<Person> ArrangedPeople => _people.Where(x => x.IsArranged)
+                                                            .OrderBy(x => x.Position);
         public Calendar Calendar { get; set; }
         public IObservable<(int id, string newname)> WhenNameChanged => whenNameChanged;
 
-        public IArrangementStrategy ArrangementStrategy { get; set; }
-
-        public Group()
-        {
-            (_name, Calendar) = (string.Empty, new(this));
-            ArrangementStrategy = new BaseArrangementStrategy(People.Cast<IArrangeable>());
+        public IArrangement Arrangement 
+        { 
+            get => arrangement;
+            set 
+            {
+                arrangement = value;
+                arrangement.SetContext(this);
+                arrangement.ArrangeAll(EArrangementMode.Arranged);
+            }
         }
-        public Group(string name) : this()
-        {
-            _name = name;
-        }
+        IEnumerable<IArrangeable> IArrangeableGroup.Arrangeables => People;
+        IEnumerable<IArrangeable> IArrangeableGroup.Arranged => ArrangedPeople;
 
+        public Group(string name, IArrangement? arrangement = null)
+        {
+            (_name, Calendar) = (name, new(this));
+            this.arrangement = arrangement ?? new BaseArrangement(this);
+            arrangement.SetContext(this);
+        }
         public virtual void Rename(string name)
         {
             try
@@ -72,12 +77,12 @@ namespace gratchLib.Entities
             if (person.Group == this) return;
             
             person.Group = this;
-            ArrangementStrategy.Arrange(person);
+            Arrangement.Arrange(person);
             _people.Add(person);
         }
 
         public virtual void RemovePerson(Person person) {
-            ArrangementStrategy.RemoveArrangement(person);
+            Arrangement.RemoveArrangement(person);
             _people.Remove(person);
         }
             

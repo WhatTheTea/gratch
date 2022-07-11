@@ -70,35 +70,19 @@ namespace gratchLib.Entities
         {
             _ = person ?? throw new ArgumentNullException(nameof(person));
             if (person.Group == this) return;
+            
             person.Group = this;
             ArrangementStrategy.Arrange(person);
             _people.Add(person);
         }
 
-        public virtual void RemovePerson(Person person) => _people.Remove(person);
-        public virtual bool Contains(string name) => People.Any(p => p.Name == name);
-#region move
-        // TODO: Move to strategy
-        /// <summary>
-        /// Makes people positions go from 1 to <see cref="ActivePeople"/>.Count()
-        /// </summary>
-        public virtual void NormalizePositions()
-        {
-            // Select all people with positions in ascending order
-            var activepeople = ActivePeople;
-            // remove gaps in positions
-            for (int i = 0; i < activepeople.Count(); i++)
-            {
-                activepeople.ElementAt(i).Position = i + 1;
-            }
-
+        public virtual void RemovePerson(Person person) {
+            ArrangementStrategy.RemoveArrangement(person);
+            _people.Remove(person);
         }
-        /// <summary>
-        /// Adds 1 to all people's positions after <paramref name="person"/>
-        /// </summary>
-        /// <param name="person"></param>
-        
-#endregion
+            
+        public virtual bool Contains(string name) => People.Any(p => p.Name == name);
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)

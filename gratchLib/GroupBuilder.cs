@@ -6,7 +6,7 @@ namespace gratchLib
     public class GroupBuilder
     {
         protected Group result = new(string.Empty);
-        public bool IsComplete => string.IsNullOrWhiteSpace(result?.Name);
+        public bool IsComplete => !string.IsNullOrWhiteSpace(result?.Name);
 
         public GroupBuilder Reset()
         {
@@ -33,11 +33,11 @@ namespace gratchLib
                 };
             return this;
         }
+    }
 
-        public enum EArrangementType 
+    public enum EArrangementType 
         {
             DontArrange,
             OneByOne
         }
-    }
 }

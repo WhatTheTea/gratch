@@ -48,7 +48,7 @@ namespace gratchLib.Entities
         {
             (_name, Calendar) = (name, new(this));
             this.arrangement = arrangement ?? new BaseArrangement(this);
-            arrangement.SetContext(this);
+            this.arrangement.SetContext(this);
         }
         public virtual void Rename(string name)
         {

@@ -59,7 +59,7 @@ namespace gratchLib.Entities.Arrangement
                 foreach (var a in arrangeablesFrom)
                 {
                     if (arrangeablesToSkip.Contains(a)) continue; // skip
-                    a.Position += 1; // move everyone else
+                    ShiftPosition(a, direction); // move everyone else
                 }
             }
         }

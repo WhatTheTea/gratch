@@ -32,7 +32,9 @@ namespace gratchLib_tests.BusinessLayer
         [MemberData(nameof(ShiftPositionsAfterData))]
         public void ShiftPositionsAfter(Person? p1, Person? p2, Person? p3)
         {
-            var group = new Group("TestGroup");
+            var group = new GroupBuilder().Name("TestGroup")
+                                          .ArrangementType(EArrangementType.OneByOne)
+                                          .GetResult();
             var people = new List<Person?>() { p1, p2, p3 };
 
             foreach(var p in people)
@@ -40,12 +42,18 @@ namespace gratchLib_tests.BusinessLayer
                 if(p == null) continue;
                 group.AddPerson(p);
             }
-            // TODO: use ArrangementStrategy
-            //group.ShiftPositionsAfter(p1);
+            
+            group.Arrangement.RemoveArrangement(p1);
+
+            Assert.True(p1.Position == 0);
+            Assert.True(p2?.Position == 1 || p2 == null);
+            Assert.True(p3?.Position == 2 || p3 == null);
+
+            group.Arrangement.ArrangeTo(p1, 1);
 
             Assert.True(p1.Position == 1);
-            Assert.True(p2?.Position == 3 || p2 == null);
-            Assert.True(p3?.Position == 4 || p3 == null);
+            Assert.True(p2?.Position == 2 || p2 == null);
+            Assert.True(p3?.Position == 3 || p3 == null);
         }
     }
 

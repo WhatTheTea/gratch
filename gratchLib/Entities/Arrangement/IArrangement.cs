@@ -1,3 +1,5 @@
+using gratchLib.Entities.Arrangement;
+
 namespace gratchLib.Entities.Arrangement
 {
     public interface IArrangement
@@ -7,5 +9,11 @@ namespace gratchLib.Entities.Arrangement
         void ArrangeTo(IArrangeable arrangeable, int position);
         void RemoveArrangement(IArrangeable arrangeable);
         void SetContext(IArrangeableGroup context);
+    }
+
+    public enum EArrangementMode
+    {
+        All,
+        Arranged
     }
 }

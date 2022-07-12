@@ -5,8 +5,8 @@ namespace gratchLib
     public readonly struct DateTimeRange : IEnumerable<DateTime>
     {
         private readonly List<DateTime> range = new();
-        public DateTime Start { get; }
-        public DateTime End { get; }
+        public readonly DateTime Start { get; init; }
+        public readonly DateTime End { get; init; }
         public int DaysSpan => (int)Math.Round((End.Date - Start.Date).TotalDays) + 1;
         public DateTimeRange(DateTime start, DateTime end)
         {

@@ -21,8 +21,21 @@ namespace gratchLib.DAL.Configurations
 
             builder.Ignore(p => p.ArrangedPeople);
 
-            builder.Property(p => p.Arrangement);
+            builder.Property(p => p.Arrangement)
+                   .HasConversion(
+                        p => p.GetType().Name,
+                        p => ArrangementFromString(p)
+                   );
         }
 
+        private IArrangement ArrangementFromString(string @string)
+        {
+            return @string switch
+            {
+                nameof(BaseArrangement) => new BaseArrangement(),
+                nameof(OneByOneArrangement) => new OneByOneArrangement(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
     }
 }

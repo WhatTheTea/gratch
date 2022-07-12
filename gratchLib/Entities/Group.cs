@@ -38,7 +38,7 @@ namespace gratchLib.Entities
             {
                 arrangement = value;
                 arrangement.SetContext(this);
-                arrangement.ArrangeAll(EArrangementMode.Arranged);
+                //arrangement.ArrangeAll(EArrangementMode.Arranged);
             }
         }
         IEnumerable<IArrangeable> IArrangeableGroup.Arrangeables => People;

@@ -1,9 +1,9 @@
-﻿using gratchLib.Entities;
+﻿using gratch.Library;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace gratchLib.DAL.Configurations
+namespace gratch.Library.DAL.Configurations
 {
     internal class PersonConfiguration : IEntityTypeConfiguration<Person>
     {

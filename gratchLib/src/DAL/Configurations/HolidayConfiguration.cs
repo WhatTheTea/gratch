@@ -1,15 +1,9 @@
-﻿using gratchLib.Entities;
+﻿using gratch.Library;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace gratchLib.DAL.Configurations
+namespace gratch.Library.DAL.Configurations
 {
     internal class HolidayConfiguration : IEntityTypeConfiguration<Holiday>
     {

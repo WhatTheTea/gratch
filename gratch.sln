@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratchWebApp", "gratchWebApp\gratchWebApp.csproj", "{C0F6E1B5-9BB1-4939-A750-E1F86D738327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratchWebAPI", "gratchWebAPI\gratchWebAPI.csproj", "{D8CBD5CD-EB3B-4509-84E6-239639C25656}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratchWebApi", "gratchWebApi\gratchWebApi.csproj", "{D834F464-1903-41B8-9D39-82F3C5C19141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,10 @@ Global
 		{C0F6E1B5-9BB1-4939-A750-E1F86D738327}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F6E1B5-9BB1-4939-A750-E1F86D738327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F6E1B5-9BB1-4939-A750-E1F86D738327}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8CBD5CD-EB3B-4509-84E6-239639C25656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8CBD5CD-EB3B-4509-84E6-239639C25656}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8CBD5CD-EB3B-4509-84E6-239639C25656}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8CBD5CD-EB3B-4509-84E6-239639C25656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D834F464-1903-41B8-9D39-82F3C5C19141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D834F464-1903-41B8-9D39-82F3C5C19141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D834F464-1903-41B8-9D39-82F3C5C19141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D834F464-1903-41B8-9D39-82F3C5C19141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

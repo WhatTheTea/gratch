@@ -1,4 +1,4 @@
-namespace gratchLib.Entities.Arrangement
+namespace gratch.Library.Arrangement
 {
     public interface IArrangeableGroup
     {

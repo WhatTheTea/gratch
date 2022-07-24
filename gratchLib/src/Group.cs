@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reactive.Subjects;
 
-using gratchLib.Entities.Arrangement;
+using gratch.Library.Arrangement;
 
-namespace gratchLib.Entities
+namespace gratch.Library
 {
 
     public class Group : IArrangeableGroup, IDisposable

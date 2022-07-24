@@ -1,8 +1,8 @@
-﻿using gratchLib.Entities;
+﻿using gratch.Library;
 
 using Microsoft.EntityFrameworkCore;
 
-namespace gratchLib.DAL
+namespace gratch.Library.DAL
 {
     public class BaseContext : DbContext
     {

@@ -1,6 +1,6 @@
 ﻿using System.Reactive.Subjects;
 
-namespace gratchLib.Entities
+namespace gratch.Library
 {
     public class Person : IDisposable, Arrangement.IArrangeable
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace gratchLib
+namespace gratch.Library
 {
     public readonly struct DateTimeRange : IEnumerable<DateTime>
     {

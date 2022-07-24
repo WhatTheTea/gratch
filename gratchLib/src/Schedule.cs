@@ -1,9 +1,6 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 
-using gratchLib.Entities;
-
-namespace gratchLib
+namespace gratch.Library
 {
     public class Schedule : IEnumerable<KeyValuePair<DateTime, Person>>
     {

@@ -1,11 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+Action<DbContextOptionsBuilder?> PostgreSQLBuilder = (DbContextOptionsBuilder? dbbuilder) => 
+    dbbuilder.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection"));
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<gratch.Api.Data.ApiDbContext>(PostgreSQLBuilder);
 
 var app = builder.Build();
 

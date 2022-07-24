@@ -1,18 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using gratchLib.Entities;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
-namespace gratchLib.DAL
+namespace gratch.Library.DAL
 {
     public class SqliteContext : BaseContext
     {
+        
+        // TODO: Move to unit tests project 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder();

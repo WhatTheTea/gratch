@@ -1,11 +1,10 @@
-﻿using gratchLib.Entities;
-
+﻿using gratch.Library;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using System.Text.Json;
 
-namespace gratchLib.DAL.Configurations
+namespace gratch.Library.DAL.Configurations
 {
     internal class CalendarConfiguration : IEntityTypeConfiguration<Calendar>
     {

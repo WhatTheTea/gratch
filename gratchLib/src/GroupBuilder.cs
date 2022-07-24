@@ -1,7 +1,6 @@
-using gratchLib.Entities;
-using gratchLib.Entities.Arrangement;
+using gratch.Library.Arrangement;
 
-namespace gratchLib
+namespace gratch.Library
 {
     public class GroupBuilder
     {

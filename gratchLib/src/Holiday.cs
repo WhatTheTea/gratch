@@ -1,4 +1,4 @@
-﻿namespace gratchLib.Entities
+﻿namespace gratch.Library
 {
     public class Holiday
     {

@@ -4,12 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace gratchLib.DAL
 {
-    public abstract class BaseContext : DbContext
+    public class BaseContext : DbContext
     {
         public virtual DbSet<Group>? Groups { get; set; }
         public virtual DbSet<Person>? People { get; set; }
         public virtual DbSet<Calendar>? Calendars { get; set; }
         public virtual DbSet<Holiday>? Holidays { get; set; }
+
+        public BaseContext() { }
+
+        public BaseContext(DbContextOptions options) : base(options)
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

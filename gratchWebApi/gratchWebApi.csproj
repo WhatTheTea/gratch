@@ -19,8 +19,4 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\gratchLib\gratchLib.csproj" />
-  </ItemGroup>
-
 </Project>

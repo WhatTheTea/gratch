@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using gratch.Library;
+using gratch.Api.Data;
 
 namespace gratch.Api.Controllers
 {
         public class GroupController : ApiControllerBase
         {
-            public GroupController(gratch.Api.Data.ApiDbContext dbContext) : base(dbContext)
+            public GroupController(ApiDbContext dbContext) : base(dbContext)
             {
 
             }
 
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<Group>?>> GetAll()
+            public async Task<ActionResult<IEnumerable<GroupModel>?>> GetAll()
             {
                 try
                 {
@@ -31,7 +31,7 @@ namespace gratch.Api.Controllers
             }
             
             [HttpGet("{id}")]
-            public async Task<ActionResult<Group?>> GetById(int id)
+            public async Task<ActionResult<GroupModel?>> GetById(int id)
             {
                 try
                 {
@@ -49,7 +49,7 @@ namespace gratch.Api.Controllers
             }
 
             [HttpPatch("{id}")]
-            public async Task<ActionResult> Update(int id, [FromBody] Group group)
+            public async Task<ActionResult> Update(int id, [FromBody] GroupModel group)
             {
                 try
                 {
@@ -64,7 +64,7 @@ namespace gratch.Api.Controllers
                 }
             }
             [HttpPost]
-            public async Task<ActionResult> Create([FromBody] Group group)
+            public async Task<ActionResult> Create([FromBody] GroupModel group)
             {
                 try
                 {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 Action<DbContextOptionsBuilder?> PostgreSQLBuilder = (DbContextOptionsBuilder? dbbuilder) => 
-    dbbuilder.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQLConnection"));
+    dbbuilder.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"));
 
 // Add services to the container.
 

@@ -1,11 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using gratch.Library;
 
 namespace gratch.Api.Data
 {
-    public class ApiDbContext : DbContext 
+    public class ApiDbContext : gratch.Library.DAL.BaseContext 
     {
-        public DbSet<Dummy> Dummies { get; set; }
-
 #pragma warning disable CS8618
         public ApiDbContext(DbContextOptions options) : base(options)
         {

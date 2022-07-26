@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace gratch.Api.Controllers
 {
     using gratch.Api.Data;
@@ -19,7 +21,7 @@ namespace gratch.Api.Controllers
         {
             try
             {
-                IEnumerable<PersonModel>? query = _dbContext.People;
+                IEnumerable<PersonModel>? query = _dbContext.People.Include(x => x.Group);
                 return query.Any() ? Ok(query) : NoContent();
             }
             catch (System.Exception)
@@ -33,7 +35,8 @@ namespace gratch.Api.Controllers
         {
             try
             {
-                var query = await _dbContext.People.FindAsync(id);
+                var query = await _dbContext.People.Include(x => x.Group)
+                                                   .FirstOrDefaultAsync(x => x.Id == id);
                 return query == null ? NotFound($"Person with id: {id} is not found") : Ok(query);
             }
             catch (System.Exception)
@@ -71,7 +74,7 @@ namespace gratch.Api.Controllers
                 }
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(string id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
             try
                 {

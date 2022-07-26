@@ -21,7 +21,7 @@ namespace gratch.Api.Controllers
                                                        .Include(x => x.Calendar)
                                                        .ThenInclude(x => x.Holidays)
                                                        .ToListAsync();
-                    return query == null ? NoContent() : Ok(query);
+                    return query.Any() ? Ok(query) : NoContent();
                 }
                 catch (System.Exception)
                 {
@@ -38,7 +38,7 @@ namespace gratch.Api.Controllers
                                                        .Include(x => x.Calendar)
                                                        .ThenInclude(x => x.Holidays)
                                                        .FirstOrDefaultAsync(x => x.Id == id);
-                    return query == null ? NoContent() : Ok(query);
+                    return query == null ? NotFound($"Group with id {id} is not found") : Ok(query);
                 }
                 catch (System.Exception)
                 {

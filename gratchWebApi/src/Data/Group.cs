@@ -3,7 +3,6 @@ namespace gratch.Api.Data
     public class GroupModel
     {
         public int Id { get; set; }
-        public int CalendarId { get; set; }
         public CalendarModel Calendar { get; set; } = new();
         public List<PersonModel>? People { get; set; } = new();
         public string Name { get; set; }

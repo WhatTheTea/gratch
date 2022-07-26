@@ -2,6 +2,7 @@ namespace gratch.Api.Controllers
 {
     using gratch.Api.Data;
     using Microsoft.AspNetCore.Mvc;
+
     public class PeopleController : ApiControllerBase
     {
         public PeopleController(ApiDbContext dbContext) : base(dbContext)
@@ -14,13 +15,12 @@ namespace gratch.Api.Controllers
         {
             return await Task.Run(() => GetAll());
         }
-
-        public ActionResult<IEnumerable<PersonModel>> GetAll()
+        private ActionResult<IEnumerable<PersonModel>> GetAll()
         {
             try
             {
                 IEnumerable<PersonModel>? query = _dbContext.People;
-                return query == null ? NoContent() : Ok(query);
+                return query.Any() ? Ok(query) : NoContent();
             }
             catch (System.Exception)
             {
@@ -34,7 +34,7 @@ namespace gratch.Api.Controllers
             try
             {
                 var query = await _dbContext.People.FindAsync(id);
-                return query == null ? NoContent() : Ok(query);
+                return query == null ? NotFound($"Person with id: {id} is not found") : Ok(query);
             }
             catch (System.Exception)
             {

@@ -21,8 +21,7 @@ namespace gratch.Api.Controllers
                                                        .Include(x => x.Calendar)
                                                        .ThenInclude(x => x.Holidays)
                                                        .ToListAsync();
-                    ActionResult result = new JsonResult(query);
-                    return result ?? NoContent();
+                    return query == null ? NoContent() : Ok(query);
                 }
                 catch (System.Exception)
                 {
@@ -39,8 +38,7 @@ namespace gratch.Api.Controllers
                                                        .Include(x => x.Calendar)
                                                        .ThenInclude(x => x.Holidays)
                                                        .FirstOrDefaultAsync(x => x.Id == id);
-                    ActionResult result = new JsonResult(query);
-                    return result ?? NoContent();
+                    return query == null ? NoContent() : Ok(query);
                 }
                 catch (System.Exception)
                 {
@@ -55,8 +53,8 @@ namespace gratch.Api.Controllers
                 {
                     if(id != group.Id) return BadRequest("Ids mismatch");
                     var query = _dbContext.Groups.Update(group);
-                    await _dbContext.SaveChangesAsync();
-                    return Ok();
+                    int rowsupdated = await _dbContext.SaveChangesAsync();
+                    return Ok("Success! Rows updated: " + rowsupdated);
                 }
                 catch (System.Exception)
                 {
@@ -69,8 +67,8 @@ namespace gratch.Api.Controllers
                 try
                 {
                     _dbContext.Groups.Add(group);
-                    await _dbContext.SaveChangesAsync();
-                    return Ok();
+                    int rowsadded = await _dbContext.SaveChangesAsync();
+                    return Ok("Success! Rows added: " + rowsadded);
                 }
                 catch (System.Exception)
                 {
@@ -86,8 +84,8 @@ namespace gratch.Api.Controllers
                     var itemToDelete = await _dbContext.Groups.FirstOrDefaultAsync(x => x.Id == id);
                     if(itemToDelete == null) return NoContent();
                     _dbContext.Remove(itemToDelete);
-                    await _dbContext.SaveChangesAsync();
-                    return Ok();
+                    int rowsdeleted = await _dbContext.SaveChangesAsync();
+                    return Ok("Success! Rows deleted: " + rowsdeleted);
                 }
                 catch (System.Exception)
                 {

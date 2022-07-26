@@ -36,6 +36,26 @@
                 "${workspaceFolder}/gratchWebApi.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "HerokuAdd",
+            "type": "shell",
+            "command": "git",
+            "args": ["add", "${workspaceFolder}"]
+        },
+        {
+            "label": "HerokuCommit",
+            "type": "shell",
+            "command": "git",
+            "args": ["commit", "-am", "${relativeFile}"]
+        },
+        {
+            "label": "HerokuDeploy",
+            "type": "shell",
+            "command": "git",
+            "args": ["push", "heroku", "master"],
+            "dependsOrder": "sequence",
+            "dependsOn": ["HerokuAdd", "HerokuCommit"]
         }
     ]
 }

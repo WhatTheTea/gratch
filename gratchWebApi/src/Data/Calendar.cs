@@ -1,10 +1,11 @@
 namespace gratch.Api.Data
 {
-    public record CalendarModel(
-        int Id,
-        int GroupId,
-        List<DayOfWeek> Weekend,
-        List<HolidayModel> Holidays,
-        DateTime StartDate  
-        );
+    public class CalendarModel
+    {
+        public int Id { get; set; }
+        public int GroupId { get; set; }
+        public List<DayOfWeek>? Weekend { get; set; } = new();
+        public List<HolidayModel>? Holidays { get; set; } = new();
+        public DateTime StartDate { get; set; } 
+    }
 }

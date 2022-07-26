@@ -1,11 +1,12 @@
 namespace gratch.Api.Data
 {
-    public record GroupModel(
-        int Id,
-        int CalendarId,
-        CalendarModel Calendar,
-        List<PersonModel> People,
-        string Name,
-        string Arrangement
-        );
+    public class GroupModel
+    {
+        public int Id { get; set; }
+        public int CalendarId { get; set; }
+        public CalendarModel Calendar { get; set; } = new();
+        public List<PersonModel>? People { get; set; } = new();
+        public string Name { get; set; }
+        public string Arrangement { get; set; }
+    }
 }

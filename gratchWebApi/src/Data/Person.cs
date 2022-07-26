@@ -1,9 +1,10 @@
 namespace gratch.Api.Data
 {
-    public record PersonModel(
-        int Id,
-        int GroupId,
-        GroupModel Group,
-        int Position 
-        );
+    public class PersonModel
+    {
+        public int Id { get; set; }
+        public int GroupId { get; set; }
+        public GroupModel? Group { get; set; }
+        public int Position { get; set; }
+    }
 }

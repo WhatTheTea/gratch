@@ -14,7 +14,7 @@ public enum ArrangementKind
 /// <remarks>
 /// Arrangements expressed as pairs of shift and person array to support many on one shift type.
 /// </remarks>
-[DebuggerDisplay($"{nameof(Title)} : {nameof(PeopleArrangement)}")]
+[DebuggerDisplay("{Title) : {PeopleArrangement}")]
 public class Arrangement(string title = "")
 {
     public int Id { get; set; }

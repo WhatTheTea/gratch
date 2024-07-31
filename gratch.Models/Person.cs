@@ -1,4 +1,4 @@
-﻿namespace gratch.Models;
+﻿namespace WhatTheTea.Gratch.Models;
 
 public class Person
 {

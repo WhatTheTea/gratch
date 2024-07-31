@@ -22,7 +22,12 @@ public class BasicArranger : IArranger
                                                                         DateTimeOffset start,
                                                                         DateTimeOffset end)
     {
-        var result = new Dictionary<DateTimeOffset, Person[]>();
+        if (arrangement.PeopleArrangement.Count < 1
+            || arrangement.Kind != Kind)
+        {
+            return [];
+        }
+
         var daysInTicks = end.Ticks - start.Ticks;
         int daysCount = (int)(daysInTicks / TimeSpan.TicksPerDay);
 

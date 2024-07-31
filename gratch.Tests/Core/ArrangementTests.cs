@@ -11,11 +11,14 @@ public class ArrangementTests
     public void PeopleAreArrangedOneByOne()
     {
         var timeProvider = new FakeTimeProvider(new DateTime(2024, 07, 01));
+        var now = timeProvider.GetLocalNow();
         var people = Enumerable.Range(1, 30).Select(x => new Person(x.ToString()));
-        IArranger arranger = new BasicArranger(timeProvider);
+        var arranger = new BasicArranger();
 
         var arrangement = arranger.ArrangeMany(people);
-        var timeArrangement = arranger.GenerateTimeArrangement(arrangement);
+        var timeArrangement = arranger.GenerateTimeArrangement(arrangement,
+                                                               now,
+                                                               now.AddDays(30));
 
         timeArrangement.Select(x => x.Value[0]).Should().BeEquivalentTo(people);
     }

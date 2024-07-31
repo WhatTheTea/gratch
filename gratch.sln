@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatTheTea.Gratch.Core", "g
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatTheTea.Gratch.App", "gratch.App\WhatTheTea.Gratch.App.csproj", "{813F210D-BAFC-4672-ABFD-180D90C8DAE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatTheTea.Gratch.ViewModels", "gratch.ViewModels\WhatTheTea.Gratch.ViewModels.csproj", "{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,22 @@ Global
 		{813F210D-BAFC-4672-ABFD-180D90C8DAE7}.Release|x86.ActiveCfg = Release|x86
 		{813F210D-BAFC-4672-ABFD-180D90C8DAE7}.Release|x86.Build.0 = Release|x86
 		{813F210D-BAFC-4672-ABFD-180D90C8DAE7}.Release|x86.Deploy.0 = Release|x86
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|x64.Build.0 = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Debug|x86.Build.0 = Debug|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|ARM64.Build.0 = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|x64.ActiveCfg = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|x64.Build.0 = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|x86.ActiveCfg = Release|Any CPU
+		{284CE3B5-A0A8-4764-8A13-9E56D37B0A60}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

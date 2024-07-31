@@ -20,7 +20,21 @@ public class BasicArranger : IArranger
 
     public Dictionary<DateTimeOffset, Person[]> GenerateTimeArrangement(Arrangement arrangement,
                                                                         DateTimeOffset start,
-                                                                        DateTimeOffset end) => throw new NotImplementedException();
+                                                                        DateTimeOffset end)
+    {
+        var result = new Dictionary<DateTimeOffset, Person[]>();
+        var daysInTicks = end.Ticks - start.Ticks;
+        int daysCount = (int)(daysInTicks / TimeSpan.TicksPerDay);
+
+        return Enumerable.Range(0, daysCount)
+                         .Select(x => start.AddDays(x)) // Get days from start to end
+                         .Chunk(arrangement.PeopleArrangement.Count) // For each day assign person/people
+                         .SelectMany(days =>
+                            days.Select((day, i) =>
+                                KeyValuePair.Create(day, arrangement.PeopleArrangement[i])
+                            )
+                         ).ToDictionary();
+    }
     private static Dictionary<int, Person[]> GenerateArrangement(IEnumerable<Person> people) =>
         people.Select((person, i) => KeyValuePair.Create(i, new Person[] { person }))
               .ToDictionary();

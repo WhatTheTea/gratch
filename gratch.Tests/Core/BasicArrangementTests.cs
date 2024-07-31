@@ -32,7 +32,7 @@ public class BasicArrangementTests
     [Theory]
     [InlineData(0,31)] // No people
     [InlineData(10, 0)] // No days
-    public void ExtremeCases(int peopleCount, int daysCount)
+    public void PeopleAreNotArrangedIfArgumentsNotValid(int peopleCount, int daysCount)
     {
         var timeProvider = new FakeTimeProvider(new DateTime(2024, 07, 01));
         var now = timeProvider.GetLocalNow();

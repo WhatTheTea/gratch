@@ -1,16 +1,14 @@
 ﻿namespace WhatTheTea.Gratch.Models;
-public class Arrangement
+
+public enum ArrangementKind
+{
+    Basic
+}
+
+public class Arrangement(string title)
 {
     public int Id { get; set; }
-    public string Title { get; set; }
-    public List<Person> PeopleArrangement { get; set; } = [];
-
-    public Arrangement(string title)
-    {
-        this.Title = title;
-    }
-
-    public Dictionary<DateTimeOffset, Person> GenerateForPeriod(DateTimeOffset start, DateTimeOffset end)
-    {
-    }
+    public string Title { get; set; } = title;
+    public Dictionary<int, Person[]> PeopleArrangement { get; set; } = [];
+    public ArrangementKind Kind { get; set; }
 }

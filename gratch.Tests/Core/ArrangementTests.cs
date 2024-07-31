@@ -12,10 +12,11 @@ public class ArrangementTests
     {
         var timeProvider = new FakeTimeProvider(new DateTime(2024, 07, 01));
         var people = Enumerable.Range(1, 30).Select(x => new Person(x.ToString()));
-        var arranger = new BasicArranger(timeProvider);
+        IArranger arranger = new BasicArranger(timeProvider);
 
-        arranger.ArrangeMany(people);
+        var arrangement = arranger.ArrangeMany(people);
+        var timeArrangement = arranger.GenerateTimeArrangement(arrangement);
 
-        people.Should().Satisfy(x => x.Name == x.Shift.Day.ToString());
+        timeArrangement.Select(x => x.Value[0]).Should().BeEquivalentTo(people);
     }
 }

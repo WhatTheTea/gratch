@@ -2,7 +2,11 @@
 
 namespace WhatTheTea.Gratch.Core;
 
+/// <summary>
+/// Provides mechanism to assign
+/// </summary>
 public interface IArranger
 {
-    void ArrangeMany(IEnumerable<Person> people);
+    Arrangement ArrangeMany(IEnumerable<Person> people);
+    Dictionary<DateTimeOffset, Person[]> GenerateTimeArrangement(Arrangement arrangement);
 }

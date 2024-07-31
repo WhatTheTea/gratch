@@ -5,7 +5,7 @@ using WhatTheTea.Gratch.Models;
 using WhatTheTea.Gratch.Core;
 
 namespace WhatTheTea.Gratch.Tests.Core;
-public class ArrangementTests
+public class BasicArrangementTests
 {
     [Fact]
     public void PeopleAreArrangedOneByOne()

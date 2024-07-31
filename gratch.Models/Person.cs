@@ -1,8 +1,11 @@
-﻿namespace WhatTheTea.Gratch.Models;
+﻿using System.Diagnostics;
+
+namespace WhatTheTea.Gratch.Models;
 
 /// <summary>
 /// Class to represent person, which can be assigned to specific date 
 /// </summary>
+[DebuggerDisplay($"{nameof(Id)} : {nameof(Name)}")]
 public class Person(string name)
 {
     public int Id { get; protected set; }

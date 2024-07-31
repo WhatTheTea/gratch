@@ -1,4 +1,6 @@
-﻿namespace WhatTheTea.Gratch.Models;
+﻿using System.Diagnostics;
+
+namespace WhatTheTea.Gratch.Models;
 
 public enum ArrangementKind
 {
@@ -12,7 +14,7 @@ public enum ArrangementKind
 /// <remarks>
 /// Arrangements expressed as pairs of shift and person array to support many on one shift type.
 /// </remarks>
-/// <param name="title"></param>
+[DebuggerDisplay($"{nameof(Title)} : {nameof(PeopleArrangement)}")]
 public class Arrangement(string title = "")
 {
     public int Id { get; set; }

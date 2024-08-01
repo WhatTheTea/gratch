@@ -21,4 +21,6 @@ public class Arrangement(string title = "")
     public string Title { get; set; } = title;
     public Dictionary<int, Person[]> PeopleArrangement { get; set; } = [];
     public ArrangementKind Kind { get; set; }
+
+    public Arrangement() : this(string.Empty) { }
 }

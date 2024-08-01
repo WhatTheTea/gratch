@@ -50,6 +50,7 @@
 		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\gratch.Services\WhatTheTea.Gratch.Services.csproj" />
 		<ProjectReference Include="..\gratch.ViewModels\WhatTheTea.Gratch.ViewModels.csproj" />
 	</ItemGroup>
 

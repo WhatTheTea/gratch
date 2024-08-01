@@ -1,6 +1,6 @@
 ﻿using WhatTheTea.Gratch.Models;
 
-namespace WhatTheTea.Gratch.Core;
+namespace WhatTheTea.Gratch.Abstractions;
 
 /// <summary>
 /// Provides mechanism to assign people on shifts and 

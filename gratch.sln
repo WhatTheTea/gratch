@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatTheTea.Gratch.ViewModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatTheTea.Gratch.Services", "gratch.Services\WhatTheTea.Gratch.Services.csproj", "{313C74C4-83A3-4765-BCA8-CBC34D0E03AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatTheTea.Gratch.Abstractions", "gratch.Abstractions\WhatTheTea.Gratch.Abstractions.csproj", "{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -184,6 +186,30 @@ Global
 		{313C74C4-83A3-4765-BCA8-CBC34D0E03AE}.Test|x64.Build.0 = Release|Any CPU
 		{313C74C4-83A3-4765-BCA8-CBC34D0E03AE}.Test|x86.ActiveCfg = Release|Any CPU
 		{313C74C4-83A3-4765-BCA8-CBC34D0E03AE}.Test|x86.Build.0 = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|x64.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Debug|x86.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|ARM64.Build.0 = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|x64.ActiveCfg = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|x64.Build.0 = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|x86.ActiveCfg = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Release|x86.Build.0 = Release|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|ARM64.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|ARM64.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|x64.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|x64.Build.0 = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|x86.ActiveCfg = Debug|Any CPU
+		{EA9A4517-0E7E-4807-8F0A-3BFF71478E77}.Test|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

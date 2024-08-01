@@ -24,6 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\gratch.Abstractions\WhatTheTea.Gratch.Abstractions.csproj" />
 		<ProjectReference Include="..\gratch.Models\WhatTheTea.Gratch.Models.csproj" />
 	</ItemGroup>
 </Project>

@@ -18,4 +18,8 @@
 		<ProjectReference Include="..\gratch.Services\WhatTheTea.Gratch.Services.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	</ItemGroup>
+
 </Project>

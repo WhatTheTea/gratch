@@ -1,5 +1,5 @@
-﻿using WhatTheTea.Gratch.Models;
-using WhatTheTea.Gratch.Services.Storage;
+﻿using WhatTheTea.Gratch.Abstractions;
+using WhatTheTea.Gratch.Models;
 
 namespace WhatTheTea.Gratch.Tests.ViewModels;
 public class StorageTests

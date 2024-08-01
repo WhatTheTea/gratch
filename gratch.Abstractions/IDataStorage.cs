@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace WhatTheTea.Gratch.Services.Storage;
+namespace WhatTheTea.Gratch.Abstractions;
 public interface IDataStorage<T>
 {
     T Load();

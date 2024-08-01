@@ -8,14 +8,14 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="e20b500d-95ae-498f-b508-ef78807e45b4"
+    Name="WhatTheTea.Gratch"
     Publisher="CN=WhatTheTea"
-    Version="1.0.0.0" />
+    Version="7.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="e20b500d-95ae-498f-b508-ef78807e45b4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>gratch.App</DisplayName>
+    <DisplayName>gratch</DisplayName>
     <PublisherDisplayName>WhatTheTea</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -34,8 +34,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="gratch.App"
-        Description="gratch.App"
+        DisplayName="gratch"
+        Description="Software to arrange people to a time span"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

@@ -8,11 +8,13 @@ namespace WhatTheTea.Gratch.App.Views;
 
 public sealed partial class MainWindow : Window
 {
-    private IDataStorage<Arrangement[]> arrangementStorage = new JsonDataStorage<Arrangement[]>();
-    public MainViewModel MainViewModel { get; } = new();
+    private readonly IDataStorage<Arrangement[]> arrangementStorage = new JsonDataStorage<Arrangement[]>();
+    public MainViewModel MainViewModel { get; }
 
     public MainWindow()
     {
+        this.MainViewModel = new(this.arrangementStorage);
+
         this.InitializeComponent();
     }
 }

@@ -7,6 +7,11 @@
 
 		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 	</PropertyGroup>
+
+	<PropertyGroup Label="Packaging">
+		<IsPackable>false</IsPackable>
+		<EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
+	</PropertyGroup>
 	
 	<PropertyGroup Label="Code">
 		<UseWinUI>true</UseWinUI>

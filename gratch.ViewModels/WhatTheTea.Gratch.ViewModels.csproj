@@ -11,6 +11,12 @@
 	<PropertyGroup Label="Code">
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<UseWinUI>true</UseWinUI>
+	</PropertyGroup>
+
+	<PropertyGroup Label="Packaging">
+		<EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>

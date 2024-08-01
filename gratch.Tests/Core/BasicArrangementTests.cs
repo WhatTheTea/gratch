@@ -1,9 +1,6 @@
-﻿using Xunit;
-using FluentAssertions;
-using Microsoft.Extensions.Time.Testing;
+﻿using Microsoft.Extensions.Time.Testing;
 using WhatTheTea.Gratch.Models;
 using WhatTheTea.Gratch.Core;
-using System.Diagnostics;
 
 namespace WhatTheTea.Gratch.Tests.Core;
 /// <summary>

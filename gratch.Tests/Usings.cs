@@ -1,4 +1,2 @@
-﻿// <copyright file = "Usings.cs" company = "Digital Cloud Technologies">
-// Copyright (c) Digital Cloud Technologies.All rights reserved.
-// </copyright>
-
+﻿global using Xunit;
+global using FluentAssertions;

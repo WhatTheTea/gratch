@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "gratch.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "gratch.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

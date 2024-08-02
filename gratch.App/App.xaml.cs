@@ -1,9 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿    using Microsoft.UI.Xaml;
 
 using WhatTheTea.Gratch.App.Views;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace WhatTheTea.Gratch.App;
 /// <summary>
@@ -17,6 +14,8 @@ public partial class App : Application
     /// </summary>
     public App()
     {
+        this.Services = ConfigureServices();
+
         this.InitializeComponent();
     }
 

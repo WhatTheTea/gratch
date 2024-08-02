@@ -1,20 +1,17 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 
-using WhatTheTea.Gratch.Abstractions;
-using WhatTheTea.Gratch.Models;
-using WhatTheTea.Gratch.Services.Storage;
 using WhatTheTea.Gratch.ViewModels;
 
 namespace WhatTheTea.Gratch.App.Views;
 
 public sealed partial class MainWindow : Window
 {
-    private readonly IDataStorage<Arrangement[]> arrangementStorage = new JsonDataStorage<Arrangement[]>();
-    public MainViewModel MainViewModel { get; }
+    public MainViewModel ViewModel { get; }
 
     public MainWindow()
     {
-        this.MainViewModel = new(this.arrangementStorage);
+        this.ViewModel = App.Current.Services.GetService<MainViewModel>();
 
         this.InitializeComponent();
     }

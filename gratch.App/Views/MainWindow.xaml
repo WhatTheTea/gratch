@@ -6,8 +6,35 @@
     xmlns:local="using:WhatTheTea.Gratch.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:WhatTheTea.Gratch.ViewModels"
+    xmlns:pages="using:WhatTheTea.Gratch.App.Views.Pages"
+    xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ii="using:Microsoft.Xaml.Interactivity"
+    xmlns:convert="using:WhatTheTea.Gratch.App.Converters"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-    </StackPanel>
+    <NavigationView x:Name="MainNavigation"
+                    PaneDisplayMode="Left"
+                    PaneTitle="gratch">
+        
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Home"
+                                Icon="Home"
+                                Tag="WhatTheTea.Gratch.App.Views.Pages.HomePage"/>
+            <NavigationViewItem Content="Arrangements"
+                                Icon="List"
+                                MenuItemsSource="{x:Bind ViewModel.Arrangements}">
+            </NavigationViewItem>
+            <NavigationViewItem Content="About"
+                                Icon="Help"
+                                Tag="WhatTheTea.Gratch.App.Views.Pages.AboutPage"/>
+        </NavigationView.MenuItems>
+
+        <ScrollViewer>
+            <Frame x:Name="ContentFrame"
+                   IsTabStop="True">
+            </Frame>
+        </ScrollViewer>
+        
+    </NavigationView>
 </Window>

@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.UI.Xaml;
 
 using WhatTheTea.Gratch.Abstractions;
-using WhatTheTea.Gratch.App.Views;
+using WhatTheTea.Gratch.App.Views.Pages;
 using WhatTheTea.Gratch.Models;
 using WhatTheTea.Gratch.Services.Storage;
 using WhatTheTea.Gratch.ViewModels;
@@ -20,7 +15,7 @@ public partial class App
     /// <summary>
     /// Gets the current <see cref="App"/> instance in use
     /// </summary>
-    public new static App Current => (App)Application.Current;
+    public static new App Current => (App)Application.Current;
 
     /// <summary>
     /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
@@ -48,7 +43,13 @@ static file class ConfigurationExtensions
         services.AddSingleton<MainViewModel>()
                 .AddTransient<Func<Arrangement, ArrangementViewModel>>(s =>
                     (a) => new ArrangementViewModel(a))
+                .AddTransient<HomeViewModel>()
+                .AddTransient<AboutViewModel>()
         ;
 
-    public static IServiceCollection ConfigureViewsForViewModels(this IServiceCollection services) => services;
+    public static IServiceCollection ConfigureViewsForViewModels(this IServiceCollection services) =>
+        services.AddTransient<IViewFor<HomeViewModel>, HomePage>()
+                .AddTransient<IViewFor<AboutViewModel>, AboutPage>()
+                .AddTransient<IViewFor<ArrangementViewModel>, ArrangementPage>()
+        ;
 }

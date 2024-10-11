@@ -1,62 +1,34 @@
-﻿using WhatTheTea.Gratch.Models;
+﻿using WhatTheTea.Gratch.Abstractions;
+using WhatTheTea.Gratch.Models;
 
 namespace WhatTheTea.Gratch.Core;
-public class Arranger
+public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTimeOffset) : IArranger
 {
-    private readonly HashSet<IRule> rules = [];
-    private readonly List<Person> people = [];
+    private readonly RulesCollection rules = new(people.ToArray);
+    private readonly List<Person> people = new(people);
 
-    /// <summary>
-    /// A base point in time, from which arrangements are calculated
-    /// </summary>
-    public DateTimeOffset BaseDateTime { get; private set; }
+    public DateTimeOffset BaseDateTime { get; private set; } = baseDateTimeOffset;
 
-    public Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTimeOffset)
+    public IArranger ConfigureRules(Action<IRulesCollection> configure)
     {
-        this.people = new(people);
-        this.BaseDateTime = baseDateTimeOffset;
+        configure(this.rules);
+        foreach (var rule in this.rules)
+        {
+            rule.BaseDateTime = this.BaseDateTime;
+        }
+
+        return this;
     }
 
-    /// <summary>
-    /// Ensures rule is applied to this arranger
-    /// </summary>
-    public void AddRule(IRule rule)
-    {
-        this.rules.Add(rule);
-        rule.BaseDateTimeOffset = this.BaseDateTime;
-    }
-
-    public Person? ArrangeForDateTime(DateTimeOffset dateTime)
+    public Person? ArrangeFor(DateTimeOffset dateTime)
     {
         foreach (var person in this.people)
         {
-            if (this.EvaluateAllRulesFor(person, dateTime))
+            if (this.rules.EvaluateFor(person, dateTime))
             {
                 return person;
             }
         }
         return null;
-    }
-
-    private bool EvaluateAllRulesFor(Person person, DateTimeOffset dateTime) =>
-        this.rules.Select(x => x.Evaluate(person, dateTime, [.. this.people]))
-                  .Aggregate(true, (res, val) => res && val);
-}
-
-public interface IRule
-{
-    DateTimeOffset BaseDateTimeOffset { get; set; }
-    bool Evaluate(Person person, DateTimeOffset dateTime, Person[] people);
-}
-
-public class OneByOneRule : IRule
-{
-    public DateTimeOffset BaseDateTimeOffset { get; set; }
-
-    public bool Evaluate(Person person, DateTimeOffset dateTime, Person[] people)
-    {
-        int totalDays = (dateTime - this.BaseDateTimeOffset).Days;
-        int expectedIndex = totalDays % people.Length;
-        return people[expectedIndex] == person;
     }
 }

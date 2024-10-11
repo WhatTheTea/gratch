@@ -3,7 +3,7 @@
 namespace WhatTheTea.Gratch.Models;
 
 /// <summary>
-/// Class to represent person, which can be assigned to specific date 
+/// Class to represent a person
 /// </summary>
 [DebuggerDisplay("{Id} : {Name}")]
 public class Person(string name)

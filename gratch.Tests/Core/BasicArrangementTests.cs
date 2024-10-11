@@ -10,7 +10,6 @@ namespace WhatTheTea.Gratch.Tests.Core;
 public class BasicArrangementTests
 {
     private readonly FakeTimeProvider timeProvider = new(new DateTime(2024, 10, 01));
-    //private readonly BasicArranger arranger = new();
     private DateTimeOffset Now => this.timeProvider.GetLocalNow();
     private static Person[] GetFakePeople(int count) =>
         Enumerable.Range(1, count)
@@ -66,10 +65,10 @@ public class BasicArrangementTests
         var date = this.Now;
         var group = new Group();
         group.AddRange(GetFakePeople(5));
-        var arranger = new Arranger(group, date);
-        arranger.AddRule(new OneByOneRule());
+        var arranger = new Arranger(group, date)
+            .ConfigureRules(x => x.AddOneByOneRule());
 
-        var result = arranger.ArrangeForDateTime(date.AddDays(2));
+        var result = arranger.ArrangeFor(date.AddDays(2));
 
         result.Should().Be(group[2]);
     }

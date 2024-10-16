@@ -30,7 +30,7 @@ public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) :
         this.EnsureDateTimeIsCalculated(dateTime);
 
         var peopleCount = this.people.Length;
-        bool isArrangementValid = peopleCount > 0 && dateTime < baseDateTime;
+        bool isArrangementValid = peopleCount > 0 && dateTime > baseDateTime;
         var index = isArrangementValid
             ? (this.calculatedDateTimes.Count % peopleCount) - 1
             : -1;
@@ -43,11 +43,12 @@ public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) :
         var isCalculated = this.calculatedDateTimes.Contains(dateTime);
         if (!isCalculated)
         {
-            this.calculatedDateTimes.Clear();
-            var diff = dateTime - this.BaseDateTime;
+            var lastDateTime = this.BaseDateTime.AddDays(this.calculatedDateTimes.Count);
+            var diff = dateTime - lastDateTime;
+
             for (int i = 0; i <= diff.Days; i++)
             {
-                var nextDateTime = this.BaseDateTime.AddDays(i);
+                var nextDateTime = lastDateTime.AddDays(i);
 
                 if (this.rules.EvaluateFor(nextDateTime))
                 {

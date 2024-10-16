@@ -10,5 +10,5 @@ public interface IRulesCollection : IList<IRule>
     /// <summary>
     /// Method to evaluate all present rules in collection
     /// </summary>
-    bool EvaluateFor(Person person, DateTimeOffset dateTime);
+    bool EvaluateFor(DateTimeOffset dateTime);
 }

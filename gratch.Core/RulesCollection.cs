@@ -3,9 +3,9 @@ using WhatTheTea.Gratch.Models;
 
 namespace WhatTheTea.Gratch.Core;
 
-internal class RulesCollection(Func<Person[]> peopleFactory) : List<IRule>, IRulesCollection
+internal class RulesCollection() : List<IRule>, IRulesCollection
 {
-    public bool EvaluateFor(Person person, DateTimeOffset dateTime) =>
-        this.Select(x => x.Evaluate(person, dateTime, [.. peopleFactory()]))
+    public bool EvaluateFor(DateTimeOffset dateTime) =>
+        this.Select(x => x.Evaluate(dateTime))
             .Aggregate(true, (res, val) => res && val);
 }

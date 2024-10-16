@@ -2,33 +2,58 @@
 using WhatTheTea.Gratch.Models;
 
 namespace WhatTheTea.Gratch.Core;
-public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTimeOffset) : IArranger
+public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) : IArranger
 {
-    private readonly RulesCollection rules = new(people.ToArray);
-    private readonly List<Person> people = new(people);
+    private readonly RulesCollection rules = [];
+    private readonly Person[] people = [..people];
+    private readonly HashSet<DateTimeOffset> calculatedDateTimes = [];
 
-    public DateTimeOffset BaseDateTime { get; private set; } = baseDateTimeOffset;
-
+    public DateTimeOffset BaseDateTime
+    {
+        get => baseDateTime;
+        private set
+        {
+            baseDateTime = value;
+            this.calculatedDateTimes.Clear();
+        }
+    }
     public IArranger ConfigureRules(Action<IRulesCollection> configure)
     {
         configure(this.rules);
-        foreach (var rule in this.rules)
-        {
-            rule.BaseDateTime = this.BaseDateTime;
-        }
+        this.calculatedDateTimes.Clear();
 
         return this;
     }
 
     public Person? ArrangeFor(DateTimeOffset dateTime)
     {
-        foreach (var person in this.people)
+        this.EnsureDateTimeIsCalculated(dateTime);
+
+        var peopleCount = this.people.Length;
+        bool isArrangementValid = peopleCount > 0 && dateTime < baseDateTime;
+        var index = isArrangementValid
+            ? (this.calculatedDateTimes.Count % peopleCount) - 1
+            : -1;
+
+        return this.people.ElementAtOrDefault(index);
+    }
+
+    private void EnsureDateTimeIsCalculated(DateTimeOffset dateTime)
+    {
+        var isCalculated = this.calculatedDateTimes.Contains(dateTime);
+        if (!isCalculated)
         {
-            if (this.rules.EvaluateFor(person, dateTime))
+            this.calculatedDateTimes.Clear();
+            var diff = dateTime - this.BaseDateTime;
+            for (int i = 0; i <= diff.Days; i++)
             {
-                return person;
+                var nextDateTime = this.BaseDateTime.AddDays(i);
+
+                if (this.rules.EvaluateFor(nextDateTime))
+                {
+                    this.calculatedDateTimes.Add(nextDateTime);
+                }
             }
         }
-        return null;
     }
 }

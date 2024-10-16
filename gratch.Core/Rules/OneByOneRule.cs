@@ -1,9 +1,9 @@
 ﻿using WhatTheTea.Gratch.Abstractions;
 using WhatTheTea.Gratch.Models;
 
-namespace WhatTheTea.Gratch.Core;
+namespace WhatTheTea.Gratch.Core.Rules;
 
-internal class OneByOneRule : IRule
+internal sealed class OneByOneRule : IRule
 {
     public DateTimeOffset BaseDateTime { get; set; }
 

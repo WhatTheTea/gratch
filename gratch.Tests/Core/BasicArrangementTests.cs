@@ -8,6 +8,18 @@ namespace WhatTheTea.Gratch.Tests.Core;
 /// </summary>
 public class BasicArrangementTests
 {
+/*
+  July, 2024-07, source: https://gogos.me/text-calendar-4x3/             
+                               
+  Mon Tue Wed Thu Fri Sat Sun  
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+    1   2   3   4   5   6   7 
+    8   9  10  11  12  13  14 
+   15  16  17  18  19  20  21 
+   22  23  24  25  26  27  28 
+   29  30  31                 
+                              
+*/
     private readonly FakeTimeProvider timeProvider = new(new DateTime(2024, 07, 01));
     private DateTimeOffset Now => this.timeProvider.GetLocalNow();
     private static Person[] GetFakePeople(int count) =>

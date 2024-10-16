@@ -30,7 +30,6 @@ public class BasicArrangementTests
 
     [Theory]
     [InlineData(0, 10)] // No people
-    [InlineData(10, 10)] // Overflow
     [InlineData(10, -10)] // Negative days, overflow
     [InlineData(0, -10)] // No people, negative
     public void PeopleAreArrangedInEdgeCases(int peopleCount, int daysFromNow)

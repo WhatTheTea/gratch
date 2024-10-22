@@ -1,4 +1,4 @@
-﻿using WhatTheTea.Gratch.Abstractions;
+﻿using WhatTheTea.Gratch.Core.Abstractions;
 
 namespace WhatTheTea.Gratch.Core.Rules;
 

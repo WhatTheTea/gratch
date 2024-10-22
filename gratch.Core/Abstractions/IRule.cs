@@ -1,16 +1,12 @@
-﻿using WhatTheTea.Gratch.Models;
+﻿namespace WhatTheTea.Gratch.Core.Abstractions;
 
-namespace WhatTheTea.Gratch.Abstractions;
-
+/// <summary>
+/// Rule to define valid dates for arrangement
+/// </summary>
 public interface IRule
 {
     /// <summary>
-    /// A base point in time, from which arrangements may be calculated.
-    /// </summary>
-    //DateTimeOffset BaseDateTime { get; set; }
-
-    /// <summary>
-    /// Method to decide if <paramref name="person"/> may be arranged on <paramref name="dateTime"/>
+    /// Method to decide if object may be arranged on <paramref name="dateTime"/>
     /// </summary>
     bool Evaluate(DateTimeOffset dateTime);
 }

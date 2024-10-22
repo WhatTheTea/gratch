@@ -1,6 +1,4 @@
-﻿using WhatTheTea.Gratch.Models;
-
-namespace WhatTheTea.Gratch.Abstractions;
+﻿namespace WhatTheTea.Gratch.Core.Abstractions;
 
 /// <summary>
 /// Rules collection to provide Fluent configuration API

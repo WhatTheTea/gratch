@@ -1,7 +1,10 @@
-﻿using WhatTheTea.Gratch.Models;
+﻿namespace WhatTheTea.Gratch.Abstractions;
 
-namespace WhatTheTea.Gratch.Abstractions;
-public interface IArranger
+/// <summary>
+/// Arranges objects of type <see cref="T"/> based on rules and <see cref="BaseDateTime"/>
+/// </summary>
+/// <typeparam name="T">Type of object to be arranged</typeparam>
+public interface IArranger<T>
 {
     /// <summary>
     /// A base point in time, from which arrangements are calculated.
@@ -9,15 +12,15 @@ public interface IArranger
     DateTimeOffset BaseDateTime { get; }
 
     /// <summary>
-    /// Generates arrangement for <see cref="Person"/> on specified <paramref name="dateTime"/>
+    /// Generates arrangement for <see cref="T"/> on specified <paramref name="dateTime"/>
     /// </summary>
     /// <returns>
-    /// <see cref="Person"/> or null, if arrangement can't be evaluated for this <paramref name="dateTime"/>
+    /// <see cref="T"/> or null, if arrangement can't be evaluated for this <paramref name="dateTime"/>
     /// </returns>
-    Person? ArrangeFor(DateTimeOffset dateTime);
+    T? ArrangeFor(DateTimeOffset dateTime);
 
     /// <summary>
     /// Configures internal collection of rules, may override rule-specific BaseDateTime.
     /// </summary>
-    IArranger ConfigureRules(Action<IRulesCollection> configure);
+    IArranger<T> ConfigureRules(Action<IRulesCollection> configure);
 }

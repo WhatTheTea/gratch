@@ -1,4 +1,6 @@
-﻿namespace WhatTheTea.Gratch.Abstractions;\
+﻿using System.Threading.Tasks;
+
+namespace WhatTheTea.Gratch.Services;
 
 public interface IDataStorage<T>
 {

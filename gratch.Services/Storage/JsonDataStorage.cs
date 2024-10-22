@@ -3,11 +3,10 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-using WhatTheTea.Gratch.Abstractions;
-
 using Windows.Storage;
 
 namespace WhatTheTea.Gratch.Services.Storage;
+
 public class JsonDataStorage<T>(string? fileName = null) : IDataStorage<T>
 {
     private readonly string fileName = fileName ?? "data.json";

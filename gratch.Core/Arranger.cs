@@ -5,8 +5,8 @@ namespace WhatTheTea.Gratch.Core;
 public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) : IArranger
 {
     private readonly RulesCollection rules = [];
-    private readonly Person[] people = [..people];
-    private readonly HashSet<DateTimeOffset> calculatedDateTimes = [];
+    private readonly Person[] people = [.. people];
+    private HashSet<DateTimeOffset> calculatedDateTimes = [];
 
     public DateTimeOffset BaseDateTime
     {
@@ -43,18 +43,25 @@ public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) :
         var isCalculated = this.calculatedDateTimes.Contains(dateTime);
         if (!isCalculated)
         {
-            var lastDateTime = this.BaseDateTime.AddDays(this.calculatedDateTimes.Count);
-            var diff = dateTime - lastDateTime;
-
-            for (int i = 0; i <= diff.Days; i++)
-            {
-                var nextDateTime = lastDateTime.AddDays(i);
-
-                if (this.rules.EvaluateFor(nextDateTime))
-                {
-                    this.calculatedDateTimes.Add(nextDateTime);
-                }
-            }
+            this.CalculateArrangementsUntil(dateTime);
         }
+    }
+
+    private void CalculateArrangementsUntil(DateTimeOffset dateTime)
+    {
+        var lastDateTime = this.BaseDateTime.AddDays(this.calculatedDateTimes.Count);
+        var diff = dateTime - lastDateTime;
+
+        if (diff.Days < 0)
+        {
+            return;
+        }
+
+        var validDates = Enumerable.Range(0, diff.Days + 1)
+            .Select(x => lastDateTime.AddDays(x))
+            .Where(this.rules.EvaluateFor)
+            .ToHashSet();
+
+        this.calculatedDateTimes = validDates;
     }
 }

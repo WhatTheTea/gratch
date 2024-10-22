@@ -1,4 +1,4 @@
-﻿using WhatTheTea.Gratch.Abstractions;
+﻿using WhatTheTea.Gratch.Core.Abstractions;
 
 namespace WhatTheTea.Gratch.Core;
 public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : IArranger<T>
@@ -60,9 +60,8 @@ public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : I
 
         var validDates = Enumerable.Range(0, diff.Days + 1)
             .Select(x => lastDateTime.AddDays(x))
-            .Where(this.rules.EvaluateFor)
-            .ToHashSet();
+            .Where(this.rules.EvaluateFor);
 
-        this.calculatedDateTimes = validDates;
+        this.calculatedDateTimes = new(validDates);
     }
 }

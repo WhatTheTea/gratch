@@ -32,7 +32,7 @@ public class BasicArrangementTests
     public void PeopleArrangedOneByOne()
     {
         var group = GetFakeGroup(5);
-        var arranger = new Arranger(group, this.Now)
+        var arranger = new Arranger<Person>(group, this.Now)
             .ConfigureRules(x => x.AddEverydayRule());
 
         var result = arranger.ArrangeFor(this.Now.AddDays(2));
@@ -48,7 +48,7 @@ public class BasicArrangementTests
     {
         var arrangementDate = this.Now.AddDays(daysFromNow);
         var group = GetFakeGroup(peopleCount);
-        var arranger = new Arranger(group, this.Now)
+        var arranger = new Arranger<Person>(group, this.Now)
             .ConfigureRules(x => x.AddEverydayRule());
 
         var result = arranger.ArrangeFor(arrangementDate);
@@ -60,7 +60,7 @@ public class BasicArrangementTests
     public void ArrangerIsSkippingHolidays()
     {
         var group = GetFakeGroup(7);
-        var arranger = new Arranger(group, this.Now)
+        var arranger = new Arranger<Person>(group, this.Now)
             .ConfigureRules(x => x.AddEverydayRule().AddSkipWeekDaysRule([DayOfWeek.Saturday, DayOfWeek.Sunday]));
 
         var result = arranger.ArrangeFor(this.Now.AddDays(7));
@@ -72,7 +72,7 @@ public class BasicArrangementTests
     public void ArrangerIsSkippingExactDays()
     {
         var group = GetFakeGroup(7);
-        var arranger = new Arranger(group, this.Now)
+        var arranger = new Arranger<Person>(group, this.Now)
             .ConfigureRules(x => x.AddEverydayRule().AddSkipExactDatesRule([this.Now.AddDays(1)]));
 
         var result = arranger.ArrangeFor(this.Now.AddDays(2));

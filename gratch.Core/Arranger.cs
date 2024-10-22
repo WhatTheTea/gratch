@@ -1,11 +1,10 @@
 ﻿using WhatTheTea.Gratch.Abstractions;
-using WhatTheTea.Gratch.Models;
 
 namespace WhatTheTea.Gratch.Core;
-public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) : IArranger
+public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : IArranger<T>
 {
     private readonly RulesCollection rules = [];
-    private readonly Person[] people = [.. people];
+    private readonly T[] arrangeables = [.. people];
     private HashSet<DateTimeOffset> calculatedDateTimes = [];
 
     public DateTimeOffset BaseDateTime
@@ -17,7 +16,8 @@ public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) :
             this.calculatedDateTimes.Clear();
         }
     }
-    public IArranger ConfigureRules(Action<IRulesCollection> configure)
+
+    public IArranger<T> ConfigureRules(Action<IRulesCollection> configure)
     {
         configure(this.rules);
         this.calculatedDateTimes.Clear();
@@ -25,17 +25,18 @@ public class Arranger(IEnumerable<Person> people, DateTimeOffset baseDateTime) :
         return this;
     }
 
-    public Person? ArrangeFor(DateTimeOffset dateTime)
+    public T? ArrangeFor(DateTimeOffset dateTime)
     {
         this.EnsureDateTimeIsCalculated(dateTime);
 
-        var peopleCount = this.people.Length;
+        var peopleCount = this.arrangeables.Length;
         bool isArrangementValid = peopleCount > 0 && dateTime > baseDateTime;
+
         var index = isArrangementValid
             ? (this.calculatedDateTimes.Count % peopleCount) - 1
             : -1;
 
-        return this.people.ElementAtOrDefault(index);
+        return this.arrangeables.ElementAtOrDefault(index);
     }
 
     private void EnsureDateTimeIsCalculated(DateTimeOffset dateTime)

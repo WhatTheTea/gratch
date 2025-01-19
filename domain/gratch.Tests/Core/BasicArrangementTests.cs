@@ -1,25 +1,26 @@
 ﻿using Microsoft.Extensions.Time.Testing;
-using WhatTheTea.Gratch.Models;
 using WhatTheTea.Gratch.Core;
+using gratch.Tests.TestModels;
 
-namespace WhatTheTea.Gratch.Tests.Core;
+namespace gratch.Tests.Core;
+
 /// <summary>
 /// A set of AAA unit tests
 /// </summary>
 public class BasicArrangementTests
 {
-/*
-  July, 2024-07, source: https://gogos.me/text-calendar-4x3/             
-                               
-  Mon Tue Wed Thu Fri Sat Sun  
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━  
-    1   2   3   4   5   6   7 
-    8   9  10  11  12  13  14 
-   15  16  17  18  19  20  21 
-   22  23  24  25  26  27  28 
-   29  30  31                 
-                              
-*/
+    /*
+      July, 2024-07, source: https://gogos.me/text-calendar-4x3/             
+
+      Mon Tue Wed Thu Fri Sat Sun  
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+        1   2   3   4   5   6   7 
+        8   9  10  11  12  13  14 
+       15  16  17  18  19  20  21 
+       22  23  24  25  26  27  28 
+       29  30  31                 
+
+    */
     private readonly FakeTimeProvider timeProvider = new(new DateTime(2024, 07, 01));
     private DateTimeOffset Now => this.timeProvider.GetLocalNow();
     private static Person[] GetFakePeople(int count) =>
@@ -37,7 +38,7 @@ public class BasicArrangementTests
 
         var result = arranger.ArrangeFor(this.Now.AddDays(2));
 
-        result.Should().Be(group[2]);
+        result.ShouldBe(group[2]);
     }
 
     [Theory]
@@ -53,7 +54,7 @@ public class BasicArrangementTests
 
         var result = arranger.ArrangeFor(arrangementDate);
 
-        result.Should().Be(null);
+        result.ShouldBe(null);
     }
 
     [Fact]
@@ -65,7 +66,7 @@ public class BasicArrangementTests
 
         var result = arranger.ArrangeFor(this.Now.AddDays(7));
 
-        result.Should().Be(group[5]);
+        result.ShouldBe(group[5]);
     }
 
     [Fact]
@@ -77,6 +78,6 @@ public class BasicArrangementTests
 
         var result = arranger.ArrangeFor(this.Now.AddDays(2));
 
-        result.Should().Be(group[1]);
+        result.ShouldBe(group[1]);
     }
 }

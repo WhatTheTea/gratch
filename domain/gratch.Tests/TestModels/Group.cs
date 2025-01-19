@@ -1,5 +1,4 @@
-﻿
-namespace WhatTheTea.Gratch.Models;
+﻿namespace gratch.Tests.TestModels;
 public class Group : List<Person>
 {
     public Group(int id = 0, string title = "") : base()

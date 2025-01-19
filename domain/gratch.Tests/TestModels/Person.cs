@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace WhatTheTea.Gratch.Models;
+namespace gratch.Tests.TestModels;
 
 /// <summary>
 /// Class to represent a person

@@ -4,7 +4,8 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<LangVersion>latest</LangVersion>
+		<LangVersion>default</LangVersion>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 </Project>

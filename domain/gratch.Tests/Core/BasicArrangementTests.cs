@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Time.Testing;
-using WhatTheTea.Gratch.Core;
 using gratch.Tests.TestModels;
+using gratch.Arrangement;
+using gratch.Arrangement.Rules;
 
 namespace gratch.Tests.Core;
 

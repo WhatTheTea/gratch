@@ -31,7 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\gratch.Core\gratch.Core.csproj" />
+		<ProjectReference Include="..\gratch.Core\gratch.Arrangement.csproj" />
 	</ItemGroup>
 
 </Project>

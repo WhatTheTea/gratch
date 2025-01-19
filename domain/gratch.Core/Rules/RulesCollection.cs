@@ -1,6 +1,4 @@
-﻿using WhatTheTea.Gratch.Core.Abstractions;
-
-namespace WhatTheTea.Gratch.Core;
+﻿namespace gratch.Arrangement.Rules;
 
 internal class RulesCollection() : List<IRule>, IRulesCollection
 {

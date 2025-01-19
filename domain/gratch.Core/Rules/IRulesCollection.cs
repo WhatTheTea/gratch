@@ -1,4 +1,4 @@
-﻿namespace WhatTheTea.Gratch.Core.Abstractions;
+﻿namespace gratch.Arrangement.Rules;
 
 /// <summary>
 /// Rules collection to provide Fluent configuration API

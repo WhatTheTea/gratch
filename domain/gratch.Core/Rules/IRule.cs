@@ -1,4 +1,4 @@
-﻿namespace WhatTheTea.Gratch.Core.Abstractions;
+﻿namespace gratch.Arrangement.Rules;
 
 /// <summary>
 /// Rule to define valid dates for arrangement

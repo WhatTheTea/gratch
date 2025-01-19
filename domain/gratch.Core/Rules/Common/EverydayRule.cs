@@ -1,6 +1,4 @@
-﻿using WhatTheTea.Gratch.Core.Abstractions;
-
-namespace WhatTheTea.Gratch.Core.Rules;
+﻿namespace gratch.Arrangement.Rules.Common;
 
 internal sealed class EverydayRule : IRule
 {

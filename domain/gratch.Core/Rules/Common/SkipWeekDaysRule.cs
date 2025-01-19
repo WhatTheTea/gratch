@@ -1,6 +1,4 @@
-﻿using WhatTheTea.Gratch.Core.Abstractions;
-
-namespace WhatTheTea.Gratch.Core.Rules;
+﻿namespace gratch.Arrangement.Rules.Common;
 public class SkipWeekDaysRule(IEnumerable<DayOfWeek> blacklist) : IRule
 {
     public bool Evaluate(DateTimeOffset dateTime) => !blacklist.Contains(dateTime.DayOfWeek);

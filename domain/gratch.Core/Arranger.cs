@@ -1,6 +1,6 @@
-﻿using WhatTheTea.Gratch.Core.Abstractions;
+﻿using gratch.Arrangement.Rules;
 
-namespace WhatTheTea.Gratch.Core;
+namespace gratch.Arrangement;
 public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : IArranger<T>
 {
     private readonly RulesCollection rules = [];
@@ -33,7 +33,7 @@ public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : I
         bool isArrangementValid = peopleCount > 0 && dateTime > baseDateTime;
 
         var index = isArrangementValid
-            ? (this.calculatedDateTimes.Count % peopleCount) - 1
+            ? this.calculatedDateTimes.Count % peopleCount - 1
             : -1;
 
         return this.arrangeables.ElementAtOrDefault(index);

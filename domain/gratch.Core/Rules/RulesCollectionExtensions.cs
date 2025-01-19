@@ -1,7 +1,6 @@
-﻿using WhatTheTea.Gratch.Core.Abstractions;
-using WhatTheTea.Gratch.Core.Rules;
+﻿using gratch.Arrangement.Rules.Common;
 
-namespace WhatTheTea.Gratch.Core;
+namespace gratch.Arrangement.Rules;
 public static class RulesCollectionExtensions
 {
     public static IRulesCollection AddEverydayRule(this IRulesCollection rules) =>

@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gratch.Core", "domain\gratch.Core\gratch.Core.csproj", "{46935969-B059-48AA-94F4-EFA2619A986C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gratch.Arrangement", "domain\gratch.Core\gratch.Arrangement.csproj", "{46935969-B059-48AA-94F4-EFA2619A986C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{29353C67-34D0-4CDD-92A8-F4700DEF804B}"
 EndProject

@@ -1,4 +1,6 @@
-﻿namespace WhatTheTea.Gratch.Core.Abstractions;
+﻿using gratch.Arrangement.Rules;
+
+namespace gratch.Arrangement;
 
 /// <summary>
 /// Arranges objects of type <see cref="T"/> based on rules and <see cref="BaseDateTime"/>

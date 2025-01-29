@@ -8,9 +8,4 @@ public partial class MainWindow : Form, IMainView
     {
         this.InitializeComponent();
     }
-
-    private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
 }

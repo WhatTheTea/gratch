@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" Version="20.1.63" />
+    <PackageReference Include="ReactiveUI.SourceGenerators" Version="2.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\domain\gratch.Core\gratch.Arrangement.csproj" />
+    <ProjectReference Include="..\..\domain\gratch.Models\gratch.Models.csproj" />
+  </ItemGroup>
+
+</Project>

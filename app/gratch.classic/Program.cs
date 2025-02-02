@@ -1,6 +1,8 @@
-﻿using gratch.classic.Contracts;
+﻿using gratch.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using ReactiveUI;
 
 namespace gratch.classic;
 
@@ -16,7 +18,7 @@ internal static partial class Program
 
         ConfigureServices();
 
-        var mainWindow = (MainWindow)Ioc.Container.GetRequiredService<IMainView>();
+        var mainWindow = (Form)Ioc.Container.GetRequiredService<IViewFor<AppViewModel>>();
         Application.Run(mainWindow);
     }
 }

@@ -1,7 +1,5 @@
 ﻿using gratch.ViewModels;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using ReactiveUI.SourceGenerators;
 
 namespace gratch.classic;
@@ -12,6 +10,6 @@ public partial class MainWindow : Form
     public MainWindow()
     {
         this.InitializeComponent();
-        this.ViewModel = Ioc.Container.GetRequiredService<AppViewModel>();
+        this.ViewModel = new();
     }
 }

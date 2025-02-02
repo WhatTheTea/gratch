@@ -1,6 +1,6 @@
 ﻿namespace gratch.classic.Views;
 
-partial class SchedulePage
+partial class PeoplePage
 {
     /// <summary> 
     /// Required designer variable.
@@ -28,8 +28,15 @@ partial class SchedulePage
     /// </summary>
     private void InitializeComponent()
     {
-        components = new System.ComponentModel.Container();
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.SuspendLayout();
+        // 
+        // PeoplePage
+        // 
+        this.AutoScaleDimensions = new SizeF(7F, 15F);
+        this.AutoScaleMode = AutoScaleMode.Font;
+        this.Name = "PeoplePage";
+        this.Size = new Size(572, 431);
+        this.ResumeLayout(false);
     }
 
     #endregion

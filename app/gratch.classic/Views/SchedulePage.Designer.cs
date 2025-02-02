@@ -28,16 +28,81 @@ partial class SchedulePage
     /// </summary>
     private void InitializeComponent()
     {
+        this.tableLayoutPanel1 = new TableLayoutPanel();
+        this.label1 = new Label();
+        this.groupsCombo = new ComboBox();
+        this.scheduleDataGrid = new DataGridView();
+        this.tableLayoutPanel1.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)this.scheduleDataGrid).BeginInit();
         this.SuspendLayout();
+        // 
+        // tableLayoutPanel1
+        // 
+        this.tableLayoutPanel1.ColumnCount = 2;
+        this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
+        this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+        this.tableLayoutPanel1.Controls.Add(this.groupsCombo, 1, 0);
+        this.tableLayoutPanel1.Controls.Add(this.scheduleDataGrid, 0, 1);
+        this.tableLayoutPanel1.Dock = DockStyle.Fill;
+        this.tableLayoutPanel1.Location = new Point(0, 0);
+        this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+        this.tableLayoutPanel1.RowCount = 2;
+        this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+        this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        this.tableLayoutPanel1.Size = new Size(468, 389);
+        this.tableLayoutPanel1.TabIndex = 0;
+        // 
+        // label1
+        // 
+        this.label1.Anchor = AnchorStyles.Left;
+        this.label1.AutoSize = true;
+        this.label1.Location = new Point(10, 12);
+        this.label1.Margin = new Padding(10, 0, 3, 0);
+        this.label1.Name = "label1";
+        this.label1.Size = new Size(76, 15);
+        this.label1.TabIndex = 0;
+        this.label1.Text = "Schedule for:";
+        // 
+        // groupsCombo
+        // 
+        this.groupsCombo.Dock = DockStyle.Fill;
+        this.groupsCombo.FormattingEnabled = true;
+        this.groupsCombo.Location = new Point(104, 10);
+        this.groupsCombo.Margin = new Padding(10);
+        this.groupsCombo.Name = "groupsCombo";
+        this.groupsCombo.Size = new Size(354, 23);
+        this.groupsCombo.TabIndex = 1;
+        // 
+        // scheduleDataGrid
+        // 
+        this.scheduleDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        this.tableLayoutPanel1.SetColumnSpan(this.scheduleDataGrid, 2);
+        this.scheduleDataGrid.Dock = DockStyle.Fill;
+        this.scheduleDataGrid.Location = new Point(12, 52);
+        this.scheduleDataGrid.Margin = new Padding(12);
+        this.scheduleDataGrid.Name = "scheduleDataGrid";
+        this.scheduleDataGrid.Size = new Size(444, 325);
+        this.scheduleDataGrid.TabIndex = 2;
         // 
         // SchedulePage
         // 
         this.AutoScaleDimensions = new SizeF(7F, 15F);
         this.AutoScaleMode = AutoScaleMode.Font;
+        this.Controls.Add(this.tableLayoutPanel1);
         this.Name = "SchedulePage";
         this.Size = new Size(468, 389);
+        this.tableLayoutPanel1.ResumeLayout(false);
+        this.tableLayoutPanel1.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)this.scheduleDataGrid).EndInit();
         this.ResumeLayout(false);
     }
 
     #endregion
+
+    private TableLayoutPanel tableLayoutPanel1;
+    private Label label1;
+    private ComboBox groupsCombo;
+    private DataGridView scheduleDataGrid;
 }

@@ -27,17 +27,7 @@ internal partial class Program
         Locator.CurrentMutable.InitializeReactiveUI();
         Locator.CurrentMutable.RegisterViewsForViewModels(System.Reflection.Assembly.GetEntryAssembly()!);
 
-        ConfigureViewModels(services);
-
         Ioc.Container = services.BuildServiceProvider();
         Ioc.Container.UseMicrosoftDependencyResolver();
-    }
-
-    private static void ConfigureViewModels(IServiceCollection services)
-    {
-        services.AddSingleton<AppViewModel>()
-            .AddSingleton<CalendarViewModel>()
-            .AddSingleton<PeopleViewModel>()
-            .AddSingleton<ScheduleViewModel>();
     }
 }

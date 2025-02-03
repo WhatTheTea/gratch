@@ -66,7 +66,7 @@ partial class MainWindow
         this.ScheduleTabPage.Location = new Point(4, 24);
         this.ScheduleTabPage.Name = "ScheduleTabPage";
         this.ScheduleTabPage.Padding = new Padding(3);
-        this.ScheduleTabPage.Size = new Size(192, 72);
+        this.ScheduleTabPage.Size = new Size(476, 333);
         this.ScheduleTabPage.TabIndex = 1;
         this.ScheduleTabPage.Text = "Schedule";
         this.ScheduleTabPage.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@ partial class MainWindow
         this.schedulePage1.Dock = DockStyle.Fill;
         this.schedulePage1.Location = new Point(3, 3);
         this.schedulePage1.Name = "schedulePage1";
-        this.schedulePage1.Size = new Size(186, 66);
+        this.schedulePage1.Size = new Size(470, 327);
         this.schedulePage1.TabIndex = 0;
         // 
         // HomeTabPage

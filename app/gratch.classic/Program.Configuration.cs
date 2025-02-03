@@ -1,6 +1,4 @@
-﻿using gratch.ViewModels;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 using ReactiveUI;
 

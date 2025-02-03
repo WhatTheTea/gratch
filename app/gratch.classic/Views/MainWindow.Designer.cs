@@ -29,12 +29,12 @@ partial class MainWindow
     private void InitializeComponent()
     {
         this.PeopleTabPage = new TabPage();
+        this.peoplePage1 = new Views.PeoplePage();
         this.ScheduleTabPage = new TabPage();
+        this.schedulePage1 = new Views.SchedulePage();
         this.HomeTabPage = new TabPage();
         this.homePage1 = new Views.HomePage();
         this.MainTabControl = new TabControl();
-        this.schedulePage1 = new Views.SchedulePage();
-        this.peoplePage1 = new Views.PeoplePage();
         this.PeopleTabPage.SuspendLayout();
         this.ScheduleTabPage.SuspendLayout();
         this.HomeTabPage.SuspendLayout();
@@ -47,10 +47,18 @@ partial class MainWindow
         this.PeopleTabPage.Location = new Point(4, 24);
         this.PeopleTabPage.Name = "PeopleTabPage";
         this.PeopleTabPage.Padding = new Padding(3);
-        this.PeopleTabPage.Size = new Size(476, 253);
+        this.PeopleTabPage.Size = new Size(476, 333);
         this.PeopleTabPage.TabIndex = 2;
         this.PeopleTabPage.Text = "People";
         this.PeopleTabPage.UseVisualStyleBackColor = true;
+        // 
+        // peoplePage1
+        // 
+        this.peoplePage1.Dock = DockStyle.Fill;
+        this.peoplePage1.Location = new Point(3, 3);
+        this.peoplePage1.Name = "peoplePage1";
+        this.peoplePage1.Size = new Size(470, 327);
+        this.peoplePage1.TabIndex = 0;
         // 
         // ScheduleTabPage
         // 
@@ -58,10 +66,18 @@ partial class MainWindow
         this.ScheduleTabPage.Location = new Point(4, 24);
         this.ScheduleTabPage.Name = "ScheduleTabPage";
         this.ScheduleTabPage.Padding = new Padding(3);
-        this.ScheduleTabPage.Size = new Size(476, 253);
+        this.ScheduleTabPage.Size = new Size(192, 72);
         this.ScheduleTabPage.TabIndex = 1;
         this.ScheduleTabPage.Text = "Schedule";
         this.ScheduleTabPage.UseVisualStyleBackColor = true;
+        // 
+        // schedulePage1
+        // 
+        this.schedulePage1.Dock = DockStyle.Fill;
+        this.schedulePage1.Location = new Point(3, 3);
+        this.schedulePage1.Name = "schedulePage1";
+        this.schedulePage1.Size = new Size(186, 66);
+        this.schedulePage1.TabIndex = 0;
         // 
         // HomeTabPage
         // 
@@ -69,7 +85,7 @@ partial class MainWindow
         this.HomeTabPage.Location = new Point(4, 24);
         this.HomeTabPage.Name = "HomeTabPage";
         this.HomeTabPage.Padding = new Padding(3);
-        this.HomeTabPage.Size = new Size(476, 253);
+        this.HomeTabPage.Size = new Size(476, 333);
         this.HomeTabPage.TabIndex = 0;
         this.HomeTabPage.Text = "Home";
         this.HomeTabPage.UseVisualStyleBackColor = true;
@@ -79,7 +95,7 @@ partial class MainWindow
         this.homePage1.Dock = DockStyle.Fill;
         this.homePage1.Location = new Point(3, 3);
         this.homePage1.Name = "homePage1";
-        this.homePage1.Size = new Size(470, 247);
+        this.homePage1.Size = new Size(470, 327);
         this.homePage1.TabIndex = 0;
         // 
         // MainTabControl
@@ -91,30 +107,14 @@ partial class MainWindow
         this.MainTabControl.Location = new Point(0, 0);
         this.MainTabControl.Name = "MainTabControl";
         this.MainTabControl.SelectedIndex = 0;
-        this.MainTabControl.Size = new Size(484, 281);
+        this.MainTabControl.Size = new Size(484, 361);
         this.MainTabControl.TabIndex = 0;
-        // 
-        // schedulePage1
-        // 
-        this.schedulePage1.Dock = DockStyle.Fill;
-        this.schedulePage1.Location = new Point(3, 3);
-        this.schedulePage1.Name = "schedulePage1";
-        this.schedulePage1.Size = new Size(470, 247);
-        this.schedulePage1.TabIndex = 0;
-        // 
-        // peoplePage1
-        // 
-        this.peoplePage1.Dock = DockStyle.Fill;
-        this.peoplePage1.Location = new Point(3, 3);
-        this.peoplePage1.Name = "peoplePage1";
-        this.peoplePage1.Size = new Size(470, 247);
-        this.peoplePage1.TabIndex = 0;
         // 
         // MainWindow
         // 
         this.AutoScaleDimensions = new SizeF(7F, 15F);
         this.AutoScaleMode = AutoScaleMode.Font;
-        this.ClientSize = new Size(484, 281);
+        this.ClientSize = new Size(484, 361);
         this.Controls.Add(this.MainTabControl);
         this.MinimumSize = new Size(500, 320);
         this.Name = "MainWindow";

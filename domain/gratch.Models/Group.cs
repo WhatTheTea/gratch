@@ -1,10 +1,14 @@
 ﻿namespace gratch.Models;
 
-public class Group : List<Person>
+public class Group
 {
-    public string Name { get; set; } = string.Empty;
+    public required string Id { get; set; }
 
-    public DateTimeOffset BaseDateTimeOffset { get; set; }
+    public required string Name { get; set; }
+
+    public required DateTimeOffset BaseDateTimeOffset { get; set; }
+
+    public List<Person> People { get; set; } = [];
 
     public ArrangementConfiguration ArrangementConfiguration { get; set; } = new();
 }

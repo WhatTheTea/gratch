@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using gratch.Services;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using ReactiveUI;
 
@@ -24,6 +26,8 @@ internal partial class Program
         Locator.CurrentMutable.InitializeSplat();
         Locator.CurrentMutable.InitializeReactiveUI();
         Locator.CurrentMutable.RegisterViewsForViewModels(System.Reflection.Assembly.GetEntryAssembly()!);
+
+        services.AddSingleton<IGroupRepository, InMemoryGroupRepository>();
 
         Ioc.Container = services.BuildServiceProvider();
         Ioc.Container.UseMicrosoftDependencyResolver();

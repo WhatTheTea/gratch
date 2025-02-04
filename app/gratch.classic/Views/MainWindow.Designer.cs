@@ -29,13 +29,11 @@ partial class MainWindow
     private void InitializeComponent()
     {
         this.PeopleTabPage = new TabPage();
-        this.peoplePage1 = new Views.PeoplePage();
         this.ScheduleTabPage = new TabPage();
         this.schedulePage1 = new Views.SchedulePage();
         this.HomeTabPage = new TabPage();
         this.homePage1 = new Views.HomePage();
         this.MainTabControl = new TabControl();
-        this.PeopleTabPage.SuspendLayout();
         this.ScheduleTabPage.SuspendLayout();
         this.HomeTabPage.SuspendLayout();
         this.MainTabControl.SuspendLayout();
@@ -43,7 +41,6 @@ partial class MainWindow
         // 
         // PeopleTabPage
         // 
-        this.PeopleTabPage.Controls.Add(this.peoplePage1);
         this.PeopleTabPage.Location = new Point(4, 24);
         this.PeopleTabPage.Name = "PeopleTabPage";
         this.PeopleTabPage.Padding = new Padding(3);
@@ -51,14 +48,6 @@ partial class MainWindow
         this.PeopleTabPage.TabIndex = 2;
         this.PeopleTabPage.Text = "People";
         this.PeopleTabPage.UseVisualStyleBackColor = true;
-        // 
-        // peoplePage1
-        // 
-        this.peoplePage1.Dock = DockStyle.Fill;
-        this.peoplePage1.Location = new Point(3, 3);
-        this.peoplePage1.Name = "peoplePage1";
-        this.peoplePage1.Size = new Size(470, 327);
-        this.peoplePage1.TabIndex = 0;
         // 
         // ScheduleTabPage
         // 
@@ -119,7 +108,6 @@ partial class MainWindow
         this.MinimumSize = new Size(500, 320);
         this.Name = "MainWindow";
         this.Text = "gratch classic";
-        this.PeopleTabPage.ResumeLayout(false);
         this.ScheduleTabPage.ResumeLayout(false);
         this.HomeTabPage.ResumeLayout(false);
         this.MainTabControl.ResumeLayout(false);

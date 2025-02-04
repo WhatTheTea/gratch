@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\app\gratch.ViewModels\gratch.ViewModels.csproj" />
+    <ProjectReference Include="..\domain\gratch.Services\gratch.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

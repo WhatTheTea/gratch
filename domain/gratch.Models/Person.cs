@@ -1,3 +1,3 @@
 ﻿namespace gratch.Models;
 
-public record Person(string Name);
+public record Person(string Id, string Name);

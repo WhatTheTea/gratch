@@ -28,14 +28,7 @@ public class InMemoryGroupRepository : IGroupRepository
 
     public Task UpdateGroupAsync(Group group)
     {
-        if (this.groups.ContainsKey(group.Id))
-        {
-            this.groups[group.Id] = group;
-        }
-        else
-        {
-            throw new InvalidOperationException("Trying to update group that does not exist yet");
-        }
+        this.groups[group.Id] = group;
 
         return Task.CompletedTask;
     }

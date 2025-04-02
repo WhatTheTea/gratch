@@ -30,18 +30,18 @@ partial class PeoplePage
     {
         this.tableLayoutPanel1 = new TableLayoutPanel();
         this.tableLayoutPanel2 = new TableLayoutPanel();
-        this.button2 = new Button();
-        this.comboBox1 = new ComboBox();
+        this.removeGroupButton = new Button();
+        this.groupsComboBox = new ComboBox();
         this.label1 = new Label();
-        this.button1 = new Button();
+        this.addGroupButton = new Button();
         this.tableLayoutPanel3 = new TableLayoutPanel();
-        this.listView1 = new ListView();
         this.groupBox1 = new GroupBox();
         this.flowLayoutPanel1 = new FlowLayoutPanel();
         this.personAddButton = new Button();
         this.personUpButton = new Button();
         this.personDownButton = new Button();
         this.personRemoveButton = new Button();
+        this.peopleListBox = new ListBox();
         this.tableLayoutPanel1.SuspendLayout();
         this.tableLayoutPanel2.SuspendLayout();
         this.tableLayoutPanel3.SuspendLayout();
@@ -72,10 +72,10 @@ partial class PeoplePage
         this.tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         this.tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
         this.tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
-        this.tableLayoutPanel2.Controls.Add(this.button2, 3, 0);
-        this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
+        this.tableLayoutPanel2.Controls.Add(this.removeGroupButton, 3, 0);
+        this.tableLayoutPanel2.Controls.Add(this.groupsComboBox, 1, 0);
         this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-        this.tableLayoutPanel2.Controls.Add(this.button1, 2, 0);
+        this.tableLayoutPanel2.Controls.Add(this.addGroupButton, 2, 0);
         this.tableLayoutPanel2.Dock = DockStyle.Fill;
         this.tableLayoutPanel2.Location = new Point(3, 3);
         this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -84,25 +84,26 @@ partial class PeoplePage
         this.tableLayoutPanel2.Size = new Size(566, 34);
         this.tableLayoutPanel2.TabIndex = 1;
         // 
-        // button2
+        // removeGroupButton
         // 
-        this.button2.Dock = DockStyle.Fill;
-        this.button2.Location = new Point(534, 3);
-        this.button2.Name = "button2";
-        this.button2.Size = new Size(29, 28);
-        this.button2.TabIndex = 3;
-        this.button2.Text = "-";
-        this.button2.UseVisualStyleBackColor = true;
+        this.removeGroupButton.Dock = DockStyle.Fill;
+        this.removeGroupButton.Location = new Point(534, 3);
+        this.removeGroupButton.Name = "removeGroupButton";
+        this.removeGroupButton.Size = new Size(29, 28);
+        this.removeGroupButton.TabIndex = 3;
+        this.removeGroupButton.Text = "-";
+        this.removeGroupButton.UseVisualStyleBackColor = true;
         // 
-        // comboBox1
+        // groupsComboBox
         // 
-        this.comboBox1.Dock = DockStyle.Fill;
-        this.comboBox1.FormattingEnabled = true;
-        this.comboBox1.Location = new Point(69, 5);
-        this.comboBox1.Margin = new Padding(5);
-        this.comboBox1.Name = "comboBox1";
-        this.comboBox1.Size = new Size(422, 23);
-        this.comboBox1.TabIndex = 0;
+        this.groupsComboBox.Dock = DockStyle.Fill;
+        this.groupsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        this.groupsComboBox.FormattingEnabled = true;
+        this.groupsComboBox.Location = new Point(69, 5);
+        this.groupsComboBox.Margin = new Padding(5);
+        this.groupsComboBox.Name = "groupsComboBox";
+        this.groupsComboBox.Size = new Size(422, 23);
+        this.groupsComboBox.TabIndex = 0;
         // 
         // label1
         // 
@@ -114,23 +115,23 @@ partial class PeoplePage
         this.label1.TabIndex = 1;
         this.label1.Text = "Group:";
         // 
-        // button1
+        // addGroupButton
         // 
-        this.button1.Dock = DockStyle.Fill;
-        this.button1.Location = new Point(499, 3);
-        this.button1.Name = "button1";
-        this.button1.Size = new Size(29, 28);
-        this.button1.TabIndex = 2;
-        this.button1.Text = "+";
-        this.button1.UseVisualStyleBackColor = true;
+        this.addGroupButton.Dock = DockStyle.Fill;
+        this.addGroupButton.Location = new Point(499, 3);
+        this.addGroupButton.Name = "addGroupButton";
+        this.addGroupButton.Size = new Size(29, 28);
+        this.addGroupButton.TabIndex = 2;
+        this.addGroupButton.Text = "+";
+        this.addGroupButton.UseVisualStyleBackColor = true;
         // 
         // tableLayoutPanel3
         // 
         this.tableLayoutPanel3.ColumnCount = 2;
         this.tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         this.tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
-        this.tableLayoutPanel3.Controls.Add(this.listView1, 0, 0);
         this.tableLayoutPanel3.Controls.Add(this.groupBox1, 1, 0);
+        this.tableLayoutPanel3.Controls.Add(this.peopleListBox, 0, 0);
         this.tableLayoutPanel3.Dock = DockStyle.Fill;
         this.tableLayoutPanel3.Location = new Point(3, 43);
         this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -138,16 +139,6 @@ partial class PeoplePage
         this.tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         this.tableLayoutPanel3.Size = new Size(566, 385);
         this.tableLayoutPanel3.TabIndex = 2;
-        // 
-        // listView1
-        // 
-        this.listView1.Dock = DockStyle.Fill;
-        this.listView1.Location = new Point(12, 12);
-        this.listView1.Margin = new Padding(12);
-        this.listView1.Name = "listView1";
-        this.listView1.Size = new Size(392, 361);
-        this.listView1.TabIndex = 0;
-        this.listView1.UseCompatibleStateImageBehavior = false;
         // 
         // groupBox1
         // 
@@ -209,6 +200,17 @@ partial class PeoplePage
         this.personRemoveButton.Text = "Remove Person";
         this.personRemoveButton.UseVisualStyleBackColor = true;
         // 
+        // peopleListBox
+        // 
+        this.peopleListBox.Dock = DockStyle.Fill;
+        this.peopleListBox.FormattingEnabled = true;
+        this.peopleListBox.ItemHeight = 15;
+        this.peopleListBox.Location = new Point(12, 12);
+        this.peopleListBox.Margin = new Padding(12);
+        this.peopleListBox.Name = "peopleListBox";
+        this.peopleListBox.Size = new Size(392, 361);
+        this.peopleListBox.TabIndex = 2;
+        // 
         // PeoplePage
         // 
         this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -228,17 +230,17 @@ partial class PeoplePage
     #endregion
 
     private TableLayoutPanel tableLayoutPanel1;
-    private ComboBox comboBox1;
+    private ComboBox groupsComboBox;
     private TableLayoutPanel tableLayoutPanel2;
     private Label label1;
-    private Button button1;
-    private Button button2;
+    private Button addGroupButton;
+    private Button removeGroupButton;
     private TableLayoutPanel tableLayoutPanel3;
-    private ListView listView1;
     private GroupBox groupBox1;
     private FlowLayoutPanel flowLayoutPanel1;
     private Button personAddButton;
     private Button personUpButton;
     private Button personDownButton;
     private Button personRemoveButton;
+    private ListBox peopleListBox;
 }

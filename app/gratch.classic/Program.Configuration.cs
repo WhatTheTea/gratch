@@ -1,4 +1,5 @@
 ﻿using gratch.Services;
+using gratch.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +29,7 @@ internal partial class Program
         Locator.CurrentMutable.RegisterViewsForViewModels(System.Reflection.Assembly.GetEntryAssembly()!);
 
         services.AddSingleton<IGroupRepository, InMemoryGroupRepository>();
+        services.AddSingleton<PeopleViewModel>();
 
         Ioc.Container = services.BuildServiceProvider();
         Ioc.Container.UseMicrosoftDependencyResolver();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reactive;
 using System.Reactive.Linq;
 
@@ -65,13 +66,29 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void MoveUp(Person person)
     {
+        int index = this.People.IndexOf(person);
 
+        if (index <= 0)
+        {
+            return;
+        }
+
+        (this.People[index], this.People[index - 1]) = (this.People[index - 1], this.People[index]);
+        this.SelectedPerson = this.People[index - 1];
     }
 
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void MoveDown(Person person)
     {
+        int index = this.People.IndexOf(person);
 
+        if (index >= this.People.Count - 1)
+        {
+            return;
+        }
+
+        (this.People[index], this.People[index + 1]) = (this.People[index + 1], this.People[index]);
+        this.SelectedPerson = this.People[index + 1];
     }
 
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]

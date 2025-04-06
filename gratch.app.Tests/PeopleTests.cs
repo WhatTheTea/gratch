@@ -94,6 +94,42 @@ public class PeopleTests
         (await viewModel.MoveUpCommand.CanExecute.Take(1)).ShouldBeTrue();
     }
 
+    [Fact]
+    public async Task PersonMovesUp()
+    {
+        var testGroup = CreateTestGroup();
+        testGroup.People.Add(new("1", "1"));
+        testGroup.People.Add(new("2", "2"));
+        testGroup.People.Add(new("3", "3"));
+
+        var groupProvider = Substitute.For<IGroupRepository>();
+        groupProvider.GetGroupsAsync().Returns([testGroup]);
+        var viewModel = new PeopleViewModel(groupProvider);
+        await viewModel.Initialize();
+
+        await viewModel.MoveUpCommand.Execute(viewModel.People[1]);
+
+        viewModel.People[0].Name.ShouldBe("2");
+    }
+
+    [Fact]
+    public async Task PersonMovesDown()
+    {
+        var testGroup = CreateTestGroup();
+        testGroup.People.Add(new("1", "1"));
+        testGroup.People.Add(new("2", "2"));
+        testGroup.People.Add(new("3", "3"));
+
+        var groupProvider = Substitute.For<IGroupRepository>();
+        groupProvider.GetGroupsAsync().Returns([testGroup]);
+        var viewModel = new PeopleViewModel(groupProvider);
+        await viewModel.Initialize();
+
+        await viewModel.MoveDownCommand.Execute(viewModel.People[1]);
+
+        viewModel.People[2].Name.ShouldBe("2");
+    }
+
     private static Group CreateTestGroup(string name = "test") =>
         new() { Id = "test", Name = name, BaseDateTimeOffset = DateTimeOffset.Now };
 }

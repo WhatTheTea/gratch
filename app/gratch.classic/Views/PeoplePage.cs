@@ -28,8 +28,8 @@ public partial class PeoplePage : UserControl
 
         this.BindCommand(this.ViewModel, x => x.CreatePersonCommand, x => x.personAddButton);
         this.BindCommand(this.ViewModel, x => x.RemovePersonCommand, x => x.personRemoveButton, x => x.SelectedPerson);
-        this.BindCommand(this.ViewModel, x => x.MoveUpCommand, x => x.personUpButton);
-        this.BindCommand(this.ViewModel, x => x.MoveDownCommand, x => x.personDownButton);
+        this.BindCommand(this.ViewModel, x => x.MoveUpCommand, x => x.personUpButton, x => x.SelectedPerson);
+        this.BindCommand(this.ViewModel, x => x.MoveDownCommand, x => x.personDownButton, x => x.SelectedPerson);
         this.BindInteraction(this.ViewModel, x => x.CreatePersonDialog, async context =>
         {
             var modal = new CreatePersonDialog();

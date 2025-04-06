@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Linq;
 
+using gratch.classic.Controls;
 using gratch.Models;
 using gratch.ViewModels;
 
@@ -29,12 +30,11 @@ public partial class PeoplePage : UserControl
         this.BindCommand(this.ViewModel, x => x.RemovePersonCommand, x => x.personRemoveButton, x => x.SelectedPerson);
         this.BindCommand(this.ViewModel, x => x.MoveUpCommand, x => x.personUpButton);
         this.BindCommand(this.ViewModel, x => x.MoveDownCommand, x => x.personDownButton);
-        this.BindInteraction(this.ViewModel, x => x.CreatePersonDialog, context =>
+        this.BindInteraction(this.ViewModel, x => x.CreatePersonDialog, async context =>
         {
-            var number = this.ViewModel!.SelectedGroup?.People.Count;
-            MessageBox.Show($"Mock person #{number} created!");
-            context.SetOutput($"Person #{number}");
-            return Task.CompletedTask;
+            var modal = new CreatePersonDialog();
+            var result = await modal.ShowAsync(this) as string;
+            context.SetOutput(result);
         });
 
         this.OneWayBind(this.ViewModel, x => x.Groups, x => x.groupsComboBox.DataSource);

@@ -21,7 +21,7 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
 
     public BindingList<Person> People { get; } = [];
 
-    public Interaction<Unit, string> CreatePersonDialog { get; } = new();
+    public Interaction<Unit, string?> CreatePersonDialog { get; } = new();
 
     public Interaction<Unit, string> CreateGroupDialog { get; } = new();
 
@@ -95,12 +95,15 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     {
         var name = await this.CreatePersonDialog.Handle(Unit.Default);
 
-        var person = new Person(Guid.NewGuid().ToString(), name);
-
-        if (this.SelectedGroup is not null)
+        if (!string.IsNullOrWhiteSpace(name))
         {
-            this.SelectedGroup?.People.Add(person);
-            this.People.Add(person);
+            var person = new Person(Guid.NewGuid().ToString(), name);
+
+            if (this.SelectedGroup is not null)
+            {
+                this.SelectedGroup?.People.Add(person);
+                this.People.Add(person);
+            }
         }
     }
 
@@ -118,8 +121,23 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     [ReactiveCommand(CanExecute = nameof(whenGroupIsNotNull))]
     private async Task RemoveGroup(Group group)
     {
+        var index = this.Groups.IndexOf(group);
         await groupRepository.DeleteGroupAsync(group.Id);
 
         this.Groups.Remove(group);
+
+        this.SelectedGroup = SelectNearest(index, this.Groups);
     }
+
+    private static T? SelectNearest<T>(int index, IList<T> list) => list.Count switch
+    {
+        < 1 => default,
+        1 => list[0],
+        _ => index switch
+        {
+            < 0 => list[0],
+            var i when i >= list.Count => list[^1],
+            _ => list[index],
+        },
+    };
 }

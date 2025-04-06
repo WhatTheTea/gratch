@@ -2,6 +2,7 @@
 using System.Reactive;
 using System.Reactive.Linq;
 
+using gratch.Helpers;
 using gratch.Models;
 using gratch.Services;
 
@@ -132,18 +133,6 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
 
         this.Groups.Remove(group);
 
-        this.SelectedGroup = SelectNearest(index, this.Groups);
+        this.SelectedGroup = this.Groups.ElementAtNearest(index);
     }
-
-    private static T? SelectNearest<T>(int index, IList<T> list) => list.Count switch
-    {
-        < 1 => default,
-        1 => list[0],
-        _ => index switch
-        {
-            < 0 => list[0],
-            var i when i >= list.Count => list[^1],
-            _ => list[index],
-        },
-    };
 }

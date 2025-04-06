@@ -18,10 +18,15 @@ public partial class PeoplePage : UserControl
         this.InitializeComponent();
         this.ViewModel = Ioc.Container.GetService<PeopleViewModel>();
         
-        this.OneWayBind(this.ViewModel, x => x.People, x => x.peopleListBox.DataSource);
         this.peopleListBox.DisplayMember = "Name";
+        this.OneWayBind(this.ViewModel, x => x.People, x => x.peopleListBox.DataSource);
+        this.OneWayBind(this.ViewModel, x => x.SelectedPerson, x => x.peopleListBox.SelectedItem);
+        Observable.FromEventPattern(h => this.peopleListBox.SelectedValueChanged += h, h => this.peopleListBox.SelectedValueChanged -= h)
+            .Select(_ => this.peopleListBox.SelectedItem)
+            .BindTo(this.ViewModel, x => x.SelectedPerson);
+
         this.BindCommand(this.ViewModel, x => x.CreatePersonCommand, x => x.personAddButton);
-        this.BindCommand(this.ViewModel, x => x.RemovePersonCommand, x => x.personRemoveButton);
+        this.BindCommand(this.ViewModel, x => x.RemovePersonCommand, x => x.personRemoveButton, x => x.SelectedPerson);
         this.BindCommand(this.ViewModel, x => x.MoveUpCommand, x => x.personUpButton);
         this.BindCommand(this.ViewModel, x => x.MoveDownCommand, x => x.personDownButton);
         this.BindInteraction(this.ViewModel, x => x.CreatePersonDialog, context =>
@@ -41,8 +46,7 @@ public partial class PeoplePage : UserControl
             .BindTo(this.ViewModel, vm => vm.SelectedGroup);
 
         this.BindCommand(this.ViewModel, x => x.CreateGroupCommand, x => x.addGroupButton);
-        this.BindCommand(this.ViewModel, x => x.RemoveGroupCommand, x => x.removeGroupButton,
-            this.ViewModel.WhenAnyValue(x => x.SelectedGroup));
+        this.BindCommand(this.ViewModel, x => x.RemoveGroupCommand, x => x.removeGroupButton, x => x.SelectedGroup);
         this.BindInteraction(this.ViewModel, x => x.CreateGroupDialog, context =>
         {
             var number = this.ViewModel!.Groups.Count;

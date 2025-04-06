@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Runtime.Versioning;
 
 using gratch.Models;
 using gratch.Services;
@@ -11,6 +12,11 @@ using ReactiveUI.SourceGenerators;
 namespace gratch.ViewModels;
 public partial class PeopleViewModel(IGroupRepository groupRepository) : ReactiveObject
 {
+    private Group? selectedGroup;
+
+    [Reactive]
+    private Person? selectedPerson;
+
     public BindingList<Group> Groups { get; } = [];
 
     public BindingList<Person> People { get; } = [];
@@ -18,6 +24,7 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     public Interaction<Unit, string> CreatePersonDialog { get; } = new();
 
     public Interaction<Unit, string> CreateGroupDialog { get; } = new();
+
     public Group? SelectedGroup
     {
         get => this.selectedGroup;
@@ -30,13 +37,18 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
                 {
                     this.People.Add(item);
                 }
+                this.SelectedPerson = this.People.FirstOrDefault();
             }
         }
     }
 
-    private IObservable<bool> canExecutePeopleCommands = Observable.Return(false);
+    private IObservable<bool> whenPersonIsNotNull =>
+        this.WhenAnyValue(x => x.SelectedPerson)
+            .Select(x => x is not null);
 
-    private Group? selectedGroup;
+    private IObservable<bool> whenGroupIsNotNull =>
+        this.WhenAnyValue(x => x.SelectedGroup)
+            .Select(x => x is not null);
 
     public async Task Initialize()
     {
@@ -48,22 +60,21 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
         }
 
         this.SelectedGroup = this.Groups.FirstOrDefault();
-        this.canExecutePeopleCommands = this.WhenAnyValue(x => x.SelectedGroup).Select(x => x is not null).Publish().RefCount();
     }
 
-    [ReactiveCommand(CanExecute = nameof(canExecutePeopleCommands))]
+    [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void MoveUp(Person person)
     {
 
     }
 
-    [ReactiveCommand(CanExecute = nameof(canExecutePeopleCommands))]
+    [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void MoveDown(Person person)
     {
 
     }
 
-    [ReactiveCommand(CanExecute = nameof(canExecutePeopleCommands))]
+    [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void RemovePerson(Person person)
     {
         bool isRemoved = false;
@@ -79,7 +90,7 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
         }
     }
 
-    [ReactiveCommand(CanExecute = nameof(canExecutePeopleCommands))]
+    [ReactiveCommand(CanExecute = nameof(whenGroupIsNotNull))]
     private async Task CreatePerson()
     {
         var name = await this.CreatePersonDialog.Handle(Unit.Default);
@@ -104,7 +115,7 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
         this.SelectedGroup = group;
     }
 
-    [ReactiveCommand]
+    [ReactiveCommand(CanExecute = nameof(whenGroupIsNotNull))]
     private async Task RemoveGroup(Group group)
     {
         await groupRepository.DeleteGroupAsync(group.Id);

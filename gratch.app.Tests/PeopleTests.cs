@@ -46,7 +46,21 @@ public class PeopleTests
     }
 
     [Fact]
-    public async Task CantExecutePersonCommandsWhenGroupNull()
+    public async Task CantExecutePeopleCommands_PersonIsNull()
+    {
+        var groupProvider = Substitute.For<IGroupRepository>();
+        groupProvider.GetGroupsAsync().Returns([CreateTestGroup()]);
+        var viewModel = new PeopleViewModel(groupProvider);
+        await viewModel.Initialize();
+
+        (await viewModel.CreatePersonCommand.CanExecute.Take(1)).ShouldBeTrue();
+        (await viewModel.RemovePersonCommand.CanExecute.Take(1)).ShouldBeFalse();
+        (await viewModel.MoveDownCommand.CanExecute.Take(1)).ShouldBeFalse();
+        (await viewModel.MoveUpCommand.CanExecute.Take(1)).ShouldBeFalse();
+    }
+
+    [Fact]
+    public async Task CantExecutePeopleCommands_GroupIsNull()
     {
         var groupProvider = Substitute.For<IGroupRepository>();
         var viewModel = new PeopleViewModel(groupProvider);
@@ -56,6 +70,28 @@ public class PeopleTests
         (await viewModel.RemovePersonCommand.CanExecute.Take(1)).ShouldBeFalse();
         (await viewModel.MoveDownCommand.CanExecute.Take(1)).ShouldBeFalse();
         (await viewModel.MoveUpCommand.CanExecute.Take(1)).ShouldBeFalse();
+    }
+
+    [Fact]
+    public async Task CanExecutePeopleCommandsOnNewPerson()
+    {
+        var groupProvider = Substitute.For<IGroupRepository>();
+        groupProvider.CreateGroupAsync(Arg.Is("test")).Returns(CreateTestGroup());
+        var viewModel = new PeopleViewModel(groupProvider);
+        await viewModel.Initialize();
+        viewModel.CreateGroupDialog.RegisterHandler(handler =>
+        {
+            handler.SetOutput("test");
+        });
+
+        await viewModel.CreateGroupCommand.Execute();
+
+        viewModel.People.Add(new("123", "test"));
+        viewModel.SelectedPerson = viewModel.People[0];
+
+        (await viewModel.RemovePersonCommand.CanExecute.Take(1)).ShouldBeTrue();
+        (await viewModel.MoveDownCommand.CanExecute.Take(1)).ShouldBeTrue();
+        (await viewModel.MoveUpCommand.CanExecute.Take(1)).ShouldBeTrue();
     }
 
     private static Group CreateTestGroup(string name = "test") =>

@@ -25,12 +25,10 @@ public partial class CreateGroupDialog : DialogWithResult
 
     private static void OnNameValidating(object? sender, CancelEventArgs e)
     {
-        if (!(sender is TextBox nameBox && ValidateName(nameBox.Text)))
+        if (!(sender is TextBox nameBox && Group.Validate.Name(nameBox.Text)))
         {
             e.Cancel = true;
         }
-
-        static bool ValidateName(string? name) => !string.IsNullOrWhiteSpace(name);
     }
 
     private void createButton_Click(object sender, EventArgs e)

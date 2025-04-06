@@ -11,4 +11,9 @@ public class Group
     public List<Person> People { get; set; } = [];
 
     public ArrangementConfiguration ArrangementConfiguration { get; set; } = new();
+
+    public static class Validate
+    {
+        public static bool Name(string name) => !string.IsNullOrEmpty(name);
+    }
 }

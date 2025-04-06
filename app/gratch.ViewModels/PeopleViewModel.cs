@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Runtime.Versioning;
 
 using gratch.Models;
 using gratch.Services;
@@ -95,15 +94,17 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     {
         var name = await this.CreatePersonDialog.Handle(Unit.Default);
 
-        if (!string.IsNullOrWhiteSpace(name))
+        if (!Person.Validate.Name(name))
         {
-            var person = new Person(Guid.NewGuid().ToString(), name);
+            return;
+        }
 
-            if (this.SelectedGroup is not null)
-            {
-                this.SelectedGroup?.People.Add(person);
-                this.People.Add(person);
-            }
+        var person = new Person(Guid.NewGuid().ToString(), name);
+
+        if (this.SelectedGroup is not null)
+        {
+            this.SelectedGroup?.People.Add(person);
+            this.People.Add(person);
         }
     }
 
@@ -112,7 +113,7 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     {
         var name = await this.CreateGroupDialog.Handle(Unit.Default);
 
-        if (string.IsNullOrWhiteSpace(name))
+        if (!Group.Validate.Name(name))
         {
             return;
         }

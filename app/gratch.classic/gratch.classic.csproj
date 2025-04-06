@@ -23,4 +23,10 @@
     <ProjectReference Include="..\gratch.ViewModels\gratch.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Modal\CreateGroupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

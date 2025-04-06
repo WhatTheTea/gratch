@@ -23,7 +23,7 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
 
     public Interaction<Unit, string?> CreatePersonDialog { get; } = new();
 
-    public Interaction<Unit, string> CreateGroupDialog { get; } = new();
+    public Interaction<Unit, string?> CreateGroupDialog { get; } = new();
 
     public Group? SelectedGroup
     {
@@ -111,6 +111,11 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     private async Task CreateGroup()
     {
         var name = await this.CreateGroupDialog.Handle(Unit.Default);
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return;
+        }
 
         var group = await groupRepository.CreateGroupAsync(name);
 

@@ -47,13 +47,11 @@ public partial class PeoplePage : UserControl
 
         this.BindCommand(this.ViewModel, x => x.CreateGroupCommand, x => x.addGroupButton);
         this.BindCommand(this.ViewModel, x => x.RemoveGroupCommand, x => x.removeGroupButton, x => x.SelectedGroup);
-        this.BindInteraction(this.ViewModel, x => x.CreateGroupDialog, context =>
+        this.BindInteraction(this.ViewModel, x => x.CreateGroupDialog, async context =>
         {
-            var number = this.ViewModel!.Groups.Count;
-
-            MessageBox.Show($"Mock group #{number} created!");
-            context.SetOutput($"Group #{number}");
-            return Task.CompletedTask;
+            var modal = new CreateGroupDialog();
+            var result = await modal.ShowAsync(this) as string;
+            context.SetOutput(result);
         });
     }
 }

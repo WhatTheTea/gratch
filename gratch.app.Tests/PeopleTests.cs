@@ -1,8 +1,9 @@
-﻿using System.Reactive.Concurrency;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 
+using DynamicData;
+
+using gratch.app.Services;
 using gratch.Models;
-using gratch.Services;
 using gratch.ViewModels;
 
 using NSubstitute;
@@ -16,10 +17,8 @@ public class PeopleTests
     [Fact]
     public async Task GroupCreated()
     {
-        var groupProvider = Substitute.For<IGroupRepository>();
-        groupProvider.CreateGroupAsync(Arg.Is("test")).Returns(CreateTestGroup());
+        var groupProvider = CreateGroupManagerSubstitute();
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
         viewModel.CreateGroupDialog.RegisterHandler(handler =>
         {
             handler.SetOutput("test");
@@ -34,11 +33,9 @@ public class PeopleTests
     [Fact]
     public async Task GroupRemoved()
     {
-        var groupProvider = Substitute.For<IGroupRepository>();
         var group = CreateTestGroup();
-        groupProvider.GetGroupsAsync().Returns([group]);
+        var groupProvider = CreateGroupManagerSubstitute(group);
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
 
         await viewModel.RemoveGroupCommand.Execute(group);
 
@@ -48,10 +45,9 @@ public class PeopleTests
     [Fact]
     public async Task CantExecutePeopleCommands_PersonIsNull()
     {
-        var groupProvider = Substitute.For<IGroupRepository>();
-        groupProvider.GetGroupsAsync().Returns([CreateTestGroup()]);
+        var group = CreateTestGroup();
+        var groupProvider = CreateGroupManagerSubstitute(group);
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
 
         (await viewModel.CreatePersonCommand.CanExecute.Take(1)).ShouldBeTrue();
         (await viewModel.RemovePersonCommand.CanExecute.Take(1)).ShouldBeFalse();
@@ -62,9 +58,9 @@ public class PeopleTests
     [Fact]
     public async Task CantExecutePeopleCommands_GroupIsNull()
     {
-        var groupProvider = Substitute.For<IGroupRepository>();
+        var group = CreateTestGroup();
+        var groupProvider = CreateGroupManagerSubstitute();
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
 
         (await viewModel.CreatePersonCommand.CanExecute.Take(1)).ShouldBeFalse();
         (await viewModel.RemovePersonCommand.CanExecute.Take(1)).ShouldBeFalse();
@@ -75,10 +71,9 @@ public class PeopleTests
     [Fact]
     public async Task CanExecutePeopleCommandsOnNewPerson()
     {
-        var groupProvider = Substitute.For<IGroupRepository>();
-        groupProvider.CreateGroupAsync(Arg.Is("test")).Returns(CreateTestGroup());
+        var group = CreateTestGroup();
+        var groupProvider = CreateGroupManagerSubstitute(group);
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
         viewModel.CreateGroupDialog.RegisterHandler(handler =>
         {
             handler.SetOutput("test");
@@ -102,10 +97,8 @@ public class PeopleTests
         testGroup.People.Add(new("2", "2"));
         testGroup.People.Add(new("3", "3"));
 
-        var groupProvider = Substitute.For<IGroupRepository>();
-        groupProvider.GetGroupsAsync().Returns([testGroup]);
+        var groupProvider = CreateGroupManagerSubstitute(testGroup);
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
 
         await viewModel.MoveUpCommand.Execute(viewModel.People[1]);
 
@@ -120,10 +113,8 @@ public class PeopleTests
         testGroup.People.Add(new("2", "2"));
         testGroup.People.Add(new("3", "3"));
 
-        var groupProvider = Substitute.For<IGroupRepository>();
-        groupProvider.GetGroupsAsync().Returns([testGroup]);
+        var groupProvider = CreateGroupManagerSubstitute(testGroup);
         var viewModel = new PeopleViewModel(groupProvider);
-        await viewModel.Initialize();
 
         await viewModel.MoveDownCommand.Execute(viewModel.People[1]);
 
@@ -132,4 +123,14 @@ public class PeopleTests
 
     private static Group CreateTestGroup(string name = "test") =>
         new() { Id = "test", Name = name, BaseDateTimeOffset = DateTimeOffset.Now };
+
+    private static IGroupManager CreateGroupManagerSubstitute(params Group[] groups)
+    {
+        var groupProvider = Substitute.For<IGroupManager>();
+        var groupCache = new SourceCache<Group, string>(x => x.Id);
+        groupCache.AddOrUpdate(groups);
+        groupProvider.Groups.Returns(groupCache);
+
+        return groupProvider;
+    }
 }

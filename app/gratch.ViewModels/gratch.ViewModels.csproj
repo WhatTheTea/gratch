@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" Version="20.1.63" />
+    <PackageReference Include="ReactiveUI" Version="20.2.45" />
     <PackageReference Include="ReactiveUI.SourceGenerators" Version="2.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\domain\gratch.Models\gratch.Models.csproj" />
     <ProjectReference Include="..\..\domain\gratch.Services\gratch.Services.csproj" />
     <ProjectReference Include="..\..\gratch.Helpers\gratch.Helpers.csproj" />
+    <ProjectReference Include="..\gratch.app.Services\gratch.app.Services.csproj" />
   </ItemGroup>
 
 </Project>

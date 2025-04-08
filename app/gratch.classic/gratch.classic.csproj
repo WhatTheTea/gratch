@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\gratch.app.Services\gratch.app.Services.csproj" />
     <ProjectReference Include="..\gratch.ViewModels\gratch.ViewModels.csproj" />
   </ItemGroup>
 

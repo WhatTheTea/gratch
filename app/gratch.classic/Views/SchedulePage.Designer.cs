@@ -68,6 +68,7 @@ partial class SchedulePage
         // groupsCombo
         // 
         this.groupsCombo.Dock = DockStyle.Fill;
+        this.groupsCombo.DropDownStyle = ComboBoxStyle.DropDownList;
         this.groupsCombo.FormattingEnabled = true;
         this.groupsCombo.Location = new Point(104, 10);
         this.groupsCombo.Margin = new Padding(10);

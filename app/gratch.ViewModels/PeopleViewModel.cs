@@ -1,17 +1,18 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reactive;
 using System.Reactive.Linq;
 
+using DynamicData;
+
+using gratch.app.Services;
 using gratch.Helpers;
 using gratch.Models;
-using gratch.Services;
 
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 namespace gratch.ViewModels;
-public partial class PeopleViewModel(IGroupRepository groupRepository) : ReactiveObject
+public partial class PeopleViewModel : ReactiveObject
 {
     private Group? selectedGroup;
 
@@ -51,17 +52,19 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
         this.WhenAnyValue(x => x.SelectedGroup)
             .Select(x => x is not null);
 
-    public async Task Initialize()
+    public PeopleViewModel(IGroupManager groupManager)
     {
-        var groups = await groupRepository.GetGroupsAsync();
+        var changeSet = groupManager.Groups.Connect();
 
-        foreach (var item in groups)
-        {
-            this.Groups.Add(item);
-        }
+        changeSet
+            .Bind(this.Groups)
+            .Subscribe();
 
-        this.SelectedGroup = this.Groups.FirstOrDefault();
+        changeSet
+            .Take(1)
+            .Subscribe(x => this.SelectedGroup = x.First().Current);
     }
+
 
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void MoveUp(Person person)
@@ -94,16 +97,9 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
     private void RemovePerson(Person person)
     {
-        bool isRemoved = false;
         if (this.SelectedGroup is not null)
         {
-            isRemoved = this.SelectedGroup?.People.Remove(person) ?? false;
             this.People.Remove(person);
-        }
-
-        if (isRemoved)
-        {
-            groupRepository.UpdateGroupAsync(this.SelectedGroup!);
         }
     }
 
@@ -136,17 +132,16 @@ public partial class PeopleViewModel(IGroupRepository groupRepository) : Reactiv
             return;
         }
 
-        var group = await groupRepository.CreateGroupAsync(name);
+        var group = new Group(name);
 
         this.Groups.Add(group);
         this.SelectedGroup = group;
     }
 
     [ReactiveCommand(CanExecute = nameof(whenGroupIsNotNull))]
-    private async Task RemoveGroup(Group group)
+    private void RemoveGroup(Group group)
     {
         var index = this.Groups.IndexOf(group);
-        await groupRepository.DeleteGroupAsync(group.Id);
 
         this.Groups.Remove(group);
 

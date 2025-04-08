@@ -1,4 +1,7 @@
-﻿using gratch.ViewModels;
+﻿using System.Reactive.Threading.Tasks;
+
+using gratch.app.Services;
+using gratch.ViewModels;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +21,15 @@ internal static partial class Program
 
         ConfigureServices();
 
+        _ = InitializeGroups();
+
         var mainWindow = (Form)Ioc.Container.GetRequiredService<IViewFor<AppViewModel>>();
         Application.Run(mainWindow);
+    }
+
+    private static async Task InitializeGroups()
+    {
+        var groupManager = Ioc.Container.GetRequiredService<IGroupManager>();
+        await groupManager.Load();
     }
 }

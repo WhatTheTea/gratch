@@ -1,4 +1,6 @@
-﻿namespace gratch.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace gratch.Models;
 
 public class Group
 {
@@ -11,6 +13,16 @@ public class Group
     public List<Person> People { get; set; } = [];
 
     public ArrangementConfiguration ArrangementConfiguration { get; set; } = new();
+
+    public Group() { }
+
+    [SetsRequiredMembers]
+    public Group(string name, DateTimeOffset baseArrangementOffset = default)
+    {
+        this.Id = Guid.NewGuid().ToString();
+        this.Name = name;
+        this.BaseDateTimeOffset = baseArrangementOffset == default ? DateTimeOffset.Now : baseArrangementOffset;
+    }
 
     public static class Validate
     {

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 
 using DynamicData;
@@ -14,6 +15,8 @@ using ReactiveUI.SourceGenerators;
 namespace gratch.ViewModels;
 public partial class PeopleViewModel : ReactiveObject
 {
+    private readonly IScheduler uiScheduler;
+
     private Group? selectedGroup;
 
     [Reactive]
@@ -46,21 +49,26 @@ public partial class PeopleViewModel : ReactiveObject
 
     private IObservable<bool> whenPersonIsNotNull =>
         this.WhenAnyValue(x => x.SelectedPerson)
+            .ObserveOn(this.uiScheduler)
             .Select(x => x is not null);
 
     private IObservable<bool> whenGroupIsNotNull =>
         this.WhenAnyValue(x => x.SelectedGroup)
+            .ObserveOn(this.uiScheduler)
             .Select(x => x is not null);
 
-    public PeopleViewModel(IGroupManager groupManager)
+    public PeopleViewModel(IGroupManager groupManager, IScheduler? uiScheduler = null)
     {
+        this.uiScheduler = uiScheduler ?? RxApp.MainThreadScheduler;
         var changeSet = groupManager.Groups.Connect();
 
         changeSet
+            .ObserveOn(this.uiScheduler)
             .Bind(this.Groups)
             .Subscribe();
 
         changeSet
+            .ObserveOn(this.uiScheduler)
             .Take(1)
             .Subscribe(x => this.SelectedGroup = x.First().Current);
     }

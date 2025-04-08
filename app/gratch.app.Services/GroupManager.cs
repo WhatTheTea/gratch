@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.ComponentModel;
-using System.Linq;
 
 using DynamicData;
 
@@ -11,27 +10,39 @@ using ReactiveUI;
 
 namespace gratch.app.Services;
 
-public class GroupManager(IGroupRepository groupRepository) : ReactiveObject
+/// <summary>
+/// Provides access to groups with update notifications
+/// </summary>
+public interface IGroupManager
+{
+    SourceCache<Group, string> Groups { get; }
+
+    Task Load();
+    Task Save();
+}
+
+public class GroupManager(IGroupRepository groupRepository) : ReactiveObject, IGroupManager
 {
     private ImmutableArray<Group>? loadSnapshot;
 
-    public BindingList<Group> Groups { get; }
+    public SourceCache<Group, string> Groups { get; } = new(x => x.Id);
 
     public async Task Load()
     {
         var groups = await groupRepository.GetGroupsAsync();
-        loadSnapshot = groups.ToImmutableArray();
-        this.Groups.Add(groups);
+        this.loadSnapshot = groups.ToImmutableArray();
+        this.Groups.AddOrUpdate(this.loadSnapshot);
     }
 
     public Task Save()
     {
-        var groupsToUpdate = this.loadSnapshot?.Intersect(this.Groups)
-            .Select(groupRepository.UpdateGroupAsync) ?? [];
-
-        var groupsToRemove = this.loadSnapshot?.Except(this.Groups)
+        var groupsToRemove = this.loadSnapshot?.Except(this.Groups.Items)
             .Select(x => x.Id)
             .Select(groupRepository.DeleteGroupAsync) ?? [];
+
+        var groupsToUpdate = this.loadSnapshot?.Intersect(this.Groups.Items)
+            .Select(groupRepository.UpdateGroupAsync) ?? [];
+
 
         return Task.WhenAll([.. groupsToUpdate, .. groupsToRemove]);
     }

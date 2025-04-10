@@ -6,8 +6,8 @@ using System.Reactive.Linq;
 using DynamicData;
 
 using gratch.app.Services;
-using gratch.Helpers;
 using gratch.Models;
+using gratch.Utilities;
 
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
@@ -15,6 +15,7 @@ using ReactiveUI.SourceGenerators;
 namespace gratch.ViewModels;
 public partial class PeopleViewModel : ReactiveObject
 {
+    private readonly IGroupManager groupManager;
     private readonly IScheduler uiScheduler;
 
     private Group? selectedGroup;
@@ -59,6 +60,7 @@ public partial class PeopleViewModel : ReactiveObject
 
     public PeopleViewModel(IGroupManager groupManager, IScheduler? uiScheduler = null)
     {
+        this.groupManager = groupManager;
         this.uiScheduler = uiScheduler ?? RxApp.MainThreadScheduler;
         var changeSet = groupManager.Groups.Connect();
 
@@ -142,7 +144,8 @@ public partial class PeopleViewModel : ReactiveObject
 
         var group = new Group(name);
 
-        this.Groups.Add(group);
+        // TODO: write cross class tests
+        this.groupManager.Groups.AddOrUpdate(group);
         this.SelectedGroup = group;
     }
 

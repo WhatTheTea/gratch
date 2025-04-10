@@ -30,7 +30,7 @@ partial class SchedulePage
     {
         this.tableLayoutPanel1 = new TableLayoutPanel();
         this.label1 = new Label();
-        this.groupsCombo = new ComboBox();
+        this.groupsComboBox = new ComboBox();
         this.scheduleDataGrid = new DataGridView();
         this.tableLayoutPanel1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)this.scheduleDataGrid).BeginInit();
@@ -42,7 +42,7 @@ partial class SchedulePage
         this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
         this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-        this.tableLayoutPanel1.Controls.Add(this.groupsCombo, 1, 0);
+        this.tableLayoutPanel1.Controls.Add(this.groupsComboBox, 1, 0);
         this.tableLayoutPanel1.Controls.Add(this.scheduleDataGrid, 0, 1);
         this.tableLayoutPanel1.Dock = DockStyle.Fill;
         this.tableLayoutPanel1.Location = new Point(0, 0);
@@ -65,16 +65,16 @@ partial class SchedulePage
         this.label1.TabIndex = 0;
         this.label1.Text = "Schedule for:";
         // 
-        // groupsCombo
+        // groupsComboBox
         // 
-        this.groupsCombo.Dock = DockStyle.Fill;
-        this.groupsCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-        this.groupsCombo.FormattingEnabled = true;
-        this.groupsCombo.Location = new Point(104, 10);
-        this.groupsCombo.Margin = new Padding(10);
-        this.groupsCombo.Name = "groupsCombo";
-        this.groupsCombo.Size = new Size(354, 23);
-        this.groupsCombo.TabIndex = 1;
+        this.groupsComboBox.Dock = DockStyle.Fill;
+        this.groupsComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        this.groupsComboBox.FormattingEnabled = true;
+        this.groupsComboBox.Location = new Point(104, 10);
+        this.groupsComboBox.Margin = new Padding(10);
+        this.groupsComboBox.Name = "groupsComboBox";
+        this.groupsComboBox.Size = new Size(354, 23);
+        this.groupsComboBox.TabIndex = 1;
         // 
         // scheduleDataGrid
         // 
@@ -104,6 +104,6 @@ partial class SchedulePage
 
     private TableLayoutPanel tableLayoutPanel1;
     private Label label1;
-    private ComboBox groupsCombo;
+    private ComboBox groupsComboBox;
     private DataGridView scheduleDataGrid;
 }

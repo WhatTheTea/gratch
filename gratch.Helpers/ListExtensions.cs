@@ -1,4 +1,4 @@
-﻿namespace gratch.Helpers;
+﻿namespace gratch.Utilities;
 
 public static class ListExtensions
 {

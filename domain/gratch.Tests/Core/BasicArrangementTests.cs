@@ -81,4 +81,30 @@ public class BasicArrangementTests
 
         result.ShouldBe(group[1]);
     }
+
+    [Fact]
+    public void ArrangementDictionaryIsValid()
+    {
+        var group = GetFakeGroup(7);
+        var arranger = new Arranger<Person>(group, this.Now)
+            .ConfigureRules(x => x.AddEverydayRule());
+
+        var result = arranger.ArrangeFor(this.Now, this.Now.AddDays(6));
+
+        result[this.Now].ShouldBe(group[0]);
+        result[this.Now.AddDays(6)].ShouldBe(group[^1]);
+    }
+
+    [Fact]
+    public void ArrangementToPastIsValid()
+    {
+        var group = GetFakeGroup(5);
+        var arranger = new Arranger<Person>(group, this.Now)
+            .ConfigureRules(x => x.AddEverydayRule());
+
+        var future = arranger.ArrangeFor(this.Now.AddDays(3));
+        var past = arranger.ArrangeFor(this.Now.AddDays(2));
+
+        past.ShouldNotBe(future);
+    }
 }

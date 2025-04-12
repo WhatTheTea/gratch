@@ -1,11 +1,13 @@
-﻿using gratch.Arrangement.Rules;
+﻿using System.Collections.Immutable;
+
+using gratch.Arrangement.Rules;
 
 namespace gratch.Arrangement;
-public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : IArranger<T>
+public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTime) : IArranger<T>
 {
     private readonly RulesCollection rules = [];
-    private readonly T[] arrangeables = [.. people];
-    private HashSet<DateTimeOffset> calculatedDateTimes = [];
+    private readonly T[] arrangeables = [.. arrangeables];
+    private ImmutableSortedSet<DateTimeOffset> calculatedDateTimes = [];
 
     public DateTimeOffset BaseDateTime
     {
@@ -25,15 +27,22 @@ public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : I
         return this;
     }
 
+    public Dictionary<DateTimeOffset, T> ArrangeFor(DateTimeOffset start, DateTimeOffset end) =>
+        Enumerable.Range(0, (end - start).Days + 1)
+                  .Select(d => start.AddDays(d))
+                  .Select(date => (date, arrangement: this.ArrangeFor(date)!))
+                  .ToDictionary(pair => pair.date, pair => pair.arrangement);
+
     public T? ArrangeFor(DateTimeOffset dateTime)
     {
         this.EnsureDateTimeIsCalculated(dateTime);
 
         var peopleCount = this.arrangeables.Length;
-        bool isArrangementValid = peopleCount > 0 && dateTime > baseDateTime;
+        var dateTimeIndex = this.calculatedDateTimes.IndexOf(dateTime);
+        bool isArrangementValid = peopleCount > 0 && dateTime >= baseDateTime;
 
         var index = isArrangementValid
-            ? this.calculatedDateTimes.Count % peopleCount - 1
+            ? dateTimeIndex % peopleCount
             : -1;
 
         return this.arrangeables.ElementAtOrDefault(index);
@@ -62,6 +71,6 @@ public class Arranger<T>(IEnumerable<T> people, DateTimeOffset baseDateTime) : I
             .Select(x => lastDateTime.AddDays(x))
             .Where(this.rules.EvaluateFor);
 
-        this.calculatedDateTimes = new(validDates);
+        this.calculatedDateTimes = [.. this.calculatedDateTimes, .. validDates];
     }
 }

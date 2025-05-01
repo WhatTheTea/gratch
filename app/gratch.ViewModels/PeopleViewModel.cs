@@ -144,7 +144,6 @@ public partial class PeopleViewModel : ReactiveObject
 
         var group = new Group(name);
 
-        // TODO: write cross class tests
         this.groupManager.Groups.AddOrUpdate(group);
         this.SelectedGroup = group;
     }

@@ -1,10 +1,16 @@
-﻿using gratch.Models;
+﻿using gratch.Arrangement;
+using gratch.Models;
 
 namespace gratch.Services;
 
+/// <summary>
+/// Provides a facade for arrangement system
+/// </summary>
 public interface IArrangementService
 {
-    Models.Arrangement GetArrangementFor(DateTimeOffset start, DateTimeOffset end);
+    IArranger<Person> GetArrangerFor(Group group);
 
-    Person GetArrangedPersonOn(DateTimeOffset dateTime);
+    Person? GetArrangedPersonOn(Group group, DateTimeOffset dateTime);
+
+    Models.Arrangement GetArrangementFor(Group group, DateTimeOffset start, DateTimeOffset end);
 }

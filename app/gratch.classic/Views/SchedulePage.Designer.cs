@@ -78,12 +78,20 @@ partial class SchedulePage
         // 
         // scheduleDataGrid
         // 
+        this.scheduleDataGrid.AllowUserToAddRows = false;
+        this.scheduleDataGrid.AllowUserToDeleteRows = false;
+        this.scheduleDataGrid.AllowUserToResizeColumns = false;
+        this.scheduleDataGrid.AllowUserToResizeRows = false;
+        this.scheduleDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+        this.scheduleDataGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllHeaders;
         this.scheduleDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         this.tableLayoutPanel1.SetColumnSpan(this.scheduleDataGrid, 2);
         this.scheduleDataGrid.Dock = DockStyle.Fill;
         this.scheduleDataGrid.Location = new Point(12, 52);
         this.scheduleDataGrid.Margin = new Padding(12);
         this.scheduleDataGrid.Name = "scheduleDataGrid";
+        this.scheduleDataGrid.ReadOnly = true;
+        this.scheduleDataGrid.ShowEditingIcon = false;
         this.scheduleDataGrid.Size = new Size(444, 325);
         this.scheduleDataGrid.TabIndex = 2;
         // 

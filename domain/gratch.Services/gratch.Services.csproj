@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\gratch.Helpers\gratch.Utilities.csproj" />
     <ProjectReference Include="..\gratch.Core\gratch.Arrangement.csproj" />
     <ProjectReference Include="..\gratch.Models\gratch.Models.csproj" />
   </ItemGroup>

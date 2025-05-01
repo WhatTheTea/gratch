@@ -24,5 +24,16 @@ public partial class SchedulePage : UserControl
         Observable.FromEventPattern(ev => this.groupsComboBox.SelectedValueChanged += ev, ev => this.groupsComboBox.SelectedValueChanged -= ev)
             .Select(_ => this.groupsComboBox.SelectedItem)
             .BindTo(this.ViewModel, vm => vm.SelectedGroup);
+
+        var now = DateTime.Now;
+        var firstDayOfMonth = new DateTime(now.Year, now.Month, 1);
+        var daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
+        var dates = Enumerable.Range(0, daysInMonth)
+                  .Select(d => firstDayOfMonth.AddDays(d));
+        foreach (var date in dates)
+        {
+            this.scheduleDataGrid.Columns.Add(date.Day.ToString(), date.Day.ToString());
+        }
+
     }
 }

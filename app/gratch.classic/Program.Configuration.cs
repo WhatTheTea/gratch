@@ -30,6 +30,7 @@ internal partial class Program
         Locator.CurrentMutable.RegisterViewsForViewModels(System.Reflection.Assembly.GetEntryAssembly()!);
 
         services.AddSingleton<IGroupRepository, InMemoryGroupRepository>();
+        services.AddSingleton<IArrangementService, ArrangementService>();
         services.AddSingleton<IGroupManager, GroupManager>();
         services.AddSingleton<PeopleViewModel>();
         services.AddSingleton<ScheduleViewModel>();

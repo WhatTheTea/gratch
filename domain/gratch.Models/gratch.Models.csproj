@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\gratch.Core\gratch.Arrangement.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 using DynamicData;
 
@@ -77,7 +78,7 @@ public partial class PeopleViewModel : ReactiveObject
 
 
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
-    private void MoveUp(Person person)
+    private async Task MoveUp(Person person)
     {
         int index = this.People.IndexOf(person);
 
@@ -88,10 +89,12 @@ public partial class PeopleViewModel : ReactiveObject
 
         (this.People[index], this.People[index - 1]) = (this.People[index - 1], this.People[index]);
         this.SelectedPerson = this.People[index - 1];
+
+        await this.groupManager.Save();
     }
 
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
-    private void MoveDown(Person person)
+    private async Task MoveDown(Person person)
     {
         int index = this.People.IndexOf(person);
 
@@ -99,18 +102,22 @@ public partial class PeopleViewModel : ReactiveObject
         {
             return;
         }
-
+        
         (this.People[index], this.People[index + 1]) = (this.People[index + 1], this.People[index]);
         this.SelectedPerson = this.People[index + 1];
+
+        await this.groupManager.Save();
     }
 
     [ReactiveCommand(CanExecute = nameof(whenPersonIsNotNull))]
-    private void RemovePerson(Person person)
+    private async Task RemovePerson(Person person)
     {
         if (this.SelectedGroup is not null)
         {
             this.People.Remove(person);
         }
+
+        await this.groupManager.Save();
     }
 
     [ReactiveCommand(CanExecute = nameof(whenGroupIsNotNull))]
@@ -130,6 +137,8 @@ public partial class PeopleViewModel : ReactiveObject
             this.SelectedGroup?.People.Add(person);
             this.People.Add(person);
         }
+
+        await this.groupManager.Save();
     }
 
     [ReactiveCommand]
@@ -146,15 +155,19 @@ public partial class PeopleViewModel : ReactiveObject
 
         this.groupManager.Groups.AddOrUpdate(group);
         this.SelectedGroup = group;
+
+        await this.groupManager.Save();
     }
 
     [ReactiveCommand(CanExecute = nameof(whenGroupIsNotNull))]
-    private void RemoveGroup(Group group)
+    private async Task RemoveGroup(Group group)
     {
         var index = this.Groups.IndexOf(group);
 
         this.Groups.Remove(group);
 
         this.SelectedGroup = this.Groups.ElementAtNearest(index);
+
+        await this.groupManager.Save();
     }
 }

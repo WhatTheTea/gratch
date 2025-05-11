@@ -36,13 +36,14 @@ public class GroupManager(IGroupRepository groupRepository) : ReactiveObject, IG
 
     public Task Save()
     {
+        this.Groups.Edit(u => u.Refresh());
+
         var groupsToRemove = this.loadSnapshot?.Except(this.Groups.Items)
             .Select(x => x.Id)
             .Select(groupRepository.DeleteGroupAsync) ?? [];
 
         var groupsToUpdate = this.loadSnapshot?.Intersect(this.Groups.Items)
             .Select(groupRepository.UpdateGroupAsync) ?? [];
-
 
         return Task.WhenAll([.. groupsToUpdate, .. groupsToRemove]);
     }

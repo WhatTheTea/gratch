@@ -17,28 +17,13 @@ public partial class ScheduleViewModel : ReactiveObject
     private readonly IArrangementService arrangementService;
     private readonly IScheduler uiScheduler;
 
-    private Group? selectedGroup;
+    [Reactive]
+    private Models.Arrangement? arrangement;
 
     [Reactive]
-    private Models.Arrangement arrangement;
+    private Group? selectedGroup;
 
     public BindingList<Group> Groups { get; } = [];
-
-    public Group? SelectedGroup
-    {
-        get => this.selectedGroup;
-        set
-        {
-            if (this.RaiseAndSetIfChanged(ref this.selectedGroup, value) is not null)
-            {
-                var now = DateTimeOffset.Now;
-                var monthStart = new DateTimeOffset(now.Year, now.Month, 1, 0, 0, 0, now.Offset);
-                var monthEnd = new DateTimeOffset(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month), 0, 0, 0, now.Offset);
-
-                this.Arrangement = this.arrangementService.GetArrangementFor(value!, monthStart, monthEnd);
-            }
-        }
-    }
 
     public ScheduleViewModel(IGroupManager groupManager, IArrangementService arrangementService, IScheduler? uiScheduler = null)
     {
@@ -55,5 +40,23 @@ public partial class ScheduleViewModel : ReactiveObject
             .ObserveOn(this.uiScheduler)
             .Take(1)
             .Subscribe(x => this.SelectedGroup = x.First().Current);
+
+        this.WhenAnyValue(x => x.SelectedGroup)
+            .WhereNotNull()
+            .Subscribe(this.UpdateArrangement);
+
+        changeSet.Filter(x => x.Id == this.SelectedGroup?.Id, false)
+            .Select(x => this.SelectedGroup)
+            .WhereNotNull()
+            .Subscribe(this.UpdateArrangement);
+    }
+
+    private void UpdateArrangement(Group group)
+    {
+        var now = DateTimeOffset.Now;
+        var monthStart = new DateTime(now.Year, now.Month, 1);
+        var monthEnd = new DateTime(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month));
+
+        this.Arrangement = this.arrangementService.GetArrangementFor(group, monthStart, monthEnd);
     }
 }

@@ -20,7 +20,6 @@ public class ArrangementService : IArrangementService
     }
 
     public IArranger<Person> GetArrangerFor(Group group) =>
-        this.arrangers.GetOrCreate(group, () =>
-            new Arranger<Person>(group.People, group.BaseDateTimeOffset)
-                .ConfigureRules(group.ArrangementConfiguration));
+        new Arranger<Person>(group.People, group.BaseDateTimeOffset)
+                .ConfigureRules(group.ArrangementConfiguration);
 }

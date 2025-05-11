@@ -39,7 +39,7 @@ public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTim
 
         var peopleCount = this.arrangeables.Length;
         var dateTimeIndex = this.calculatedDateTimes.IndexOf(dateTime);
-        bool isArrangementValid = peopleCount > 0 && dateTime >= baseDateTime;
+        bool isArrangementValid = peopleCount > 0 && dateTime >= this.BaseDateTime;
 
         var index = isArrangementValid
             ? dateTimeIndex % peopleCount

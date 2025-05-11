@@ -17,7 +17,7 @@ public class PeopleTests
     [Fact]
     public async Task GroupCreated()
     {
-        var groupProvider = CreateGroupManagerSubstitute();
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute();
         var viewModel = new PeopleViewModel(groupProvider);
         viewModel.CreateGroupDialog.RegisterHandler(handler =>
         {
@@ -33,8 +33,8 @@ public class PeopleTests
     [Fact]
     public async Task GroupRemoved()
     {
-        var group = CreateTestGroup();
-        var groupProvider = CreateGroupManagerSubstitute(group);
+        var group = CommonFactory.CreateTestGroup();
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute(group);
         var viewModel = new PeopleViewModel(groupProvider);
 
         await viewModel.RemoveGroupCommand.Execute(group);
@@ -45,8 +45,8 @@ public class PeopleTests
     [Fact]
     public async Task CantExecutePeopleCommands_PersonIsNull()
     {
-        var group = CreateTestGroup();
-        var groupProvider = CreateGroupManagerSubstitute(group);
+        var group = CommonFactory.CreateTestGroup();
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute(group);
         var viewModel = new PeopleViewModel(groupProvider);
 
         (await viewModel.CreatePersonCommand.CanExecute.Take(1)).ShouldBeTrue();
@@ -58,8 +58,8 @@ public class PeopleTests
     [Fact]
     public async Task CantExecutePeopleCommands_GroupIsNull()
     {
-        var group = CreateTestGroup();
-        var groupProvider = CreateGroupManagerSubstitute();
+        var group = CommonFactory.CreateTestGroup();
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute();
         var viewModel = new PeopleViewModel(groupProvider);
 
         (await viewModel.CreatePersonCommand.CanExecute.Take(1)).ShouldBeFalse();
@@ -71,8 +71,8 @@ public class PeopleTests
     [Fact]
     public async Task CanExecutePeopleCommandsOnNewPerson()
     {
-        var group = CreateTestGroup();
-        var groupProvider = CreateGroupManagerSubstitute(group);
+        var group = CommonFactory.CreateTestGroup();
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute(group);
         var viewModel = new PeopleViewModel(groupProvider);
         viewModel.CreateGroupDialog.RegisterHandler(handler =>
         {
@@ -92,12 +92,12 @@ public class PeopleTests
     [Fact]
     public async Task PersonMovesUp()
     {
-        var testGroup = CreateTestGroup();
+        var testGroup = CommonFactory.CreateTestGroup();
         testGroup.People.Add(new("1", "1"));
         testGroup.People.Add(new("2", "2"));
         testGroup.People.Add(new("3", "3"));
 
-        var groupProvider = CreateGroupManagerSubstitute(testGroup);
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute(testGroup);
         var viewModel = new PeopleViewModel(groupProvider);
 
         await viewModel.MoveUpCommand.Execute(viewModel.People[1]);
@@ -108,29 +108,16 @@ public class PeopleTests
     [Fact]
     public async Task PersonMovesDown()
     {
-        var testGroup = CreateTestGroup();
+        var testGroup = CommonFactory.CreateTestGroup();
         testGroup.People.Add(new("1", "1"));
         testGroup.People.Add(new("2", "2"));
         testGroup.People.Add(new("3", "3"));
 
-        var groupProvider = CreateGroupManagerSubstitute(testGroup);
+        var groupProvider = CommonFactory.CreateGroupManagerSubstitute(testGroup);
         var viewModel = new PeopleViewModel(groupProvider);
 
         await viewModel.MoveDownCommand.Execute(viewModel.People[1]);
 
         viewModel.People[2].Name.ShouldBe("2");
-    }
-
-    private static Group CreateTestGroup(string name = "test") =>
-        new() { Id = "test", Name = name, BaseDateTimeOffset = DateTimeOffset.Now };
-
-    private static IGroupManager CreateGroupManagerSubstitute(params Group[] groups)
-    {
-        var groupProvider = Substitute.For<IGroupManager>();
-        var groupCache = new SourceCache<Group, string>(x => x.Id);
-        groupCache.AddOrUpdate(groups);
-        groupProvider.Groups.Returns(groupCache);
-
-        return groupProvider;
     }
 }

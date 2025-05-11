@@ -42,6 +42,18 @@ public class BasicArrangementTests
         result.ShouldBe(group[2]);
     }
 
+    [Fact]
+    public void PeopleArrangedWithRealisticBaseDateTime()
+    {
+        var group = GetFakeGroup(5);
+        var arranger = new Arranger<Person>(group, this.Now.AddHours(12))
+            .ConfigureRules(x => x.AddEverydayRule());
+
+        var result = arranger.ArrangeFor(this.Now.AddDays(2));
+
+        result.ShouldBe(group[2]);
+    }
+
     [Theory]
     [InlineData(0, 10)] // No people
     [InlineData(10, -10)] // Negative days, overflow

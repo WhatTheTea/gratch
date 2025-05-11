@@ -11,7 +11,7 @@ public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTim
 
     public DateTimeOffset BaseDateTime
     {
-        get => baseDateTime;
+        get => baseDateTime.LocalDateTime.Date;
         private set
         {
             baseDateTime = value;

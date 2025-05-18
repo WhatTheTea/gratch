@@ -1,8 +1,4 @@
-﻿using DynamicData;
-
-using gratch.app.Services;
-using gratch.Models;
-using gratch.Services;
+﻿using gratch.Services;
 using gratch.ViewModels;
 
 using NSubstitute;
@@ -19,11 +15,5 @@ public class ScheduleTests
         var schedule = new ScheduleViewModel(groupManager, arrangementManager);
 
         arrangementManager.ReceivedWithAnyArgs().GetArrangementFor(default!, default, default);
-    }
-
-    [Fact]
-    public void ScheduleUpdatedOnGroupUpdate()
-    {
-
     }
 }

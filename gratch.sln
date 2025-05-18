@@ -24,9 +24,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.Models", "domain\gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.Services", "domain\gratch.Services\gratch.Services.csproj", "{53D4485B-402E-48A5-B577-4FD776472138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.app.Tests", "gratch.app.Tests\gratch.app.Tests.csproj", "{8C899C82-2DDE-48AE-9EE4-E0F40E864B4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.app.Tests", "app\gratch.app.Tests\gratch.app.Tests.csproj", "{8C899C82-2DDE-48AE-9EE4-E0F40E864B4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.Utilities", "gratch.Helpers\gratch.Utilities.csproj", "{AC2FF22E-3D2A-4288-81B6-2A04FA53FFDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.Utilities", "gratch.Utilities\gratch.Utilities.csproj", "{AC2FF22E-3D2A-4288-81B6-2A04FA53FFDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gratch.app.Services", "app\gratch.app.Services\gratch.app.Services.csproj", "{B24ED8B1-65A1-45FB-9126-559E4B1887F8}"
 EndProject

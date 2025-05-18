@@ -12,7 +12,8 @@ public class ScheduleTests
     {
         var groupManager = CommonFactory.CreateGroupManagerSubstitute(CommonFactory.CreateTestGroup());
         var arrangementManager = Substitute.For<IArrangementService>();
-        var schedule = new ScheduleViewModel(groupManager, arrangementManager);
+
+        var schedule = new GroupScheduleViewModel(groupManager, arrangementManager);
 
         arrangementManager.ReceivedWithAnyArgs().GetArrangementFor(default!, default, default);
     }

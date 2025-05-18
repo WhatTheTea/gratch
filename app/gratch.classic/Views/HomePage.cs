@@ -4,7 +4,7 @@ using ReactiveUI.SourceGenerators;
 
 namespace gratch.classic.Views;
 
-[IViewFor<CalendarViewModel>]
+[IViewFor<DateScheduleViewModel>]
 public partial class HomePage : UserControl
 {
     public HomePage()

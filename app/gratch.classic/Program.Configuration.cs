@@ -33,7 +33,7 @@ internal partial class Program
         services.AddSingleton<IArrangementService, ArrangementService>();
         services.AddSingleton<IGroupManager, GroupManager>();
         services.AddSingleton<PeopleViewModel>();
-        services.AddSingleton<ScheduleViewModel>();
+        services.AddSingleton<GroupScheduleViewModel>();
 
         Ioc.Container = services.BuildServiceProvider();
         Ioc.Container.UseMicrosoftDependencyResolver();

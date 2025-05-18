@@ -10,7 +10,7 @@ using ReactiveUI.SourceGenerators;
 
 namespace gratch.classic.Views;
 
-[IViewFor<ScheduleViewModel>]
+[IViewFor<GroupScheduleViewModel>]
 public partial class SchedulePage : UserControl
 {
     private static DateTime MonthStart => new(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -30,7 +30,7 @@ public partial class SchedulePage : UserControl
     {
         this.InitializeComponent();
         this.InitializeScheduleDataGrid();
-        this.ViewModel = Ioc.Container.GetService<ScheduleViewModel>();
+        this.ViewModel = Ioc.Container.GetService<GroupScheduleViewModel>();
         this.InitializeBindings();
     }
 

@@ -12,7 +12,7 @@ using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 namespace gratch.ViewModels;
-public partial class ScheduleViewModel : ReactiveObject
+public partial class GroupScheduleViewModel : ReactiveObject
 {
     private readonly IArrangementService arrangementService;
     private readonly IScheduler uiScheduler;
@@ -25,7 +25,7 @@ public partial class ScheduleViewModel : ReactiveObject
 
     public BindingList<Group> Groups { get; } = [];
 
-    public ScheduleViewModel(IGroupManager groupManager, IArrangementService arrangementService, IScheduler? uiScheduler = null)
+    public GroupScheduleViewModel(IGroupManager groupManager, IArrangementService arrangementService, IScheduler? uiScheduler = null)
     {
         this.arrangementService = arrangementService;
         this.uiScheduler = uiScheduler ?? RxApp.MainThreadScheduler;

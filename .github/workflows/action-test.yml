@@ -5,12 +5,19 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-  build-and-test:
-
+  run-tests:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        project-path: 
+          [ 
+            ./domain/gratch.Tests/gratch.Tests.csproj, 
+            ./app/gratch.app.Tests/gratch.app.Tests.csproj 
+            ]
+      
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -18,8 +25,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore
-      run: dotnet restore
+      run: dotnet restore ${{ matrix.project-path }}
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore ${{ matrix.project-path }}
     - name: Test
-      run: dotnet test --no-build --verbosity normal 
+      run: dotnet test --no-build --verbosity normal ${{ matrix.project-path }}

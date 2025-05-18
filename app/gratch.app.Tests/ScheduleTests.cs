@@ -17,4 +17,16 @@ public class ScheduleTests
 
         arrangementManager.ReceivedWithAnyArgs().GetArrangementFor(default!, default, default);
     }
+
+    //[Fact]
+    //public void DayScheduleCreatedIdealCase()
+    //{
+    //    var 
+    //    var group = CommonFactory.CreateTestGroup();
+    //    var viewModel = new DateScheduleViewModel();
+
+    //    viewModel.SelectedDate = new DateTime(2025, 05, 19);
+
+    //    viewModel.Arrangements[group] 
+    //}
 }

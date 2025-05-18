@@ -34,6 +34,7 @@ internal partial class Program
         services.AddSingleton<IGroupManager, GroupManager>();
         services.AddSingleton<PeopleViewModel>();
         services.AddSingleton<GroupScheduleViewModel>();
+        services.AddSingleton<DateScheduleViewModel>();
 
         Ioc.Container = services.BuildServiceProvider();
         Ioc.Container.UseMicrosoftDependencyResolver();

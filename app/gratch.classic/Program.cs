@@ -1,11 +1,6 @@
-﻿using System.Reactive.Threading.Tasks;
-
-using gratch.app.Services;
-using gratch.ViewModels;
+﻿using gratch.app.Services;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using ReactiveUI;
 
 namespace gratch.classic;
 
@@ -23,7 +18,7 @@ internal static partial class Program
 
         _ = InitializeGroups();
 
-        var mainWindow = (Form)Ioc.Container.GetRequiredService<IViewFor<AppViewModel>>();
+        var mainWindow = new MainWindow();
         Application.Run(mainWindow);
     }
 

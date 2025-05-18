@@ -18,7 +18,7 @@
     <ProjectReference Include="..\..\domain\gratch.Core\gratch.Arrangement.csproj" />
     <ProjectReference Include="..\..\domain\gratch.Models\gratch.Models.csproj" />
     <ProjectReference Include="..\..\domain\gratch.Services\gratch.Services.csproj" />
-    <ProjectReference Include="..\..\gratch.Helpers\gratch.Utilities.csproj" />
+    <ProjectReference Include="..\..\gratch.Utilities\gratch.Utilities.csproj" />
     <ProjectReference Include="..\gratch.app.Services\gratch.app.Services.csproj" />
   </ItemGroup>
 

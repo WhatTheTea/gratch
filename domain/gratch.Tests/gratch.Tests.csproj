@@ -25,12 +25,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="Xunit" />
-		<Using Include="Shouldly" />
+	  <ProjectReference Include="..\gratch.Core\gratch.Arrangement.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\gratch.Core\gratch.Arrangement.csproj" />
+		<Using Include="Xunit" />
+		<Using Include="Shouldly" />
 	</ItemGroup>
 
 </Project>

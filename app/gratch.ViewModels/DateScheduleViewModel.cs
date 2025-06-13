@@ -47,6 +47,9 @@ public partial class DateScheduleViewModel : ReactiveObject
         }
     }
 
-    private void UpdateArrangementsFor(Group group, DateTime current) =>
+    private void UpdateArrangementsFor(Group group, DateTime current)
+    {
         this.arrangements[group] = this.arrangementService.GetArrangedPersonOn(group, current);
+        this.RaisePropertyChanged(nameof(this.Arrangements));
+    }
 }

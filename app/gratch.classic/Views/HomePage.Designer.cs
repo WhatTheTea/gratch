@@ -30,8 +30,8 @@ partial class HomePage
     {
         this.tableLayoutPanel1 = new TableLayoutPanel();
         this.label1 = new Label();
-        this.monthCalendar1 = new MonthCalendar();
-        this.listView1 = new ListView();
+        this.calendar = new MonthCalendar();
+        this.scheduleListView = new ListView();
         this.label2 = new Label();
         this.label3 = new Label();
         this.tableLayoutPanel1.SuspendLayout();
@@ -43,8 +43,8 @@ partial class HomePage
         this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
         this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
         this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-        this.tableLayoutPanel1.Controls.Add(this.monthCalendar1, 0, 2);
-        this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 2);
+        this.tableLayoutPanel1.Controls.Add(this.calendar, 0, 2);
+        this.tableLayoutPanel1.Controls.Add(this.scheduleListView, 1, 2);
         this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
         this.tableLayoutPanel1.Controls.Add(this.label3, 1, 1);
         this.tableLayoutPanel1.Dock = DockStyle.Fill;
@@ -68,24 +68,25 @@ partial class HomePage
         this.label1.TabIndex = 0;
         this.label1.Text = "gratch classic v0.1.0";
         // 
-        // monthCalendar1
+        // calendar
         // 
-        this.monthCalendar1.Dock = DockStyle.Fill;
-        this.monthCalendar1.Location = new Point(9, 69);
-        this.monthCalendar1.Name = "monthCalendar1";
-        this.monthCalendar1.TabIndex = 1;
+        this.calendar.Dock = DockStyle.Fill;
+        this.calendar.Location = new Point(9, 69);
+        this.calendar.Name = "calendar";
+        this.calendar.TabIndex = 1;
         // 
-        // listView1
+        // scheduleListView
         // 
-        this.listView1.Alignment = ListViewAlignment.Default;
-        this.listView1.Dock = DockStyle.Fill;
-        this.listView1.Location = new Point(227, 69);
-        this.listView1.Margin = new Padding(24, 9, 24, 24);
-        this.listView1.Name = "listView1";
-        this.listView1.Size = new Size(257, 168);
-        this.listView1.TabIndex = 2;
-        this.listView1.UseCompatibleStateImageBehavior = false;
-        this.listView1.View = View.List;
+        this.scheduleListView.Alignment = ListViewAlignment.Default;
+        this.scheduleListView.Dock = DockStyle.Fill;
+        this.scheduleListView.FullRowSelect = true;
+        this.scheduleListView.Location = new Point(227, 69);
+        this.scheduleListView.Margin = new Padding(24, 9, 24, 24);
+        this.scheduleListView.Name = "scheduleListView";
+        this.scheduleListView.Size = new Size(257, 168);
+        this.scheduleListView.TabIndex = 2;
+        this.scheduleListView.UseCompatibleStateImageBehavior = false;
+        this.scheduleListView.View = View.Tile;
         // 
         // label2
         // 
@@ -125,8 +126,8 @@ partial class HomePage
 
     private TableLayoutPanel tableLayoutPanel1;
     private Label label1;
-    private MonthCalendar monthCalendar1;
-    private ListView listView1;
+    private MonthCalendar calendar;
+    private ListView scheduleListView;
     private Label label2;
     private Label label3;
 }

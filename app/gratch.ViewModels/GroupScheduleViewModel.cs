@@ -53,7 +53,7 @@ public partial class GroupScheduleViewModel : ReactiveObject
 
     private void UpdateArrangement(Group group)
     {
-        var now = DateTimeOffset.Now;
+        var now = DateTime.Now;
         var monthStart = new DateTime(now.Year, now.Month, 1);
         var monthEnd = new DateTime(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month));
 

@@ -7,7 +7,7 @@ public class InMemoryGroupRepository : IGroupRepository
 
     public Task<Group> CreateGroupAsync(string name)
     {
-        var group = new Group { Name = name, BaseDateTimeOffset = DateTimeOffset.Now, Id = Guid.NewGuid().ToString() };
+        var group = new Group { Name = name, BaseDateTime = DateTime.Now, Id = Guid.NewGuid().ToString() };
         this.groups[group.Id] = group;
 
         return Task.FromResult(group);

@@ -7,7 +7,7 @@ public static class RulesCollectionExtensions
          rules.AddRule(new EverydayRule());
     public static IRulesCollection AddSkipWeekDaysRule(this IRulesCollection rules, IEnumerable<DayOfWeek> blacklist) =>
         rules.AddRule(new SkipWeekDaysRule(blacklist));
-    public static IRulesCollection AddSkipExactDatesRule(this IRulesCollection rules, IEnumerable<DateTimeOffset> dates) =>
+    public static IRulesCollection AddSkipExactDatesRule(this IRulesCollection rules, IEnumerable<DateTime> dates) =>
         rules.AddRule(new SkipExactDatesRule(dates));
 
     private static IRulesCollection AddRule(this IRulesCollection rules, IRule rule)

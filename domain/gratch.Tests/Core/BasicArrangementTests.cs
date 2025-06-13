@@ -23,7 +23,7 @@ public class BasicArrangementTests
 
     */
     private readonly FakeTimeProvider timeProvider = new(new DateTime(2024, 07, 01));
-    private DateTimeOffset Now => this.timeProvider.GetLocalNow();
+    private DateTime Now => this.timeProvider.GetLocalNow().Date;
     private static Person[] GetFakePeople(int count) =>
         Enumerable.Range(0, count)
                   .Select(x => new Person(x.ToString()))

@@ -11,7 +11,7 @@ public interface IArranger<T>
     /// <summary>
     /// A base point in time, from which arrangements are calculated.
     /// </summary>
-    DateTimeOffset BaseDateTime { get; }
+    DateTime BaseDateTime { get; }
 
     /// <summary>
     /// Generates arrangement for <see cref="T"/> on specified <paramref name="dateTime"/>
@@ -19,12 +19,12 @@ public interface IArranger<T>
     /// <returns>
     /// <see cref="T"/> or null, if arrangement can't be evaluated for this <paramref name="dateTime"/>
     /// </returns>
-    T? ArrangeFor(DateTimeOffset dateTime);
+    T? ArrangeFor(DateTime dateTime);
 
     /// <summary>
     /// Generates arrangement for <see cref="T"/> on specified range from <paramref name="start"/> to <paramref name="end"/>
     /// </summary>
-    Dictionary<DateTimeOffset, T> ArrangeFor(DateTimeOffset start, DateTimeOffset end);
+    Dictionary<DateTime, T> ArrangeFor(DateTime start, DateTime end);
 
     /// <summary>
     /// Configures internal collection of rules, may override rule-specific BaseDateTime.

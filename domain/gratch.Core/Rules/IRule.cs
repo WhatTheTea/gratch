@@ -8,5 +8,5 @@ public interface IRule
     /// <summary>
     /// Method to decide if object may be arranged on <paramref name="dateTime"/>
     /// </summary>
-    bool Evaluate(DateTimeOffset dateTime);
+    bool Evaluate(DateTime dateTime);
 }

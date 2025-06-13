@@ -3,15 +3,15 @@
 using gratch.Arrangement.Rules;
 
 namespace gratch.Arrangement;
-public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTime) : IArranger<T>
+public class Arranger<T>(IEnumerable<T> arrangeables, DateTime baseDateTime) : IArranger<T>
 {
     private readonly RulesCollection rules = [];
     private readonly T[] arrangeables = [.. arrangeables];
-    private ImmutableSortedSet<DateTimeOffset> calculatedDateTimes = [];
+    private ImmutableSortedSet<DateTime> calculatedDateTimes = [];
 
-    public DateTimeOffset BaseDateTime
+    public DateTime BaseDateTime
     {
-        get => baseDateTime.LocalDateTime.Date;
+        get => baseDateTime.Date;
         private set
         {
             baseDateTime = value;
@@ -27,13 +27,13 @@ public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTim
         return this;
     }
 
-    public Dictionary<DateTimeOffset, T> ArrangeFor(DateTimeOffset start, DateTimeOffset end) =>
+    public Dictionary<DateTime, T> ArrangeFor(DateTime start, DateTime end) =>
         Enumerable.Range(0, (end - start).Days + 1)
                   .Select(d => start.AddDays(d))
                   .Select(date => (date, arrangement: this.ArrangeFor(date)!))
                   .ToDictionary(pair => pair.date, pair => pair.arrangement);
 
-    public T? ArrangeFor(DateTimeOffset dateTime)
+    public T? ArrangeFor(DateTime dateTime)
     {
         this.EnsureDateTimeIsCalculated(dateTime);
 
@@ -48,7 +48,7 @@ public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTim
         return this.arrangeables.ElementAtOrDefault(index);
     }
 
-    private void EnsureDateTimeIsCalculated(DateTimeOffset dateTime)
+    private void EnsureDateTimeIsCalculated(DateTime dateTime)
     {
         var isCalculated = this.calculatedDateTimes.Contains(dateTime);
         if (!isCalculated)
@@ -57,7 +57,7 @@ public class Arranger<T>(IEnumerable<T> arrangeables, DateTimeOffset baseDateTim
         }
     }
 
-    private void CalculateArrangementsUntil(DateTimeOffset dateTime)
+    private void CalculateArrangementsUntil(DateTime dateTime)
     {
         var lastDateTime = this.BaseDateTime.AddDays(this.calculatedDateTimes.Count);
         var diff = dateTime - lastDateTime;

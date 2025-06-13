@@ -8,7 +8,7 @@ public class Group
 
     public required string Name { get; set; }
 
-    public required DateTimeOffset BaseDateTimeOffset { get; set; }
+    public required DateTime BaseDateTime { get; set; }
 
     public List<Person> People { get; set; } = [];
 
@@ -17,11 +17,11 @@ public class Group
     public Group() { }
 
     [SetsRequiredMembers]
-    public Group(string name, DateTimeOffset baseArrangementOffset = default)
+    public Group(string name, DateTime baseArrangementOffset = default)
     {
         this.Id = Guid.NewGuid().ToString();
         this.Name = name;
-        this.BaseDateTimeOffset = baseArrangementOffset == default ? DateTimeOffset.Now : baseArrangementOffset;
+        this.BaseDateTime = baseArrangementOffset == default ? DateTime.Now : baseArrangementOffset;
     }
 
     public static class Validate

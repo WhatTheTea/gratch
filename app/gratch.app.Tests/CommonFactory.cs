@@ -11,7 +11,7 @@ namespace gratch.app.Tests;
 public static class CommonFactory
 {
     public static Group CreateTestGroup(string name = "test") =>
-        new() { Id = "test", Name = name, BaseDateTimeOffset = DateTimeOffset.Now };
+        new() { Id = "test", Name = name, BaseDateTime = DateTime.Now };
 
     public static IGroupManager CreateGroupManagerSubstitute(params Group[] groups)
     {

@@ -10,7 +10,7 @@ public interface IArrangementService
 {
     IArranger<Person> GetArrangerFor(Group group);
 
-    Person? GetArrangedPersonOn(Group group, DateTimeOffset dateTime);
+    Person? GetArrangedPersonOn(Group group, DateTime dateTime);
 
-    Models.Arrangement GetArrangementFor(Group group, DateTimeOffset start, DateTimeOffset end);
+    Models.Arrangement GetArrangementFor(Group group, DateTime start, DateTime end);
 }

@@ -2,7 +2,7 @@
 
 internal class RulesCollection() : List<IRule>, IRulesCollection
 {
-    public bool EvaluateFor(DateTimeOffset dateTime) =>
+    public bool EvaluateFor(DateTime dateTime) =>
         this.Select(x => x.Evaluate(dateTime))
             .Aggregate(true, (res, val) => res && val);
 }

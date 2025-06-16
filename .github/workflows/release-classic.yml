@@ -22,7 +22,7 @@ jobs:
         - name: Restore
           run: dotnet restore $PROJECT_PATH
         - name: Build
-          run: dotnet build --no-restore ${{ env.PROJECT_PATH }}
+          run: dotnet build --no-restore ${{ env.PROJECT_PATH }} --no-self-contained -p:PublishSingleFile=true
         - name: Publish
           run: dotnet publish ${{ env.PROJECT_PATH }} --no-build -o ${{ env.ARTIFACTS_DIR }}
         - name: Release

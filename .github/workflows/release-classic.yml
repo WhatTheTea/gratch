@@ -1,0 +1,33 @@
+name: Windows Forms Release
+
+on:
+  push:
+    tags:
+        - "classic-v*.*.*"
+  workflow_dispatch:
+
+env:
+  PROJECT_PATH: ./app/gratch.classic/gratch.classic.csproj 
+  ARTIFACTS_DIR: ./artifacts/
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+        - uses: actions/checkout@v4
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: 8.0.x
+        - name: Restore
+          run: dotnet restore $PROJECT_PATH
+        - name: Build
+          run: dotnet build --no-restore ${{ env.PROJECT_PATH }}
+        - name: Publish
+          run: dotnet publish --no-build -o ${{ env.ARTIFACTS_DIR }}
+        - name: Release
+          uses: softprops/action-gh-release@v2
+          with:
+            files:
+                ${{ env.ARTIFACTS_DIR }}/*.exe
+            draft: true

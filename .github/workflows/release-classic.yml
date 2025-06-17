@@ -7,8 +7,9 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_PATH: ./app/gratch.classic/gratch.classic.csproj 
-  ARTIFACTS_DIR: ./artifacts/
+  project_path: ./app/gratch.classic/gratch.classic.csproj 
+  artifacts_path: ./artifacts/
+  runtime: win-x64
 
 jobs:
   publish:
@@ -20,14 +21,14 @@ jobs:
           with:
             dotnet-version: 8.0.x
         - name: Restore
-          run: dotnet restore $PROJECT_PATH
+          run: dotnet restore $project_path -r win-x64
         - name: Build
-          run: dotnet build --no-restore ${{ env.PROJECT_PATH }} --no-self-contained -p:PublishSingleFile=true
+          run: dotnet build --no-restore ${{ env.project_path }} -r ${{ env.runtime }} -c Release
         - name: Publish
-          run: dotnet publish ${{ env.PROJECT_PATH }} --no-build -o ${{ env.ARTIFACTS_DIR }}
+          run: dotnet publish ${{ env.project_path }} -o ${{ env.artifacts_path }} --no-build -r ${{ env.runtime }} --no-self-contained
         - name: Release
           uses: softprops/action-gh-release@v2
           with:
             files:
-                ${{ env.ARTIFACTS_DIR }}/*.exe
+                ${{ env.artifacts_path }}/*.exe
             draft: true
